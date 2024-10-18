@@ -18,7 +18,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-104,0,0,4,90"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-90,0,0,4,104"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -36,7 +36,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="795" max="32767" attributes="0"/>
+                  <EmptySpace pref="809" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
@@ -103,19 +103,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmdPemesanan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="cmdPenyewaan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="cmdPembayaran" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="cmdKaryawan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="cmdPelanggan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="cmdModil" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="cmdSupir" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="cmdSopir" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmdReportPengeluaran" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="cmdReportPemesanan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="cmdRepotPembayaran" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="cmdRepotMobil" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="cmdRepotPelanggan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="cmdRepotDekorasi" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="cmdRepotPemesanan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="cmdLogOut" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="cmdDashboard" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
@@ -134,7 +134,7 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmdPemesanan" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmdPenyewaan" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cmdPembayaran" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -146,17 +146,17 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cmdModil" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmdSupir" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmdSopir" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmdReportPengeluaran" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmdReportPemesanan" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmdRepotPembayaran" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmdRepotMobil" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cmdRepotPelanggan" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmdRepotDekorasi" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmdRepotPemesanan" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="cmdLogOut" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -195,15 +195,15 @@
                 <Property name="text" type="java.lang.String" value="Dashboard"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="cmdPemesanan">
+            <Component class="javax.swing.JButton" name="cmdPenyewaan">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Booking.png"/>
+                  <Image iconType="3" name="/maulana/icon/Car Rental.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pemesanan"/>
+                <Property name="text" type="java.lang.String" value="Penyewaan"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -213,7 +213,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdPemesananActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdPenyewaanActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -230,7 +230,7 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Online Payment.png"/>
+                  <Image iconType="3" name="/maulana/icon/Card Payment.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pembayaran"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -251,7 +251,7 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Name Tag.png"/>
+                  <Image iconType="3" name="/maulana/icon/Manager.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Karyawan"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -301,7 +301,7 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Christmas Door Decoration.png"/>
+                  <Image iconType="3" name="/maulana/icon/Car.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Mobil"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -316,15 +316,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdModilActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="cmdSupir">
+            <Component class="javax.swing.JButton" name="cmdSopir">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Receipt.png"/>
+                  <Image iconType="3" name="/maulana/icon/Driver.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Supir"/>
+                <Property name="text" type="java.lang.String" value="Sopir"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -334,7 +334,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdSupirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdSopirActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -345,15 +345,15 @@
                 <Property name="text" type="java.lang.String" value="Laporan"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="cmdReportPengeluaran">
+            <Component class="javax.swing.JButton" name="cmdReportPemesanan">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Expense.png"/>
+                  <Image iconType="3" name="/maulana/icon/Purchase Order.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Laporan Pemesanan"/>
+                <Property name="text" type="java.lang.String" value="Laporan Penyewaan"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -363,16 +363,16 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdReportPengeluaranActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdReportPemesananActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="cmdRepotPelanggan">
+            <Component class="javax.swing.JButton" name="cmdRepotPembayaran">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Graph Report.png"/>
+                  <Image iconType="3" name="/maulana/icon/Statistics Report.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laporan Pembayaran"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -384,16 +384,16 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdRepotPelangganActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdRepotPembayaranActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="cmdRepotDekorasi">
+            <Component class="javax.swing.JButton" name="cmdRepotMobil">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Interior.png"/>
+                  <Image iconType="3" name="/maulana/icon/Graph Report.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laporan Mobil"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -405,16 +405,16 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdRepotDekorasiActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdRepotMobilActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="cmdRepotPemesanan">
+            <Component class="javax.swing.JButton" name="cmdRepotPelanggan">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/maulana/icon/Purchase Order.png"/>
+                  <Image iconType="3" name="/maulana/icon/Statistics Report.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laporan Pelanggan"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -426,7 +426,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdRepotPemesananActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdRepotPelangganActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cmdLogOut">
@@ -471,7 +471,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="penampil" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -480,7 +480,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="penampil" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
