@@ -29,4 +29,4 @@ Ini adalah Sistem Pemesanan Penyewaan Mobil yang dibangun menggunakan Java, MySQ
 
 1. Kloning repositori
    ```bash
-   git clone https://github.com/your-username/car-rental.git
+   git clone https://github.com/maulana/car-rental.git
