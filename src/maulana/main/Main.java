@@ -12,6 +12,8 @@ import maulana.form.DataMobil;
 import maulana.form.DataKaryawan;
 import maulana.form.DataPelanggan;
 import maulana.form.DataSupir;
+import raven.popup.GlassPanePopup;
+import raven.toast.Notifications;
 
 /**
  *
@@ -26,6 +28,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void init(){
+        GlassPanePopup.install(this);
+        Notifications.getInstance().setJFrame(this);
         scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"

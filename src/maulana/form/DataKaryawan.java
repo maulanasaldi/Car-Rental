@@ -6,8 +6,15 @@
 package maulana.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import koneksi.KoneksiDB;
+import raven.popup.DefaultOption;
+import raven.popup.GlassPanePopup;
+import raven.popup.component.SimplePopupBorder;
 
 /**
  *
@@ -15,16 +22,17 @@ import java.awt.Color;
  */
 public class DataKaryawan extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FormPelanggan
-     */
+    private Connection koneksi = new KoneksiDB().connect();
+    private DefaultTableModel tabelModel;
+
     public DataKaryawan() {
         initComponents();
-        setOpaque(false);
         init();
+        dataTabel();
     }
 
-    private void init() {        
+    private void init() {
+
         txtCari.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Search...");
         txtCari.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
@@ -36,6 +44,29 @@ public class DataKaryawan extends javax.swing.JPanel {
 
     }
 
+    private void dataTabel() {
+        Object[] baris = {"ID", "Nama", "Password", "Alamat"};
+        tabelModel = new DefaultTableModel(null, baris);
+        String cariItem = txtCari.getText();
+
+        try {
+            String query = "SELECT * FROM karyawan WHERE id LIKE '%" + cariItem + "%' OR nama LIKE'%" + cariItem + "%' ORDER BY id ASC";
+            Statement statment = koneksi.createStatement();
+            ResultSet hasil = statment.executeQuery(query);
+            while (hasil.next()) {
+                tabelModel.addRow(new Object[]{
+                    hasil.getString(1),
+                    hasil.getString(2),
+                    hasil.getString(3),
+                    hasil.getString(4)
+                });
+            }
+            tabelKaryawan.setModel(tabelModel);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Data gagal dipanggil");
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,18 +75,18 @@ public class DataKaryawan extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelKaryawan = new javax.swing.JTable();
         button1 = new maulana.swing.Button();
         button2 = new maulana.swing.Button();
         button3 = new maulana.swing.Button();
         jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Dekorasi");
+        jLabel1.setText("Karyawan");
 
         txtCari.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -159,15 +190,34 @@ public class DataKaryawan extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nama", "Password", "Alamat"
             }
-        ));
-        scroll.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scroll.setViewportView(tabelKaryawan);
+        if (tabelKaryawan.getColumnModel().getColumnCount() > 0) {
+            tabelKaryawan.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelKaryawan.getColumnModel().getColumn(1).setPreferredWidth(250);
+            tabelKaryawan.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tabelKaryawan.getColumnModel().getColumn(3).setPreferredWidth(300);
+        }
 
         button1.setBackground(new java.awt.Color(0, 255, 0));
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("TAMBAH");
         button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         button2.setBackground(new java.awt.Color(255, 255, 0));
         button2.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,6 +294,34 @@ public class DataKaryawan extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        TambahKaryawan tambah = new TambahKaryawan();
+        DefaultOption option = new DefaultOption() {
+            @Override
+            public boolean closeWhenClickOutside() {
+                return true;
+            }
+        };
+        String actions[] = new String[]{"Batal", "Simpan"};
+        GlassPanePopup.showPopup(new SimplePopupBorder(tambah, "Tambah Karyawan", actions, (pc, i) -> {
+            if (i == 1) {
+                // Ambil data dari form
+                String nama = tambah.getTxtNama();
+                String password = tambah.getTxtPassword();
+                String alamat = tambah.getTxtAlamat();
+                String umur = tambah.getTxtUmur();
+
+                // Tambahkan data ke tabel
+                DefaultTableModel model = (DefaultTableModel) tabelKaryawan.getModel();
+                model.addRow(new Object[]{model.getRowCount() + 1, nama, password, alamat, umur});
+
+                pc.closePopup();
+            } else {
+                pc.closePopup();
+            }
+        }), option);
+    }//GEN-LAST:event_button1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private maulana.swing.Button button1;
@@ -251,9 +329,9 @@ public class DataKaryawan extends javax.swing.JPanel {
     private maulana.swing.Button button3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTable jTable1;
     private maulana.swing.PanelRounded panelRounded1;
     private javax.swing.JScrollPane scroll;
+    private javax.swing.JTable tabelKaryawan;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables
 }

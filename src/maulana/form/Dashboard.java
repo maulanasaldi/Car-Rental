@@ -23,14 +23,13 @@ public class Dashboard extends javax.swing.JPanel {
     }
 
     private void init(){
-        txtCari.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Search...");
-        txtCari.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("maulana.icon.search.svg"));
+        txtCari.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Search...");        
         txtCari.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
-                + "margin:5,20,5,20;"
+                + "margin:5,10,5,20;"
                 + "background:$Panel.background;");
     }
     
@@ -42,6 +41,7 @@ public class Dashboard extends javax.swing.JPanel {
         panelRounded2 = new maulana.swing.PanelRounded();
         panelRounded3 = new maulana.swing.PanelRounded();
         panelRounded4 = new maulana.swing.PanelRounded();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txtCari = new javax.swing.JTextField();
@@ -80,6 +80,14 @@ public class Dashboard extends javax.swing.JPanel {
             .addGap(0, 93, Short.MAX_VALUE)
         );
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Search.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -95,7 +103,7 @@ public class Dashboard extends javax.swing.JPanel {
 
         txtCari.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Jadwal Acara");
 
         javax.swing.GroupLayout panelRounded4Layout = new javax.swing.GroupLayout(panelRounded4);
@@ -104,12 +112,14 @@ public class Dashboard extends javax.swing.JPanel {
             panelRounded4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRounded4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded4Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -117,9 +127,11 @@ public class Dashboard extends javax.swing.JPanel {
             panelRounded4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(panelRounded4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(panelRounded4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRounded4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                 .addContainerGap())
@@ -155,8 +167,13 @@ public class Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

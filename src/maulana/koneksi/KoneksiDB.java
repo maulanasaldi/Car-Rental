@@ -1,22 +1,29 @@
-package maulana.koneksi;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package koneksi;
+import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
+/**
+ *
+ * @author saldi
+ */
 public class KoneksiDB {
-    private String url = "jdbc:mysql://localhost:3306:/sewa_mobil";
-    private String host = "root";
-    private String password = "";
-    
-    public Connection getKoneksi(){
-        Connection koneksi = null;
+    private Connection koneksi;
+    public Connection connect(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            
-            koneksi = DriverManager.getConnection(url, url, password);
-            System.out.println("koneksi berhasil");
-        } catch (Exception e) {
-            System.out.println("koneksi gagal");
+            System.out.println("Koneksi berhasil");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Gagal koneksi"+ex);
+        }
+        String url = "jdbc:mysql://localhost:3306/car-rental";
+        try {
+            koneksi = DriverManager.getConnection(url,"root","");
+            System.out.println("Berhasil koneksi database");
+        } catch (SQLException ex) {
+            System.out.println("Gagal koneksi database"+ex);
         }
         return koneksi;
     }

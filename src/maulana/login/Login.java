@@ -6,12 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import maulana.koneksi.KoneksiDB;
+import koneksi.KoneksiDB;
+
 import maulana.main.Main;
 
 public class Login extends javax.swing.JFrame {
 
-    private Connection conn = new KoneksiDB().getKoneksi();
+    private Connection koneksi = new KoneksiDB().connect();
     
     public Login() {
         initComponents();
@@ -179,7 +180,7 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtPass.getPassword());
         try {
             String query = "SELECT * FROM user WHERE username=? AND password=?";
-            PreparedStatement statement = conn.prepareStatement(query);
+            PreparedStatement statement = koneksi.prepareStatement(query);
             statement.setString(1, username);            
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
