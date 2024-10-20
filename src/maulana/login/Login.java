@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import koneksi.KoneksiDB;
 
 import maulana.main.Main;
+import raven.toast.Notifications;
 
 public class Login extends javax.swing.JFrame {
 
@@ -179,18 +180,18 @@ public class Login extends javax.swing.JFrame {
         String username = txtUsername.getText();
         String password = new String(txtPass.getPassword());
         try {
-            String query = "SELECT * FROM user WHERE username=? AND password=?";
+            String query = "SELECT * FROM karyawan WHERE id=? AND password=?";
             PreparedStatement statement = koneksi.prepareStatement(query);
             statement.setString(1, username);            
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                System.out.println("login berhasil");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, "Selamat anda berhasil Login");
                 this.setVisible(false);
                 Main main = new Main();
                 main.setVisible(true);                
             } else {
-                System.out.println("login gagal! Username atau Password salah");
+                Notifications.getInstance().show(Notifications.Type.ERROR, "Login gagal! Username atau Password salah");                
             }
         } catch (SQLException e) {
             e.printStackTrace();
