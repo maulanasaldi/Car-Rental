@@ -32,7 +32,7 @@ public class DataKaryawan extends javax.swing.JPanel {
         dataTabel();
     }
 
-    private void init()  {
+    private void init() {
         panel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:25;"
                 + "background:$Table.background");
@@ -67,7 +67,7 @@ public class DataKaryawan extends javax.swing.JPanel {
     }
 
     private void dataTabel() {
-        Object[] baris = {"ID", "NAMA", "PASSWORD", "ALAMAT"};
+        Object[] baris = {"ID", "NAMA", "JENIS KELAMIN", "NO. HANDPHONE", "PASSWORD", "ALAMAT"};
         tabelModel = new DefaultTableModel(null, baris);
         JTableHeader tabelHeader = tabelKaryawan.getTableHeader();
         ((DefaultTableCellRenderer) tabelHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
@@ -82,20 +82,22 @@ public class DataKaryawan extends javax.swing.JPanel {
                     hasil.getString(1),
                     hasil.getString(2),
                     hasil.getString(3),
-                    hasil.getString(4)
+                    hasil.getString(4),
+                    hasil.getString(5),
+                    hasil.getString(6)
                 });
             }
             tabelKaryawan.setModel(tabelModel);
             // Mengatur lebar kolom
             TableColumn column;
             column = tabelKaryawan.getColumnModel().getColumn(0); // Kolom "ID"            
-            column.setMaxWidth(60);       // Lebar maksimum
+            column.setMaxWidth(70);       // Lebar maksimum
             column = tabelKaryawan.getColumnModel().getColumn(1); // Kolom "Nama"
-            column.setPreferredWidth(100);
-            column = tabelKaryawan.getColumnModel().getColumn(2); // Kolom "Password"
-            column.setPreferredWidth(100);
-            column = tabelKaryawan.getColumnModel().getColumn(3); // Kolom "Alamat"
-            column.setPreferredWidth(300);
+            column.setPreferredWidth(170);
+            column = tabelKaryawan.getColumnModel().getColumn(2); // Kolom "Jenis Kelamin"
+            column.setPreferredWidth(80);
+            column = tabelKaryawan.getColumnModel().getColumn(3); // Kolom "No. Handphone"
+            column.setPreferredWidth(80);
             // Refresh tabel
             tabelKaryawan.revalidate();
             tabelKaryawan.repaint();
@@ -132,113 +134,113 @@ public class DataKaryawan extends javax.swing.JPanel {
 
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nama", "Password", "Alamat"
+                "ID", "Nama", "Jenis Kelamin", "No. Hand Phone", "Password", "Alamat"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -250,7 +252,9 @@ public class DataKaryawan extends javax.swing.JPanel {
         if (tabelKaryawan.getColumnModel().getColumnCount() > 0) {
             tabelKaryawan.getColumnModel().getColumn(0).setMaxWidth(40);
             tabelKaryawan.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tabelKaryawan.getColumnModel().getColumn(3).setPreferredWidth(300);
+            tabelKaryawan.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tabelKaryawan.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tabelKaryawan.getColumnModel().getColumn(5).setPreferredWidth(300);
         }
 
         btnTambah.setBackground(new java.awt.Color(51, 204, 0));
@@ -346,16 +350,18 @@ public class DataKaryawan extends javax.swing.JPanel {
                 // Ambil data dari form
                 String id = tambah.getTxtID();
                 String nama = tambah.getTxtNama();
+                String jenisKelamin = tambah.getSelectedGender();
+                String noHandphone = tambah.getTxtNoHP();
                 String password = tambah.getTxtPassword();
                 String alamat = tambah.getTxtAlamat();
 
                 // Tambahkan data ke tabel
                 DefaultTableModel model = (DefaultTableModel) tabelKaryawan.getModel();
-                model.addRow(new Object[]{model.getRowCount() + id, nama, password, alamat});
+                model.addRow(new Object[]{id, nama, jenisKelamin, noHandphone, password, alamat});
 
                 try {
                     // Simpan data ke database
-                    String query = "INSERT INTO karyawan (id, nama, password, alamat) VALUES ('" + id + "', '" + nama + "', '" + password + "', '" + alamat + "')";
+                    String query = "INSERT INTO karyawan (id, nama, jenisKelamin, noHandphone, password, alamat) VALUES ('" + id + "', '" + nama + "', '" + jenisKelamin + "', '" + noHandphone + "', '" + password + "', '" + alamat + "')";
                     Statement statement = koneksi.createStatement();
                     statement.executeUpdate(query);
                     pc.closePopup();
@@ -397,7 +403,7 @@ public class DataKaryawan extends javax.swing.JPanel {
 
                 // Tampilkan notifikasi sukses
                 Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data karyawan berhasil dihapus");
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Data gagal dihapus: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -415,13 +421,17 @@ public class DataKaryawan extends javax.swing.JPanel {
         // Ambil data dari baris yang dipilih
         String id = tabelKaryawan.getValueAt(selectedRow, 0).toString();
         String nama = tabelKaryawan.getValueAt(selectedRow, 1).toString();
-        String password = tabelKaryawan.getValueAt(selectedRow, 2).toString();
-        String alamat = tabelKaryawan.getValueAt(selectedRow, 3).toString();
+        String jenisKelamin = tabelKaryawan.getValueAt(selectedRow, 2).toString();
+        String noHandPhone = tabelKaryawan.getValueAt(selectedRow, 3).toString();
+        String password = tabelKaryawan.getValueAt(selectedRow, 4).toString();
+        String alamat = tabelKaryawan.getValueAt(selectedRow, 5).toString();
 
         // Buat form TambahKaryawan dan set data yang diambil dari tabel
         FormKaryawan tambah = new FormKaryawan();
         tambah.setTxtID(id);  // Set ID ke field ID di form
         tambah.setTxtNama(nama);  // Set Nama ke field Nama di form
+        tambah.setSelectedGender(jenisKelamin);
+        tambah.setTxtNoHP(noHandPhone);
         tambah.setTxtPassword(password);  // Set Password ke field Password di form
         tambah.setTxtAlamat(alamat);  // Set Alamat ke field Alamat di form
 
@@ -439,24 +449,31 @@ public class DataKaryawan extends javax.swing.JPanel {
                 // Ambil data yang telah diedit dari form
                 String newID = tambah.getTxtID();
                 String newNama = tambah.getTxtNama();
+                String newJenisKelamin = tambah.getSelectedGender();
+                String newNoHandphone = tambah.getTxtNoHP();
                 String newPassword = tambah.getTxtPassword();
                 String newAlamat = tambah.getTxtAlamat();
 
                 try {
                     // Simpan data yang telah diedit ke database
-                    String query = "UPDATE karyawan SET nama = ?, password = ?, alamat = ? WHERE id = ?";
+                    String query = "UPDATE karyawan SET nama = ?, jenisKelamin = ?, noHandPhone = ?, password = ?, alamat = ? WHERE id = ?";
                     PreparedStatement preparedStatement = koneksi.prepareStatement(query);
                     preparedStatement.setString(1, newNama);
-                    preparedStatement.setString(2, newPassword);
-                    preparedStatement.setString(3, newAlamat);
-                    preparedStatement.setString(4, newID);
+                    preparedStatement.setString(2, newJenisKelamin);
+                    preparedStatement.setString(3, newNoHandphone);
+                    preparedStatement.setString(4, newPassword);
+                    preparedStatement.setString(5, newAlamat);
+                    preparedStatement.setString(6, newID);
                     preparedStatement.executeUpdate();
 
                     // Perbarui data yang telah diedit di tabel
                     DefaultTableModel model = (DefaultTableModel) tabelKaryawan.getModel();
+                    model.setValueAt(newID, selectedRow, 0);
                     model.setValueAt(newNama, selectedRow, 1);
-                    model.setValueAt(newPassword, selectedRow, 2);
-                    model.setValueAt(newAlamat, selectedRow, 3);
+                    model.setValueAt(newJenisKelamin, selectedRow, 2);
+                    model.setValueAt(newNoHandphone, selectedRow, 3);
+                    model.setValueAt(newPassword, selectedRow, 4);
+                    model.setValueAt(newAlamat, selectedRow, 5);                    
 
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data karyawan berhasil diperbarui");
                 } catch (SQLException e) {

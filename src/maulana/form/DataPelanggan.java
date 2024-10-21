@@ -30,17 +30,17 @@ public class DataPelanggan extends javax.swing.JPanel {
         dataTabel();
     }
 
-    private void init()  {
+    private void init() {
         panel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:25;"
                 + "background:$Table.background");
-        tabelKaryawan.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
+        tabelPelanggan.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
                 + "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background;"
                 + "font:bold;");
-        tabelKaryawan.putClientProperty(FlatClientProperties.STYLE, ""
+        tabelPelanggan.putClientProperty(FlatClientProperties.STYLE, ""
                 + "rowHeight:30;"
                 + "showHorizontalLines:true;"
                 + "intercellSpacing:0,1;"
@@ -65,14 +65,14 @@ public class DataPelanggan extends javax.swing.JPanel {
     }
 
     private void dataTabel() {
-        Object[] baris = {"ID", "NAMA", "PASSWORD", "ALAMAT"};
+        Object[] baris = {"NIK", "NAMA", "JENIS KELAMIN", "NO. HANDPHONE", "PEKERJAAN", "NO. SIM", "ALAMAT"};
         tabelModel = new DefaultTableModel(null, baris);
-        JTableHeader tabelHeader = tabelKaryawan.getTableHeader();
+        JTableHeader tabelHeader = tabelPelanggan.getTableHeader();
         ((DefaultTableCellRenderer) tabelHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
         String cariItem = txtCari.getText();
 
         try {
-            String query = "SELECT * FROM karyawan WHERE id LIKE '%" + cariItem + "%' OR nama LIKE'%" + cariItem + "%' ORDER BY id ASC";
+            String query = "SELECT * FROM pelanggan WHERE nik LIKE '%" + cariItem + "%' OR nama LIKE'%" + cariItem + "%' ORDER BY nik ASC";
             Statement statment = koneksi.createStatement();
             ResultSet hasil = statment.executeQuery(query);
             while (hasil.next()) {
@@ -80,23 +80,26 @@ public class DataPelanggan extends javax.swing.JPanel {
                     hasil.getString(1),
                     hasil.getString(2),
                     hasil.getString(3),
-                    hasil.getString(4)
+                    hasil.getString(4),
+                    hasil.getString(5),
+                    hasil.getString(6),
+                    hasil.getString(7)
                 });
             }
-            tabelKaryawan.setModel(tabelModel);
+            tabelPelanggan.setModel(tabelModel);
             // Mengatur lebar kolom
             TableColumn column;
-            column = tabelKaryawan.getColumnModel().getColumn(0); // Kolom "ID"            
-            column.setMaxWidth(60);       // Lebar maksimum
-            column = tabelKaryawan.getColumnModel().getColumn(1); // Kolom "Nama"
+            column = tabelPelanggan.getColumnModel().getColumn(0); // Kolom "NIK"            
+            column.setPreferredWidth(100);       // Lebar maksimum
+            column = tabelPelanggan.getColumnModel().getColumn(1); // Kolom "Nama"
             column.setPreferredWidth(100);
-            column = tabelKaryawan.getColumnModel().getColumn(2); // Kolom "Password"
+            column = tabelPelanggan.getColumnModel().getColumn(2); // Kolom "Jenis Kelamin"
             column.setPreferredWidth(100);
-            column = tabelKaryawan.getColumnModel().getColumn(3); // Kolom "Alamat"
-            column.setPreferredWidth(300);
+            column = tabelPelanggan.getColumnModel().getColumn(3); // Kolom "No Handphone"
+            column.setPreferredWidth(100);
             // Refresh tabel
-            tabelKaryawan.revalidate();
-            tabelKaryawan.repaint();
+            tabelPelanggan.revalidate();
+            tabelPelanggan.repaint();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data gagal dipanggil");
         }
@@ -110,7 +113,7 @@ public class DataPelanggan extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
-        tabelKaryawan = new javax.swing.JTable();
+        tabelPelanggan = new javax.swing.JTable();
         btnTambah = new maulana.swing.Button();
         btnEdit = new maulana.swing.Button();
         btnHapus = new maulana.swing.Button();
@@ -128,7 +131,7 @@ public class DataPelanggan extends javax.swing.JPanel {
 
         scroll.setBorder(null);
 
-        tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -243,12 +246,12 @@ public class DataPelanggan extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tabelKaryawan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        scroll.setViewportView(tabelKaryawan);
-        if (tabelKaryawan.getColumnModel().getColumnCount() > 0) {
-            tabelKaryawan.getColumnModel().getColumn(0).setMaxWidth(40);
-            tabelKaryawan.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tabelKaryawan.getColumnModel().getColumn(3).setPreferredWidth(300);
+        tabelPelanggan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        scroll.setViewportView(tabelPelanggan);
+        if (tabelPelanggan.getColumnModel().getColumnCount() > 0) {
+            tabelPelanggan.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelPelanggan.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tabelPelanggan.getColumnModel().getColumn(3).setPreferredWidth(300);
         }
 
         btnTambah.setBackground(new java.awt.Color(51, 204, 0));
@@ -331,7 +334,7 @@ public class DataPelanggan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        FormKaryawan tambah = new FormKaryawan();
+        FormPelanggan tambah = new FormPelanggan();
         DefaultOption option = new DefaultOption() {
             @Override
             public boolean closeWhenClickOutside() {
@@ -342,18 +345,21 @@ public class DataPelanggan extends javax.swing.JPanel {
         GlassPanePopup.showPopup(new SimplePopupBorder(tambah, "Tambah Karyawan", actions, (pc, i) -> {
             if (i == 1) {
                 // Ambil data dari form
-                String id = tambah.getTxtID();
+                String nik = tambah.getTxtNIK();
                 String nama = tambah.getTxtNama();
-                String password = tambah.getTxtPassword();
+                String gender = tambah.getSelectedGender();
+                String noHandphone = tambah.getTxtNoHP();
+                String pekerjaan = tambah.getTxtPekerjaan();
+                String noSIM = tambah.getTxtNoSIM();
                 String alamat = tambah.getTxtAlamat();
 
                 // Tambahkan data ke tabel
-                DefaultTableModel model = (DefaultTableModel) tabelKaryawan.getModel();
-                model.addRow(new Object[]{model.getRowCount() + id, nama, password, alamat});
+                DefaultTableModel model = (DefaultTableModel) tabelPelanggan.getModel();
+                model.addRow(new Object[]{nik, nama, gender, noHandphone, pekerjaan, noSIM, alamat});
 
                 try {
                     // Simpan data ke database
-                    String query = "INSERT INTO karyawan (id, nama, password, alamat) VALUES ('" + id + "', '" + nama + "', '" + password + "', '" + alamat + "')";
+                    String query = "INSERT INTO pelanggan (nik, nama, jenisKelamin, noHandphone, pekerjaan, noSIM, alamat) VALUES ('" + nik + "', '" + nama + "', '" + gender + "', '" + noHandphone + "', '" + pekerjaan + "', '" + noSIM + "', '" + alamat + "')";
                     Statement statement = koneksi.createStatement();
                     statement.executeUpdate(query);
                     pc.closePopup();
@@ -370,7 +376,7 @@ public class DataPelanggan extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        int selectedRow = tabelKaryawan.getSelectedRow();
+        int selectedRow = tabelPelanggan.getSelectedRow();
 
         // Periksa apakah ada baris yang dipilih
         if (selectedRow == -1) {
@@ -379,7 +385,7 @@ public class DataPelanggan extends javax.swing.JPanel {
         }
 
         // Ambil ID karyawan yang dipilih
-        String idKaryawan = tabelKaryawan.getValueAt(selectedRow, 0).toString();
+        String idKaryawan = tabelPelanggan.getValueAt(selectedRow, 0).toString();
 
         // Konfirmasi penghapusan
         int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus karyawan dengan ID: " + idKaryawan + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
@@ -391,7 +397,7 @@ public class DataPelanggan extends javax.swing.JPanel {
                 statement.executeUpdate(query);
 
                 // Hapus baris dari tabel
-                ((DefaultTableModel) tabelKaryawan.getModel()).removeRow(selectedRow);
+                ((DefaultTableModel) tabelPelanggan.getModel()).removeRow(selectedRow);
 
                 // Tampilkan notifikasi sukses
                 Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data karyawan berhasil dihapus");
@@ -404,24 +410,30 @@ public class DataPelanggan extends javax.swing.JPanel {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // Pastikan pengguna memilih baris yang akan di-edit
-        int selectedRow = tabelKaryawan.getSelectedRow();
+        int selectedRow = tabelPelanggan.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Ambil data dari baris yang dipilih
-        String id = tabelKaryawan.getValueAt(selectedRow, 0).toString();
-        String nama = tabelKaryawan.getValueAt(selectedRow, 1).toString();
-        String password = tabelKaryawan.getValueAt(selectedRow, 2).toString();
-        String alamat = tabelKaryawan.getValueAt(selectedRow, 3).toString();
+        String nik = tabelPelanggan.getValueAt(selectedRow, 0).toString();
+        String nama = tabelPelanggan.getValueAt(selectedRow, 1).toString();
+        String gender = tabelPelanggan.getValueAt(selectedRow, 2).toString();
+        String noHandphone = tabelPelanggan.getValueAt(selectedRow, 3).toString();
+        String pekerjaan = tabelPelanggan.getValueAt(selectedRow, 4).toString();
+        String noSIM = tabelPelanggan.getValueAt(selectedRow, 5).toString();
+        String alamat = tabelPelanggan.getValueAt(selectedRow, 6).toString();
 
         // Buat form TambahKaryawan dan set data yang diambil dari tabel
-        FormKaryawan tambah = new FormKaryawan();
-        tambah.setTxtID(id);  // Set ID ke field ID di form
-        tambah.setTxtNama(nama);  // Set Nama ke field Nama di form
-        tambah.setTxtPassword(password);  // Set Password ke field Password di form
-        tambah.setTxtAlamat(alamat);  // Set Alamat ke field Alamat di form
+        FormPelanggan edit = new FormPelanggan();
+        edit.setTxtNIK(nik);  // Set ID ke field ID di form
+        edit.setTxtNama(nama);  // Set Nama ke field Nama di form
+        edit.setSelectedGender(gender);  // Set Password ke field Password di form
+        edit.setTxtNoHP(noHandphone);
+        edit.setTxtPekerjaan(pekerjaan);
+        edit.setTxtNoSIM(noSIM);
+        edit.setTxtAlamat(alamat);  // Set Alamat ke field Alamat di form
 
         // Tampilkan popup untuk mengedit data
         DefaultOption option = new DefaultOption() {
@@ -432,29 +444,38 @@ public class DataPelanggan extends javax.swing.JPanel {
         };
         String actions[] = new String[]{"Batal", "Simpan"};
 
-        GlassPanePopup.showPopup(new SimplePopupBorder(tambah, "Edit Karyawan", actions, (pc, i) -> {
+        GlassPanePopup.showPopup(new SimplePopupBorder(edit, "Edit Karyawan", actions, (pc, i) -> {
             if (i == 1) {
                 // Ambil data yang telah diedit dari form
-                String newID = tambah.getTxtID();
-                String newNama = tambah.getTxtNama();
-                String newPassword = tambah.getTxtPassword();
-                String newAlamat = tambah.getTxtAlamat();
+                String newNIK = edit.getTxtNIK();
+                String newNama = edit.getTxtNama();
+                String newGender = edit.getSelectedGender();
+                String newNoHandphone = edit.getTxtNoHanphone();
+                String newPekerjaan = edit.getTxtPekerjaan();
+                String newNoSIM = edit.getTxtNoSIM();
+                String newAlamat = edit.getTxtAlamat();
 
                 try {
                     // Simpan data yang telah diedit ke database
                     String query = "UPDATE karyawan SET nama = ?, password = ?, alamat = ? WHERE id = ?";
                     PreparedStatement preparedStatement = koneksi.prepareStatement(query);
                     preparedStatement.setString(1, newNama);
-                    preparedStatement.setString(2, newPassword);
-                    preparedStatement.setString(3, newAlamat);
-                    preparedStatement.setString(4, newID);
+                    preparedStatement.setString(2, newGender);
+                    preparedStatement.setString(3, newNoHandphone);
+                    preparedStatement.setString(4, newPekerjaan);
+                    preparedStatement.setString(5, newNoSIM);
+                    preparedStatement.setString(6, newAlamat);
+                    preparedStatement.setString(7, newNIK);
                     preparedStatement.executeUpdate();
 
                     // Perbarui data yang telah diedit di tabel
-                    DefaultTableModel model = (DefaultTableModel) tabelKaryawan.getModel();
+                    DefaultTableModel model = (DefaultTableModel) tabelPelanggan.getModel();
                     model.setValueAt(newNama, selectedRow, 1);
-                    model.setValueAt(newPassword, selectedRow, 2);
-                    model.setValueAt(newAlamat, selectedRow, 3);
+                    model.setValueAt(newGender, selectedRow, 2);
+                    model.setValueAt(newNoHandphone, selectedRow, 3);
+                    model.setValueAt(newPekerjaan, selectedRow, 4);
+                    model.setValueAt(newNoSIM, selectedRow, 5);                    
+                    model.setValueAt(newAlamat, selectedRow, 6);
 
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data karyawan berhasil diperbarui");
                 } catch (SQLException e) {
@@ -480,7 +501,7 @@ public class DataPelanggan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private maulana.swing.PanelRounded panel;
     private javax.swing.JScrollPane scroll;
-    private javax.swing.JTable tabelKaryawan;
+    private javax.swing.JTable tabelPelanggan;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables
 }
