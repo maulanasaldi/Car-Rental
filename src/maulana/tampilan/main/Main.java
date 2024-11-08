@@ -3,8 +3,6 @@ package maulana.tampilan.main;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import maulana.tampilan.data.Dashboard;
@@ -23,12 +21,25 @@ import raven.toast.Notifications;
 
 public class Main extends javax.swing.JFrame {
 
+    private String idKaryawan;
     private Connection koneksi = new KoneksiDB().connect();
-    
+
     public Main() {
-        initComponents();        
+        initComponents();
         init();
-        super.setExtendedState(MAXIMIZED_BOTH);        
+        super.setExtendedState(MAXIMIZED_BOTH);
+    }            
+
+    public void setIdKaryawan(String id) {
+        if (id != null) {
+            this.idKaryawan = id;  // Simpan nilai ke variabel instance
+        } else {
+            System.out.println("ID Karyawan null saat setIdKaryawan dipanggil!");
+        }
+    }
+
+public void setNamaKaryawan(String nama) {
+        lblNamaKaryawan.setText(nama);
     }
 
     private void init() {
@@ -55,13 +66,8 @@ public class Main extends javax.swing.JFrame {
         penampil.add(new Dashboard());
         penampil.repaint();
         penampil.revalidate();
-    }   
-
-    public void setNamaKaryawan(String nama) {
-        lblNamaKaryawan.setText(nama);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -386,9 +392,17 @@ public class Main extends javax.swing.JFrame {
 
     private void cmdPenyewaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPenyewaanActionPerformed
         penampil.removeAll();
-        penampil.add(new Pemesanan());
+        Pemesanan pesanan = new Pemesanan();
+        
+        // Set idKaryawan ke Pemesanan
+        pesanan.setIdKaryawan(idKaryawan);
+        
+        penampil.add(pesanan);
         penampil.repaint();
         penampil.revalidate();
+        
+        // Debugging untuk memastikan idKaryawan dikirim ke Pemesanan
+        System.out.println("ID Karyawan after setting in Pemesanan: " + idKaryawan);
     }//GEN-LAST:event_cmdPenyewaanActionPerformed
 
     private void cmdPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPembayaranActionPerformed
@@ -424,7 +438,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdSopirActionPerformed
 
     private void cmdReportPemesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdReportPemesananActionPerformed
-        
+
     }//GEN-LAST:event_cmdReportPemesananActionPerformed
 
     private void cmdRepotPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRepotPembayaranActionPerformed
@@ -442,7 +456,7 @@ public class Main extends javax.swing.JFrame {
             JasperPrint print = JasperFillManager.fillReport(path, parameter, koneksi);
             JasperViewer.viewReport(print, false);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, "Dokumen tidak ada"+ex);
+            JOptionPane.showMessageDialog(rootPane, "Dokumen tidak ada" + ex);
         }
     }//GEN-LAST:event_cmdRepotPelangganActionPerformed
 

@@ -3,16 +3,24 @@ package maulana.tampilan.data;
 import maulana.tampilan.popup.FormMobil;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Component;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import maulana.koneksi.KoneksiDB;
 import raven.popup.DefaultOption;
@@ -28,7 +36,7 @@ public class DataMobil extends javax.swing.JPanel {
     public DataMobil() {
         initComponents();
         init();
-        dataTabel();       
+        dataTabel();
     }
 
     private void init() {
@@ -66,43 +74,74 @@ public class DataMobil extends javax.swing.JPanel {
     }
 
     private void dataTabel() {
-        Object[] baris = {"ID", "MEREK", "JENIS", "PLAT NOMOR", "KAPASITAS", "TARIF", "STATUS"};
-        tabelModel = new DefaultTableModel(null, baris);
+        Object[] baris = {"ID", "MEREK", "JENIS", "PLAT NOMOR", "KAPASITAS", "TARIF", "STATUS", "GAMBAR"};
+        tabelModel = new DefaultTableModel(null, baris) {
+            @Override
+            public Class<?> getColumnClass(int column) {
+                return column == 7 ? ImageIcon.class : String.class;
+            }
+        };
         JTableHeader tabelHeader = tabelMobil.getTableHeader();
         ((DefaultTableCellRenderer) tabelHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
         String cariItem = txtCari.getText();
 
         try {
-            String query = "SELECT * FROM mobil WHERE id_mobil LIKE '%" + cariItem + "%' OR jenis LIKE'%" + cariItem + "%' ORDER BY id_mobil ASC";
-            Statement statment = koneksi.createStatement();
-            ResultSet hasil = statment.executeQuery(query);
+            String query = "SELECT * FROM mobil WHERE id_mobil LIKE ? OR jenis LIKE ? ORDER BY id_mobil ASC";
+            PreparedStatement preparedStatement = koneksi.prepareStatement(query);
+            preparedStatement.setString(1, "%" + cariItem + "%");
+            preparedStatement.setString(2, "%" + cariItem + "%");
+            ResultSet hasil = preparedStatement.executeQuery();
+
             while (hasil.next()) {
-                tabelModel.addRow(new Object[]{
-                    hasil.getString(1),
-                    hasil.getString(2),
-                    hasil.getString(3),
-                    hasil.getString(4),
-                    hasil.getString(5),
-                    hasil.getString(6),
-                    hasil.getString(7)
-                });
+                String id = hasil.getString("id_mobil");
+                String merek = hasil.getString("merek");
+                String jenis = hasil.getString("jenis");
+                String platNomor = hasil.getString("plat_nomor");
+                String kapasitas = hasil.getString("kapasitas");
+                String tarif = hasil.getString("tarif");
+                String status = hasil.getString("status");
+
+                // Mengambil data gambar dari database
+                byte[] gambarBytes = hasil.getBytes("gambar");
+                ImageIcon gambarIcon = null;
+
+                if (gambarBytes != null && gambarBytes.length > 0) {
+                    Image img = Toolkit.getDefaultToolkit().createImage(gambarBytes);
+                    Image resizedImg = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                    gambarIcon = new ImageIcon(resizedImg);
+                }
+
+                // Tambahkan baris ke model tabel
+                tabelModel.addRow(new Object[]{id, merek, jenis, platNomor, kapasitas, tarif, status, gambarIcon});
             }
+
             tabelMobil.setModel(tabelModel);
+
             // Mengatur lebar kolom
-            TableColumn column;
-            column = tabelMobil.getColumnModel().getColumn(0); // Kolom "ID"            
-            column.setMaxWidth(60);       // Lebar maksimum
-            column = tabelMobil.getColumnModel().getColumn(1); // Kolom "Nama"
-            column.setPreferredWidth(100);
-            column = tabelMobil.getColumnModel().getColumn(2); // Kolom "Password"
-            column.setPreferredWidth(100);
-            column = tabelMobil.getColumnModel().getColumn(3); // Kolom "Alamat"
-            column.setPreferredWidth(300);
-            // Refresh tabel
+            tabelMobil.getColumnModel().getColumn(0).setMaxWidth(60);
+            tabelMobil.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tabelMobil.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tabelMobil.getColumnModel().getColumn(3).setPreferredWidth(300);
+            tabelMobil.getColumnModel().getColumn(7).setPreferredWidth(60);
+
+            // Tambahkan renderer untuk kolom gambar
+            tabelMobil.getColumnModel().getColumn(7).setCellRenderer(new TableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    JLabel label = new JLabel();
+                    if (value instanceof ImageIcon) {
+                        label.setIcon((ImageIcon) value);
+                    }
+                    label.setHorizontalAlignment(JLabel.CENTER);
+                    return label;
+                }
+            });
+
             tabelMobil.revalidate();
             tabelMobil.repaint();
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data gagal dipanggil");
+            JOptionPane.showMessageDialog(null, "Data gagal dipanggil: " + e.getMessage());
         }
     }
 
@@ -380,29 +419,55 @@ public class DataMobil extends javax.swing.JPanel {
                 String kapasitas = tambahDataMobil.getTxtKapasitas();
                 String tarif = tambahDataMobil.getTxtTarif();
                 String status = tambahDataMobil.getSelectedStatus();
+                byte[] gambar = tambahDataMobil.getGambarBytes(); // Mengambil gambar dalam bentuk byte array
+
+                // Validasi data
+                if (id.isEmpty() || merek.isEmpty() || jenis.isEmpty() || platNomer.isEmpty() || kapasitas.isEmpty() || tarif.isEmpty()) {
+                    Notifications.getInstance().show(Notifications.Type.ERROR, "Semua field harus diisi!");
+                    return;
+                }
+
+                if (gambar == null || gambar.length == 0) {
+                    Notifications.getInstance().show(Notifications.Type.ERROR, "Gambar mobil harus dipilih!");
+                    return;
+                }
 
                 // Tambahkan data ke tabel
                 DefaultTableModel model = (DefaultTableModel) tabelMobil.getModel();
-                model.addRow(new Object[]{id, merek, jenis, platNomer, kapasitas, tarif, status});
+                model.addRow(new Object[]{id, merek, jenis, platNomer, kapasitas, formatRupiah(tarif), status, gambar});
 
-                try {
-                    // Simpan data ke database
-                    String query = "INSERT INTO mobil (id_mobil, merek, jenis, plat_nomor, kapasitas, tarif, status) VALUES ('" + id + "', '" + merek + "', '" + jenis + "', '" + platNomer + "', '" + kapasitas + "', '" + tarif + "', '" + status + "')";
-                    Statement statement = koneksi.createStatement();
-                    statement.executeUpdate(query);
+                // Simpan data ke database dengan PreparedStatement
+                String query = "INSERT INTO mobil (id_mobil, merek, jenis, plat_nomor, kapasitas, tarif, status, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                try (PreparedStatement preparedStatement = koneksi.prepareStatement(query)) {
+                    preparedStatement.setString(1, id);
+                    preparedStatement.setString(2, merek);
+                    preparedStatement.setString(3, jenis);
+                    preparedStatement.setString(4, platNomer);
+                    preparedStatement.setInt(5, Integer.parseInt(kapasitas));
+                    preparedStatement.setInt(6, Integer.parseInt(tarif));
+                    preparedStatement.setString(7, status);
+                    preparedStatement.setBytes(8, gambar); // Menyimpan gambar sebagai BLOB
+
+                    preparedStatement.executeUpdate();
+                    dataTabel();
                     pc.closePopup();
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data mobil berhasil ditambahkan");
                 } catch (Exception e) {
                     e.printStackTrace();
                     Notifications.getInstance().show(Notifications.Type.ERROR, "Data mobil gagal ditambahkan!");
                 }
-
-                pc.closePopup();
             } else {
                 pc.closePopup();
             }
         }), option);
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    // Method untuk format Rupiah
+    private String formatRupiah(String tarif) {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        int intTarif = Integer.parseInt(tarif);
+        return format.format(intTarif);
+    }
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         int selectedRow = tabelMobil.getSelectedRow();
@@ -454,15 +519,23 @@ public class DataMobil extends javax.swing.JPanel {
         String tarif = tabelMobil.getValueAt(selectedRow, 5).toString();
         String status = tabelMobil.getValueAt(selectedRow, 6).toString();
 
+        // Ambil gambar dari kolom tabel
+        ImageIcon gambar = (ImageIcon) tabelMobil.getValueAt(selectedRow, 7);
+
         // Buat form mobil dan set data yang diambil dari tabel
         FormMobil edit = new FormMobil();
-        edit.setTxtID(id);  // Set ID ke field ID di form
-        edit.setTxtMerek(merek);  // Set Nomor Polisi ke field Merek Polisi di form
-        edit.setTxtJenis(jenis);  // Set Jenis ke field Jenis di form
-        edit.setTxtPlatNomer(platNomor);  // Set Merek ke field Plat Nomor di form
-        edit.setTxtKapasitas(kapasitas);    // Set Merek ke field Kapasitas di form
-        edit.setTxtTarif(tarif);    // Set Merek ke field tarif di form
-        edit.setSelectedStatus(status); // Set Status ke field Status di form
+        edit.setTxtID(id);
+        edit.setTxtMerek(merek);
+        edit.setTxtJenis(jenis);
+        edit.setTxtPlatNomer(platNomor);
+        edit.setTxtKapasitas(kapasitas);
+        edit.setTxtTarif(tarif);
+        edit.setSelectedStatus(status);
+
+        // Set gambar pada form
+        if (gambar != null) {
+            edit.setGambar(gambar);
+        }
 
         // Tampilkan popup untuk mengedit data
         DefaultOption option = new DefaultOption() {
@@ -483,6 +556,7 @@ public class DataMobil extends javax.swing.JPanel {
                 String newKapasitas = edit.getTxtKapasitas();
                 String newTarif = edit.getTxtTarif();
                 String newStatus = edit.getSelectedStatus();
+                ImageIcon newGambar = edit.getGambar();
 
                 try {
                     // Simpan data yang telah diedit ke database
@@ -505,6 +579,9 @@ public class DataMobil extends javax.swing.JPanel {
                     model.setValueAt(newKapasitas, selectedRow, 4);
                     model.setValueAt(newTarif, selectedRow, 5);
                     model.setValueAt(newStatus, selectedRow, 6);
+                    model.setValueAt(newGambar, selectedRow, 7); // Update gambar jika diubah
+                    
+                    dataTabel();
 
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data mobil berhasil diperbarui");
                 } catch (SQLException e) {

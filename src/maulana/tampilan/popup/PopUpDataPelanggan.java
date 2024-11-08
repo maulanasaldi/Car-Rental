@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package maulana.tampilan.popup;
 
 import com.formdev.flatlaf.FlatClientProperties;
@@ -138,6 +133,7 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
         pelanggan.noTelepon = tblPelanggan.getValueAt(tabelPelanggan, 3).toString();
         pelanggan.alamatPelanggan = tblPelanggan.getValueAt(tabelPelanggan, 4).toString();
         pelanggan.itemTerpilihPelanggan();
+        
     }//GEN-LAST:event_tblPelangganMouseClicked
 
     private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased

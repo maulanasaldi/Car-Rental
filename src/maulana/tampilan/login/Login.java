@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.SwingUtilities;
 import maulana.koneksi.KoneksiDB;
+import maulana.tampilan.data.Pemesanan;
 
 import maulana.tampilan.main.Main;
 import raven.toast.Notifications;
@@ -206,27 +207,35 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_cbShowPassActionPerformed
 
     private void cmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActionPerformed
-        String idKaryawan = txtUserID.getText();
+        String id = txtUserID.getText();
         String password = new String(txtPass.getPassword());
         try {
             String query = "SELECT * FROM karyawan WHERE id_karyawan =? AND password=?";
             PreparedStatement statement = koneksi.prepareStatement(query);
-            statement.setString(1, idKaryawan);
+            statement.setString(1, id);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
+
             if (resultSet.next()) {
-                String namaKaryawan = resultSet.getString("nama_karyawan"); // mengambil nama karyawan dari database
-                
-                 Notifications.getInstance().show(Notifications.Type.SUCCESS, "Selamat anda berhasil Login");
-                
-                // Menggunakan invokeLater agar transisi ke Main terjadi setelah notifikasi muncul
+                String idKaryawan = resultSet.getString("id_karyawan");
+                String namaKaryawan = resultSet.getString("nama_karyawan");
+
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, "Selamat anda berhasil Login");
+
                 new Thread(() -> {
                     try {
-                        Thread.sleep(2000);  // Jeda 2 detik (2000 milidetik)
+                        Thread.sleep(2000);  // Jeda 2 detik
                         SwingUtilities.invokeLater(() -> {
                             this.setVisible(false);
-                            Main main = new Main();  
-                            main.setNamaKaryawan(namaKaryawan);
+                            Main main = new Main();
+
+                            if (idKaryawan != null && namaKaryawan != null) {
+                                main.setIdKaryawan(idKaryawan); // Set idKaryawan ke instance Main
+                                main.setNamaKaryawan(namaKaryawan); // Set namaKaryawan ke instance Main
+                            } else {
+                                System.out.println("ID atau Nama Karyawan kosong!");
+                            }
+
                             main.setVisible(true);
                         });
                     } catch (InterruptedException e) {
