@@ -9,20 +9,16 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import maulana.koneksi.KoneksiDB;
-import maulana.tampilan.data.Pemesanan;
+import maulana.tampilan.data.Pembayaran;
 
-/**
- *
- * @author mmaul
- */
-public class PopUpDataPelanggan extends javax.swing.JPanel {
+public class PopUpDataSupir extends javax.swing.JPanel {
 
     private Connection koneksi = new KoneksiDB().connect();
     private DefaultTableModel tabmode;
-    public Pemesanan pelanggan = null;
+    public Pembayaran supir = null;
     private JDialog parentDialog;
 
-    public PopUpDataPelanggan(JDialog dialog) {
+    public PopUpDataSupir(JDialog dialog) {
         this.parentDialog = dialog;
         initComponents();
         dataTable();
@@ -42,11 +38,11 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
     }
 
     private void dataTable() {
-        Object[] baris = {"NIK", "N0. SIM", "NAMA", "NO. TELEPON", "ALAMAT"};
+        Object[] baris = {"ID Supir", "Nama", "No. Telepon", "Alamat", "Tarif"};
         tabmode = new DefaultTableModel(null, baris);
         String cariItem = txtCari.getText();
         try {
-            String sql = "SELECT * FROM pelanggan WHERE nik LIKE '%" + cariItem + "%' OR nama_pelanggan LIKE '%" + cariItem + "%' ORDER BY nik ASC";
+            String sql = "SELECT * FROM supir WHERE id_supir LIKE '%" + cariItem + "%' OR nama_supir LIKE '%" + cariItem + "%' ORDER BY id_supir ASC";
             Statement stat = koneksi.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()) {
@@ -129,12 +125,11 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
 
     private void tblPelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPelangganMouseClicked
         int tabelPelanggan = tblPelanggan.getSelectedRow();
-        pelanggan.nik = tblPelanggan.getValueAt(tabelPelanggan, 0).toString();
-        pelanggan.noSim = tblPelanggan.getValueAt(tabelPelanggan, 1).toString();
-        pelanggan.namaPelanggan = tblPelanggan.getValueAt(tabelPelanggan, 2).toString();
-        pelanggan.noTelepon = tblPelanggan.getValueAt(tabelPelanggan, 3).toString();
-        pelanggan.alamatPelanggan = tblPelanggan.getValueAt(tabelPelanggan, 4).toString();
-        pelanggan.itemTerpilihPelanggan();
+        supir.idSupir = tblPelanggan.getValueAt(tabelPelanggan, 0).toString();
+        supir.namaSupir = tblPelanggan.getValueAt(tabelPelanggan, 1).toString();
+        supir.noTlpnSupir = tblPelanggan.getValueAt(tabelPelanggan, 2).toString();        
+        supir.tarifSupir = Integer.parseInt(tblPelanggan.getValueAt(tabelPelanggan, 4).toString());        
+        supir.itemTerpilihSupir();        
         parentDialog.dispose();
     }//GEN-LAST:event_tblPelangganMouseClicked
 

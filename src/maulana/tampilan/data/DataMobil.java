@@ -4,8 +4,11 @@ import maulana.tampilan.popup.FormMobil;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 import java.util.Locale;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -43,19 +47,6 @@ public class DataMobil extends javax.swing.JPanel {
         panel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:25;"
                 + "background:$Table.background");
-        tabelMobil.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
-                + "height:30;"
-                + "hoverBackground:null;"
-                + "pressedBackground:null;"
-                + "separatorColor:$TableHeader.background;"
-                + "font:bold;");
-        tabelMobil.putClientProperty(FlatClientProperties.STYLE, ""
-                + "rowHeight:30;"
-                + "showHorizontalLines:true;"
-                + "intercellSpacing:0,1;"
-                + "cellFocusColor:$TableHeader.hoverBackground;"
-                + "selectionBackground:$TableHeader.hoverBackground;"
-                + "selectionForeground:$Table.foreground;");
         scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
@@ -69,7 +60,7 @@ public class DataMobil extends javax.swing.JPanel {
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;"
-                + "background:$Panel.background");
+                + "background:$TextField.background");
 
     }
 
@@ -179,10 +170,10 @@ public class DataMobil extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
-        tabelMobil = new javax.swing.JTable();
-        btnTambah = new maulana.swing.Button();
-        btnEdit = new maulana.swing.Button();
-        btnHapus = new maulana.swing.Button();
+        tabelMobil = new maulana.swing.TabelFlatLaf();
+        buttonAction1 = new maulana.swing.ButtonAction();
+        buttonAction2 = new maulana.swing.ButtonAction();
+        buttonAction3 = new maulana.swing.ButtonAction();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Data Mobil");
@@ -195,158 +186,40 @@ public class DataMobil extends javax.swing.JPanel {
             }
         });
 
-        scroll.setBorder(null);
-
         tabelMobil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nama", "Password", "Alamat"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelMobil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ));
         scroll.setViewportView(tabelMobil);
-        if (tabelMobil.getColumnModel().getColumnCount() > 0) {
-            tabelMobil.getColumnModel().getColumn(0).setMaxWidth(40);
-            tabelMobil.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tabelMobil.getColumnModel().getColumn(3).setPreferredWidth(300);
-        }
 
-        btnTambah.setBackground(new java.awt.Color(51, 204, 0));
-        btnTambah.setForeground(new java.awt.Color(255, 255, 255));
-        btnTambah.setText("TAMBAH");
-        btnTambah.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+        buttonAction1.setText("TAMBAH");
+        buttonAction1.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        buttonAction1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahActionPerformed(evt);
+                buttonAction1ActionPerformed(evt);
             }
         });
 
-        btnEdit.setBackground(new java.awt.Color(204, 204, 0));
-        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
-        btnEdit.setText("EDIT");
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+        buttonAction2.setText("EDIT");
+        buttonAction2.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        buttonAction2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
+                buttonAction2ActionPerformed(evt);
             }
         });
 
-        btnHapus.setBackground(new java.awt.Color(204, 0, 0));
-        btnHapus.setForeground(new java.awt.Color(255, 255, 255));
-        btnHapus.setText("HAPUS");
-        btnHapus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+        buttonAction3.setText("HAPUS");
+        buttonAction3.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        buttonAction3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHapusActionPerformed(evt);
+                buttonAction3ActionPerformed(evt);
             }
         });
 
@@ -355,36 +228,35 @@ public class DataMobil extends javax.swing.JPanel {
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(13, 13, 13)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
+                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
+                        .addComponent(buttonAction3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonAction2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonAction1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(10, 10, 10))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addComponent(scroll)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scroll)
-                .addGap(10, 10, 10))
+                    .addComponent(buttonAction1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAction2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAction3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -399,7 +271,37 @@ public class DataMobil extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+    // Method untuk format Rupiah
+    private String formatRupiah(String tarif) {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        int intTarif = Integer.parseInt(tarif);
+        return format.format(intTarif);
+    }
+
+    private byte[] convertToBytes(ImageIcon icon) {
+        try {
+            BufferedImage bufferdImage = new BufferedImage(
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    BufferedImage.TYPE_INT_RGB
+            );
+            Graphics g = bufferdImage.createGraphics();
+            icon.paintIcon(null, g, 0, 0);
+            g.dispose();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferdImage, "jpg", baos);
+            return baos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
+        dataTabel();
+    }//GEN-LAST:event_txtCariKeyReleased
+
+    private void buttonAction1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction1ActionPerformed
         FormMobil tambahDataMobil = new FormMobil();
         autoNumber(tambahDataMobil);
         DefaultOption option = new DefaultOption() {
@@ -460,16 +362,99 @@ public class DataMobil extends javax.swing.JPanel {
                 pc.closePopup();
             }
         }), option);
-    }//GEN-LAST:event_btnTambahActionPerformed
+    }//GEN-LAST:event_buttonAction1ActionPerformed
 
-    // Method untuk format Rupiah
-    private String formatRupiah(String tarif) {
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-        int intTarif = Integer.parseInt(tarif);
-        return format.format(intTarif);
-    }
+    private void buttonAction2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction2ActionPerformed
+        // Pastikan pengguna memilih baris yang akan di-edit
+        int selectedRow = tabelMobil.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // Ambil data dari baris yang dipilih
+        String id = tabelMobil.getValueAt(selectedRow, 0).toString();
+        String merek = tabelMobil.getValueAt(selectedRow, 1).toString();
+        String jenis = tabelMobil.getValueAt(selectedRow, 2).toString();
+        String platNomor = tabelMobil.getValueAt(selectedRow, 3).toString();
+        String kapasitas = tabelMobil.getValueAt(selectedRow, 4).toString();
+        String tarif = tabelMobil.getValueAt(selectedRow, 5).toString();
+        String status = tabelMobil.getValueAt(selectedRow, 6).toString();
+        ImageIcon gambar = (ImageIcon) tabelMobil.getValueAt(selectedRow, 7);
+
+        // Buat form mobil dan set data yang diambil dari tabel
+        FormMobil edit = new FormMobil();
+        edit.setTxtID(id);
+        edit.setTxtMerek(merek);
+        edit.setTxtJenis(jenis);
+        edit.setTxtPlatNomer(platNomor);
+        edit.setTxtKapasitas(kapasitas);
+        edit.setTxtTarif(tarif);
+        edit.setSelectedStatus(status);
+        if (gambar != null) {
+            edit.setGambar(gambar);
+        }
+
+        // Tampilkan popup untuk mengedit data
+        DefaultOption option = new DefaultOption() {
+            @Override
+            public boolean closeWhenClickOutside() {
+                return true;
+            }
+        };
+        String actions[] = new String[]{"Batal", "Simpan"};
+
+        GlassPanePopup.showPopup(new SimplePopupBorder(edit, "Edit Mobil", actions, (pc, i) -> {
+            if (i == 1) {
+                // Ambil data yang telah diedit dari form
+                String newID = edit.getTxtID();
+                String newMerek = edit.getTxtMerek();
+                String newJenis = edit.getTxtJenis();
+                String newPlatNomer = edit.getTxtPlatNomer();
+                String newKapasitas = edit.getTxtKapasitas();
+                String newTarif = edit.getTxtTarif();
+                String newStatus = edit.getSelectedStatus();
+                byte[] gambarBytes = edit.getGambarBytes();
+
+                try {
+                    // Simpan data yang telah diedit ke database
+                    String query = "UPDATE mobil SET merek = ?, jenis = ?, plat_nomor = ?, kapasitas = ?, tarif = ?, status = ?, gambar = ? WHERE id_mobil = ?";
+                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);
+                    preparedStatement.setString(1, newMerek);
+                    preparedStatement.setString(2, newJenis);
+                    preparedStatement.setString(3, newPlatNomer);
+                    preparedStatement.setString(4, newKapasitas);
+                    preparedStatement.setString(5, newTarif);
+                    preparedStatement.setString(6, newStatus);
+                    preparedStatement.setBytes(7, gambarBytes);
+                    preparedStatement.setString(8, newID);
+                    preparedStatement.executeUpdate();
+
+                    // Perbarui data yang telah diedit di tabel
+                    DefaultTableModel model = (DefaultTableModel) tabelMobil.getModel();
+                    model.setValueAt(newMerek, selectedRow, 1);
+                    model.setValueAt(newJenis, selectedRow, 2);
+                    model.setValueAt(newPlatNomer, selectedRow, 3);
+                    model.setValueAt(newKapasitas, selectedRow, 4);
+                    model.setValueAt(newTarif, selectedRow, 5);
+                    model.setValueAt(newStatus, selectedRow, 6);
+                    model.setValueAt(gambarBytes, selectedRow, 7);
+
+                    dataTabel();
+
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data mobil berhasil diperbarui");
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Data gagal diperbarui: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                pc.closePopup();
+            } else {
+                pc.closePopup();
+            }
+        }), option);
+    }//GEN-LAST:event_buttonAction2ActionPerformed
+
+    private void buttonAction3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction3ActionPerformed
         int selectedRow = tabelMobil.getSelectedRow();
 
         // Periksa apakah ada baris yang dipilih
@@ -500,113 +485,16 @@ public class DataMobil extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Data gagal dihapus: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_btnHapusActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // Pastikan pengguna memilih baris yang akan di-edit
-        int selectedRow = tabelMobil.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Ambil data dari baris yang dipilih
-        String id = tabelMobil.getValueAt(selectedRow, 0).toString();
-        String merek = tabelMobil.getValueAt(selectedRow, 1).toString();
-        String jenis = tabelMobil.getValueAt(selectedRow, 2).toString();
-        String platNomor = tabelMobil.getValueAt(selectedRow, 3).toString();
-        String kapasitas = tabelMobil.getValueAt(selectedRow, 4).toString();
-        String tarif = tabelMobil.getValueAt(selectedRow, 5).toString();
-        String status = tabelMobil.getValueAt(selectedRow, 6).toString();
-
-        // Ambil gambar dari kolom tabel
-        ImageIcon gambar = (ImageIcon) tabelMobil.getValueAt(selectedRow, 7);
-
-        // Buat form mobil dan set data yang diambil dari tabel
-        FormMobil edit = new FormMobil();
-        edit.setTxtID(id);
-        edit.setTxtMerek(merek);
-        edit.setTxtJenis(jenis);
-        edit.setTxtPlatNomer(platNomor);
-        edit.setTxtKapasitas(kapasitas);
-        edit.setTxtTarif(tarif);
-        edit.setSelectedStatus(status);
-
-        // Set gambar pada form
-        if (gambar != null) {
-            edit.setGambar(gambar);
-        }
-
-        // Tampilkan popup untuk mengedit data
-        DefaultOption option = new DefaultOption() {
-            @Override
-            public boolean closeWhenClickOutside() {
-                return true;
-            }
-        };
-        String actions[] = new String[]{"Batal", "Simpan"};
-
-        GlassPanePopup.showPopup(new SimplePopupBorder(edit, "Edit Mobil", actions, (pc, i) -> {
-            if (i == 1) {
-                // Ambil data yang telah diedit dari form
-                String newID = edit.getTxtID();
-                String newMerek = edit.getTxtMerek();
-                String newJenis = edit.getTxtJenis();
-                String newPlatNomer = edit.getTxtPlatNomer();
-                String newKapasitas = edit.getTxtKapasitas();
-                String newTarif = edit.getTxtTarif();
-                String newStatus = edit.getSelectedStatus();
-                ImageIcon newGambar = edit.getGambar();
-
-                try {
-                    // Simpan data yang telah diedit ke database
-                    String query = "UPDATE mobil SET merek = ?, jenis = ?, plat_nomor = ?, kapasitas = ?, tarif = ?, status = ? WHERE id_mobil = ?";
-                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);
-                    preparedStatement.setString(1, newMerek);
-                    preparedStatement.setString(2, newJenis);
-                    preparedStatement.setString(3, newPlatNomer);
-                    preparedStatement.setString(4, newKapasitas);
-                    preparedStatement.setString(5, newTarif);
-                    preparedStatement.setString(6, newStatus);
-                    preparedStatement.setString(7, newID);
-                    preparedStatement.executeUpdate();
-
-                    // Perbarui data yang telah diedit di tabel
-                    DefaultTableModel model = (DefaultTableModel) tabelMobil.getModel();
-                    model.setValueAt(newMerek, selectedRow, 1);
-                    model.setValueAt(newJenis, selectedRow, 2);
-                    model.setValueAt(newPlatNomer, selectedRow, 3);
-                    model.setValueAt(newKapasitas, selectedRow, 4);
-                    model.setValueAt(newTarif, selectedRow, 5);
-                    model.setValueAt(newStatus, selectedRow, 6);
-                    model.setValueAt(newGambar, selectedRow, 7); // Update gambar jika diubah
-                    
-                    dataTabel();
-
-                    Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data mobil berhasil diperbarui");
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Data gagal diperbarui: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-
-                pc.closePopup();
-            } else {
-                pc.closePopup();
-            }
-        }), option);
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
-        dataTabel();
-    }//GEN-LAST:event_txtCariKeyReleased
+    }//GEN-LAST:event_buttonAction3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private maulana.swing.Button btnEdit;
-    private maulana.swing.Button btnHapus;
-    private maulana.swing.Button btnTambah;
+    private maulana.swing.ButtonAction buttonAction1;
+    private maulana.swing.ButtonAction buttonAction2;
+    private maulana.swing.ButtonAction buttonAction3;
     private javax.swing.JLabel jLabel1;
     private maulana.swing.PanelRounded panel;
     private javax.swing.JScrollPane scroll;
-    private javax.swing.JTable tabelMobil;
+    private maulana.swing.TabelFlatLaf tabelMobil;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables
 }

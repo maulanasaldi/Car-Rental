@@ -1,35 +1,45 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package maulana.tampilan.popup;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import maulana.koneksi.KoneksiDB;
+import maulana.tampilan.data.Pembayaran;
 import maulana.tampilan.data.Pemesanan;
 
 /**
  *
  * @author mmaul
  */
-public class PopUpDataPelanggan extends javax.swing.JPanel {
+public class PopUpDataMobilPemesanan extends javax.swing.JPanel {
 
     private Connection koneksi = new KoneksiDB().connect();
     private DefaultTableModel tabmode;
-    public Pemesanan pelanggan = null;
+    public Pemesanan mobilPemesanan = null;        
     private JDialog parentDialog;
 
-    public PopUpDataPelanggan(JDialog dialog) {
+    public PopUpDataMobilPemesanan(JDialog dialog) {
         this.parentDialog = dialog;
         initComponents();
         dataTable();
         init();
     }
-    
-    private void init(){
+
+    private void init() {
         txtCari.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Cari...");
         txtCari.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("maulana/icon/search.svg"));
         txtCari.putClientProperty(FlatClientProperties.STYLE, ""
@@ -42,25 +52,39 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
     }
 
     private void dataTable() {
-        Object[] baris = {"NIK", "N0. SIM", "NAMA", "NO. TELEPON", "ALAMAT"};
+        Object[] baris = {"ID MOBIL", "MEREK", "JENIS", "PLAT NOMOR", "KAPASITAS", "TARIF", "STATUS", "GAMBAR"};
         tabmode = new DefaultTableModel(null, baris);
         String cariItem = txtCari.getText();
         try {
-            String sql = "SELECT * FROM pelanggan WHERE nik LIKE '%" + cariItem + "%' OR nama_pelanggan LIKE '%" + cariItem + "%' ORDER BY nik ASC";
+            // Modifikasi query untuk memilih data gambar (kolom gambar bisa diberi nama 'gambar' dalam database)
+            String sql = "SELECT id_mobil, merek, jenis, plat_nomor, kapasitas, tarif, status, gambar FROM mobil WHERE id_mobil LIKE '%" + cariItem + "%' OR merek LIKE '%" + cariItem + "%' ORDER BY id_mobil ASC";
             Statement stat = koneksi.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()) {
+                // Mengambil gambar dalam bentuk BLOB
+                Blob blob = hasil.getBlob("gambar");
+                ImageIcon imageIcon = null;
+                if (blob != null) {
+                    byte[] imgData = blob.getBytes(1, (int) blob.length());
+                    Image image = Toolkit.getDefaultToolkit().createImage(imgData);
+                    imageIcon = new ImageIcon(image);
+                }
+
+                // Menambahkan data ke dalam tabel
                 tabmode.addRow(new Object[]{
-                    hasil.getString(1),
-                    hasil.getString(2),
-                    hasil.getString(3),
-                    hasil.getString(4),
-                    hasil.getString(5)
+                    hasil.getString(1), // ID Mobil
+                    hasil.getString(2), // Merek
+                    hasil.getString(3), // Jenis
+                    hasil.getString(4), // Plat Nomor
+                    hasil.getString(5), // Kapasitas
+                    hasil.getString(6), // Tarif
+                    hasil.getString(7), // Status
+                    imageIcon // Gambar
                 });
             }
-            tblPelanggan.setModel(tabmode);
+            tblMobil.setModel(tabmode);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data gagal dipanggil" + e);
+            JOptionPane.showMessageDialog(null, "Data gagal dipanggil: " + e);
         }
     }
 
@@ -71,7 +95,7 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         txtCari = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPelanggan = new maulana.swing.TabelFlatLaf();
+        tblMobil = new maulana.swing.TabelFlatLaf();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setLayout(new java.awt.BorderLayout());
@@ -83,7 +107,7 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
             }
         });
 
-        tblPelanggan.setModel(new javax.swing.table.DefaultTableModel(
+        tblMobil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -94,12 +118,12 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblPelanggan.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblMobil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPelangganMouseClicked(evt);
+                tblMobilMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblPelanggan);
+        jScrollPane2.setViewportView(tblMobil);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,22 +151,42 @@ public class PopUpDataPelanggan extends javax.swing.JPanel {
         dataTable();
     }//GEN-LAST:event_txtCariKeyReleased
 
-    private void tblPelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPelangganMouseClicked
-        int tabelPelanggan = tblPelanggan.getSelectedRow();
-        pelanggan.nik = tblPelanggan.getValueAt(tabelPelanggan, 0).toString();
-        pelanggan.noSim = tblPelanggan.getValueAt(tabelPelanggan, 1).toString();
-        pelanggan.namaPelanggan = tblPelanggan.getValueAt(tabelPelanggan, 2).toString();
-        pelanggan.noTelepon = tblPelanggan.getValueAt(tabelPelanggan, 3).toString();
-        pelanggan.alamatPelanggan = tblPelanggan.getValueAt(tabelPelanggan, 4).toString();
-        pelanggan.itemTerpilihPelanggan();
-        parentDialog.dispose();
-    }//GEN-LAST:event_tblPelangganMouseClicked
+    private void tblMobilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMobilMouseClicked
+// Mendapatkan baris yang dipilih
+        int selectedRow = tblMobil.getSelectedRow();
+        if (selectedRow >= 0) {
+            // 1. Mengambil data dari tabel ke dalam objek mobilPemesanan pemsanan
+            mobilPemesanan.idMobil = tblMobil.getValueAt(selectedRow, 0).toString();
+            mobilPemesanan.merek = tblMobil.getValueAt(selectedRow, 1).toString();
+            mobilPemesanan.jenis = tblMobil.getValueAt(selectedRow, 2).toString();
+            mobilPemesanan.platNomor = tblMobil.getValueAt(selectedRow, 3).toString();
+            mobilPemesanan.kapasitas = tblMobil.getValueAt(selectedRow, 4).toString();
+            mobilPemesanan.tarif = tblMobil.getValueAt(selectedRow, 5).toString();
+            mobilPemesanan.status = tblMobil.getValueAt(selectedRow, 6).toString();
+            // Mengambil gambar dari kolom "GAMBAR" (kolom ke-7)
+            ImageIcon imageIconMobilPesanan = (ImageIcon) tblMobil.getValueAt(selectedRow, 7);
+            // Jika gambar ada, kirim ke kelas Pesanan untuk diupdate
+            if (imageIconMobilPesanan != null) {
+                int fixedWidth = 270;
+                int fixedHeight = 333;
+                Image scaledImage = imageIconMobilPesanan.getImage().getScaledInstance(fixedWidth, fixedHeight, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(scaledImage);
+                // Misalnya, Pesanan adalah instance objek dari kelas Pesanan
+                mobilPemesanan.setLblGambar(resizedIcon); // Update gambar di lblGambar
+            } else {
+                mobilPemesanan.setLblGambar(null); // Set null jika tidak ada gambar
+            }
+            // Panggil method untuk menangani item terpilih
+            mobilPemesanan.itemTerpilihMobil();            
+            parentDialog.dispose();
+        }
+    }//GEN-LAST:event_tblMobilMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private maulana.swing.TabelFlatLaf tblPelanggan;
+    private maulana.swing.TabelFlatLaf tblMobil;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables
 }

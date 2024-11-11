@@ -103,17 +103,25 @@ public class FormMobil extends javax.swing.JPanel {
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                // Tampilkan gambar
+                // Membaca file gambar yang dipilih
                 ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-                Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                lblImagePreview.setIcon(new ImageIcon(scaledImage));
 
-                // Simpan gambar sebagai byte array untuk disimpan ke database
+                // Menyesuaikan gambar dengan ukuran JLabel (lblImagePreview)
+                Image img = imageIcon.getImage();
+                Image scaledImg = img.getScaledInstance(lblImagePreview.getWidth(), lblImagePreview.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImg);
+
+                // Menampilkan gambar pada lblImagePreview
+                lblImagePreview.setIcon(scaledIcon);
+
+                // Menyimpan gambar sebagai byte array untuk disimpan ke database
                 gambarBytes = Files.readAllBytes(selectedFile.toPath());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -122,53 +130,31 @@ public class FormMobil extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        txtMerek = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtJenis = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         rbTersedia = new javax.swing.JRadioButton();
         rbTidakTersedia = new javax.swing.JRadioButton();
-        txtPlatNomer = new javax.swing.JTextField();
-        txtKapasitas = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtTarif = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         lblImagePreview = new javax.swing.JLabel();
         btnPilihGambar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        txtID = new maulana.swing.TextFieldFlatLaf();
+        txtMerek = new maulana.swing.TextFieldFlatLaf();
+        txtJenis = new maulana.swing.TextFieldFlatLaf();
+        txtPlatNomer = new maulana.swing.TextFieldFlatLaf();
+        txtKapasitas = new maulana.swing.TextFieldFlatLaf();
+        txtTarif = new maulana.swing.TextFieldFlatLaf();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("ID");
 
-        txtID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtID.setEnabled(false);
-        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtIDKeyPressed(evt);
-            }
-        });
-
-        txtMerek.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtMerek.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMerekKeyPressed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Merek");
-
-        txtJenis.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtJenis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtJenisKeyPressed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -200,30 +186,9 @@ public class FormMobil extends javax.swing.JPanel {
             }
         });
 
-        txtPlatNomer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtPlatNomer.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPlatNomerKeyPressed(evt);
-            }
-        });
-
-        txtKapasitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtKapasitas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtKapasitasKeyPressed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Kapasitas");
-
-        txtTarif.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTarif.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTarifKeyPressed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -243,64 +208,65 @@ public class FormMobil extends javax.swing.JPanel {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Gambar");
 
+        txtID.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnPilihGambar))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rbTersedia)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbTidakTersedia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE))
-                            .addComponent(txtID)
-                            .addComponent(txtMerek)
-                            .addComponent(txtJenis)
-                            .addComponent(txtPlatNomer, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtKapasitas, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTarif, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(30, 30, 30))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnPilihGambar)
-                            .addComponent(lblImagePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblImagePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtMerek, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtJenis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPlatNomer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtKapasitas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTarif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtID))
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMerek))
+                    .addComponent(txtMerek, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtJenis)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtJenis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,31 +287,12 @@ public class FormMobil extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblImagePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPilihGambar)))
-                .addGap(58, 58, 58))
+                    .addComponent(lblImagePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPilihGambar)
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtMerek.requestFocus();
-        }
-    }//GEN-LAST:event_txtIDKeyPressed
-
-    private void txtMerekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMerekKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtJenis.requestFocus();
-        }
-    }//GEN-LAST:event_txtMerekKeyPressed
-
-    private void txtJenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJenisKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtPlatNomer.requestFocus();
-        }
-    }//GEN-LAST:event_txtJenisKeyPressed
 
     private void rbTidakTersediaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rbTidakTersediaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -358,24 +305,6 @@ public class FormMobil extends javax.swing.JPanel {
             txtJenis.requestFocus();
         }
     }//GEN-LAST:event_rbTersediaKeyPressed
-
-    private void txtPlatNomerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlatNomerKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtKapasitas.requestFocus();
-        }
-    }//GEN-LAST:event_txtPlatNomerKeyPressed
-
-    private void txtKapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKapasitasKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtTarif.requestFocus();
-        }
-    }//GEN-LAST:event_txtKapasitasKeyPressed
-
-    private void txtTarifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTarifKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            rbTersedia.requestFocus();
-        }
-    }//GEN-LAST:event_txtTarifKeyPressed
 
     private void btnPilihGambarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihGambarActionPerformed
         chooseImage(evt);
@@ -396,11 +325,11 @@ public class FormMobil extends javax.swing.JPanel {
     private javax.swing.JLabel lblImagePreview;
     private javax.swing.JRadioButton rbTersedia;
     private javax.swing.JRadioButton rbTidakTersedia;
-    private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtJenis;
-    private javax.swing.JTextField txtKapasitas;
-    private javax.swing.JTextField txtMerek;
-    private javax.swing.JTextField txtPlatNomer;
-    private javax.swing.JTextField txtTarif;
+    private maulana.swing.TextFieldFlatLaf txtID;
+    private maulana.swing.TextFieldFlatLaf txtJenis;
+    private maulana.swing.TextFieldFlatLaf txtKapasitas;
+    private maulana.swing.TextFieldFlatLaf txtMerek;
+    private maulana.swing.TextFieldFlatLaf txtPlatNomer;
+    private maulana.swing.TextFieldFlatLaf txtTarif;
     // End of variables declaration//GEN-END:variables
 }

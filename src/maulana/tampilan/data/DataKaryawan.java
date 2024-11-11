@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import maulana.koneksi.KoneksiDB;
+import maulana.tampilan.main.Main;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
@@ -24,6 +25,7 @@ public class DataKaryawan extends javax.swing.JPanel {
 
     private Connection koneksi = new KoneksiDB().connect();
     private DefaultTableModel tabelModel;
+    private Main main;
 
     public DataKaryawan() {
         initComponents();
@@ -35,19 +37,6 @@ public class DataKaryawan extends javax.swing.JPanel {
         panel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:25;"
                 + "background:$Table.background");
-        tabelKaryawan.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
-                + "height:30;"
-                + "hoverBackground:null;"
-                + "pressedBackground:null;"
-                + "separatorColor:$TableHeader.background;"
-                + "font:bold;");
-        tabelKaryawan.putClientProperty(FlatClientProperties.STYLE, ""
-                + "rowHeight:30;"
-                + "showHorizontalLines:true;"
-                + "intercellSpacing:0,1;"
-                + "cellFocusColor:$TableHeader.hoverBackground;"
-                + "selectionBackground:$TableHeader.hoverBackground;"
-                + "selectionForeground:$Table.foreground;");
         scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
@@ -61,12 +50,11 @@ public class DataKaryawan extends javax.swing.JPanel {
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;"
-                + "background:$Panel.background");
-
+                + "background:$TextField.background");
     }
 
     private void dataTabel() {
-        Object[] baris = {"ID", "NAMA", "JABATAN", "NO. TELEPON", "ALAMAT" , "PASSWORD"};
+        Object[] baris = {"ID", "NAMA", "JABATAN", "NO. TELEPON", "ALAMAT", "PASSWORD"};
         tabelModel = new DefaultTableModel(null, baris);
         JTableHeader tabelHeader = tabelKaryawan.getTableHeader();
         ((DefaultTableCellRenderer) tabelHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
@@ -104,7 +92,7 @@ public class DataKaryawan extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Data gagal dipanggil");
         }
     }
-    
+
     private void autoNumber(FormKaryawan tambahDataKaryawan) {
         try {
             String sql = "SELECT id_karyawan FROM karyawan ORDER BY id_karyawan DESC LIMIT 1"; // Mengambil ID terakhir
@@ -139,10 +127,10 @@ public class DataKaryawan extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
-        tabelKaryawan = new javax.swing.JTable();
-        btnTambah = new maulana.swing.Button();
-        btnEdit = new maulana.swing.Button();
-        btnHapus = new maulana.swing.Button();
+        tabelKaryawan = new maulana.swing.TabelFlatLaf();
+        btnTambah = new maulana.swing.ButtonAction();
+        btnEdit = new maulana.swing.ButtonAction();
+        btnEdit1 = new maulana.swing.ButtonAction();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Data Karyawan");
@@ -155,160 +143,40 @@ public class DataKaryawan extends javax.swing.JPanel {
             }
         });
 
-        scroll.setBorder(null);
-
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nama", "Jenis Kelamin", "No. Hand Phone", "Password", "Alamat"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelKaryawan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ));
         scroll.setViewportView(tabelKaryawan);
-        if (tabelKaryawan.getColumnModel().getColumnCount() > 0) {
-            tabelKaryawan.getColumnModel().getColumn(0).setMaxWidth(40);
-            tabelKaryawan.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tabelKaryawan.getColumnModel().getColumn(3).setPreferredWidth(100);
-            tabelKaryawan.getColumnModel().getColumn(4).setPreferredWidth(100);
-            tabelKaryawan.getColumnModel().getColumn(5).setPreferredWidth(300);
-        }
 
-        btnTambah.setBackground(new java.awt.Color(51, 204, 0));
-        btnTambah.setForeground(new java.awt.Color(255, 255, 255));
         btnTambah.setText("TAMBAH");
-        btnTambah.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnTambah.setMargin(new java.awt.Insets(2, 10, 2, 10));
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTambahActionPerformed(evt);
             }
         });
 
-        btnEdit.setBackground(new java.awt.Color(204, 204, 0));
-        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("EDIT");
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEdit.setMargin(new java.awt.Insets(2, 10, 2, 10));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
 
-        btnHapus.setBackground(new java.awt.Color(204, 0, 0));
-        btnHapus.setForeground(new java.awt.Color(255, 255, 255));
-        btnHapus.setText("HAPUS");
-        btnHapus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit1.setText("HAPUS");
+        btnEdit1.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHapusActionPerformed(evt);
+                btnEdit1ActionPerformed(evt);
             }
         });
 
@@ -317,36 +185,35 @@ public class DataKaryawan extends javax.swing.JPanel {
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(13, 13, 13)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scroll)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 428, Short.MAX_VALUE)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(10, 10, 10))
+                        .addGap(0, 830, Short.MAX_VALUE))))
+            .addComponent(scroll)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scroll)
-                .addGap(10, 10, 10))
+                    .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -360,6 +227,10 @@ public class DataKaryawan extends javax.swing.JPanel {
             .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
+        dataTabel();
+    }//GEN-LAST:event_txtCariKeyReleased
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         FormKaryawan tambahDataKaryawan = new FormKaryawan();
@@ -377,7 +248,7 @@ public class DataKaryawan extends javax.swing.JPanel {
                 String id_karyawan = tambahDataKaryawan.getTxtID();
                 String nama = tambahDataKaryawan.getTxtNama();
                 String jabatan = tambahDataKaryawan.getSelectedJabatan();
-                String noHandphone = tambahDataKaryawan.getTxtNoHP();                
+                String noHandphone = tambahDataKaryawan.getTxtNoHP();
                 String alamat = tambahDataKaryawan.getTxtAlamat();
                 String password = tambahDataKaryawan.getTxtPassword();
 
@@ -403,7 +274,85 @@ public class DataKaryawan extends javax.swing.JPanel {
         }), option);
     }//GEN-LAST:event_btnTambahActionPerformed
 
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // Pastikan pengguna memilih baris yang akan di-edit
+        int selectedRow = tabelKaryawan.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Ambil data dari baris yang dipilih
+        String idKaryawan = tabelKaryawan.getValueAt(selectedRow, 0).toString();
+        String namaKaryawan = tabelKaryawan.getValueAt(selectedRow, 1).toString();
+        String jabatan = tabelKaryawan.getValueAt(selectedRow, 2).toString();
+        String noTlpKaryawan = tabelKaryawan.getValueAt(selectedRow, 3).toString();
+        String alamatKaryawan = tabelKaryawan.getValueAt(selectedRow, 4).toString();
+        String password = tabelKaryawan.getValueAt(selectedRow, 5).toString();        
+
+        // Buat form mobil dan set data yang diambil dari tabel
+        FormKaryawan editDataKaryawan = new FormKaryawan();
+        editDataKaryawan.setTxtID(idKaryawan);
+        editDataKaryawan.setTxtNama(namaKaryawan);
+        editDataKaryawan.setSelectedJabatan(jabatan);
+        editDataKaryawan.setTxtNoHP(noTlpKaryawan);
+        editDataKaryawan.setTxtAlamat(alamatKaryawan);
+        editDataKaryawan.setTxtPassword(password);        
+
+        // Tampilkan popup untuk mengedit data
+        DefaultOption option = new DefaultOption() {
+            @Override
+            public boolean closeWhenClickOutside() {
+                return true;
+            }
+        };
+        String actions[] = new String[]{"Batal", "Simpan"};
+
+        GlassPanePopup.showPopup(new SimplePopupBorder(editDataKaryawan, "Edit Data Karyawan", actions, (pc, i) -> {
+            if (i == 1) {
+                // Ambil data yang telah diedit dari form
+                String newIDKaryawan = editDataKaryawan.getTxtID();
+                String newNamaKaryawan = editDataKaryawan.getTxtNama();
+                String newJabatan = editDataKaryawan.getSelectedJabatan();
+                String newNoTlpKaryawan = editDataKaryawan.getTxtNoHP();
+                String newAlamatKaryawan = editDataKaryawan.getTxtAlamat();
+                String newPassword = editDataKaryawan.getTxtPassword();                
+
+                try {
+                    // Simpan data yang telah diedit ke database
+                    String query = "UPDATE karyawan SET nama_karyawan = ?, jabatan = ?, no_telepon_karyawan = ?, alamat_karyawan = ?, password = ? WHERE id_karyawan = ?";
+                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);
+                    preparedStatement.setString(1, newNamaKaryawan);
+                    preparedStatement.setString(2, newJabatan);
+                    preparedStatement.setString(3, newNoTlpKaryawan);
+                    preparedStatement.setString(4, newAlamatKaryawan);
+                    preparedStatement.setString(5, newPassword);                                        
+                    preparedStatement.setString(6, newIDKaryawan);
+                    preparedStatement.executeUpdate();
+
+                    // Perbarui data yang telah diedit di tabel
+                    DefaultTableModel model = (DefaultTableModel) tabelKaryawan.getModel();
+                    model.setValueAt(newNamaKaryawan, selectedRow, 1);
+                    model.setValueAt(newJabatan, selectedRow, 2);
+                    model.setValueAt(newNoTlpKaryawan, selectedRow, 3);
+                    model.setValueAt(newAlamatKaryawan, selectedRow, 4);
+                    model.setValueAt(newPassword, selectedRow, 5);                    
+
+                    dataTabel();
+
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data mobil berhasil diperbarui");
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Data gagal diperbarui: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                pc.closePopup();
+            } else {
+                pc.closePopup();
+            }
+        }), option);
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
         int selectedRow = tabelKaryawan.getSelectedRow();
 
         // Periksa apakah ada baris yang dipilih
@@ -434,98 +383,17 @@ public class DataKaryawan extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Data gagal dihapus: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_btnHapusActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // Pastikan pengguna memilih baris yang akan di-edit
-        int selectedRow = tabelKaryawan.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Ambil data dari baris yang dipilih
-        String id = tabelKaryawan.getValueAt(selectedRow, 0).toString();
-        String nama = tabelKaryawan.getValueAt(selectedRow, 1).toString();
-        String jabatan = tabelKaryawan.getValueAt(selectedRow, 2).toString();
-        String noHandPhone = tabelKaryawan.getValueAt(selectedRow, 3).toString();        
-        String alamat = tabelKaryawan.getValueAt(selectedRow, 4).toString();
-        String password = tabelKaryawan.getValueAt(selectedRow, 5).toString();
-
-        // Buat form TambahKaryawan dan set data yang diambil dari tabel
-        FormKaryawan editDataKaryawan = new FormKaryawan();
-        editDataKaryawan.setTxtID(id);  // Set ID ke field ID di form
-        editDataKaryawan.setTxtNama(nama);  // Set Nama ke field Nama di form
-        editDataKaryawan.setSelectedJabatan(jabatan); // Set Nama ke field Jabatan di form
-        editDataKaryawan.setTxtNoHP(noHandPhone);  // Set Nama ke field No di form
-        editDataKaryawan.setTxtAlamat(alamat);  // Set Alamat ke field Alamat di form
-        editDataKaryawan.setTxtPassword(password); // Set Password ke field Password di form
-
-        // Tampilkan popup untuk mengedit data
-        DefaultOption option = new DefaultOption() {
-            @Override
-            public boolean closeWhenClickOutside() {
-                return true;
-            }
-        };
-        String actions[] = new String[]{"Batal", "Simpan"};
-
-        GlassPanePopup.showPopup(new SimplePopupBorder(editDataKaryawan, "Edit Karyawan", actions, (pc, i) -> {
-            if (i == 1) {
-                // Ambil data yang telah diedit dari form
-                String newID = editDataKaryawan.getTxtID();
-                String newNama = editDataKaryawan.getTxtNama();
-                String newJabatan = editDataKaryawan.getSelectedJabatan();
-                String newNoHandphone = editDataKaryawan.getTxtNoHP();                
-                String newAlamat = editDataKaryawan.getTxtAlamat();
-                String newPassword = editDataKaryawan.getTxtPassword();
-
-                try {
-                    // Simpan data yang telah diedit ke database
-                    String query = "UPDATE karyawan SET nama_karyawan = ?, jabatan = ?, no_telepon_karyawan = ?, alamat_karyawan = ?, password =? WHERE id_karyawan = ?";
-                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);
-                    preparedStatement.setString(1, newNama);
-                    preparedStatement.setString(2, newJabatan);
-                    preparedStatement.setString(3, newNoHandphone);                    
-                    preparedStatement.setString(4, newAlamat);
-                    preparedStatement.setString(5, newID);
-                    preparedStatement.setString(6, newPassword);
-                    preparedStatement.executeUpdate();
-
-                    // Perbarui data yang telah diedit di tabel
-                    DefaultTableModel model = (DefaultTableModel) tabelKaryawan.getModel();
-                    model.setValueAt(newID, selectedRow, 0);
-                    model.setValueAt(newNama, selectedRow, 1);
-                    model.setValueAt(newJabatan, selectedRow, 2);
-                    model.setValueAt(newNoHandphone, selectedRow, 3);                    
-                    model.setValueAt(newAlamat, selectedRow, 4);        
-                    model.setValueAt(newPassword, selectedRow, 5);
-
-                    Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data karyawan berhasil diperbarui");
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Data gagal diperbarui: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-
-                pc.closePopup();
-            } else {
-                pc.closePopup();
-            }
-        }), option);
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
-        dataTabel();
-    }//GEN-LAST:event_txtCariKeyReleased
+    }//GEN-LAST:event_btnEdit1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private maulana.swing.Button btnEdit;
-    private maulana.swing.Button btnHapus;
-    private maulana.swing.Button btnTambah;
+    private maulana.swing.ButtonAction btnEdit;
+    private maulana.swing.ButtonAction btnEdit1;
+    private maulana.swing.ButtonAction btnTambah;
     private javax.swing.JLabel jLabel1;
     private maulana.swing.PanelRounded panel;
     private javax.swing.JScrollPane scroll;
-    private javax.swing.JTable tabelKaryawan;
+    private maulana.swing.TabelFlatLaf tabelKaryawan;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables
 }

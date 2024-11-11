@@ -1,6 +1,7 @@
 package maulana.tampilan.main;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.sql.Connection;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import maulana.tampilan.data.DataKaryawan;
 import maulana.tampilan.data.DataPelanggan;
 import maulana.tampilan.data.DataSupir;
 import maulana.koneksi.KoneksiDB;
+import maulana.tampilan.data.Pembayaran;
 import maulana.tampilan.data.Pemesanan;
 import maulana.tampilan.login.Login;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -50,6 +52,11 @@ public void setNamaKaryawan(String nama) {
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Panel.background;");
+        scrollPenampil.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
+                + "trackArc:999;"
+                + "trackInsets:3,3,3,3;"
+                + "thumbInsets:3,3,3,3;"
+                + "background:$Panel.background;");        
         cmdDashboard.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
         cmdLogOut.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
         cmdPenyewaan.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
@@ -94,6 +101,8 @@ public void setNamaKaryawan(String nama) {
         cmdRepotPelanggan = new javax.swing.JButton();
         cmdLogOut = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        scrollPenampil = new javax.swing.JScrollPane();
+        jPanel2 = new javax.swing.JPanel();
         penampil = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -358,23 +367,38 @@ public void setNamaKaryawan(String nama) {
 
         getContentPane().add(scroll, java.awt.BorderLayout.LINE_START);
 
+        scrollPenampil.setBorder(null);
+
         penampil.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(penampil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(penampil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        scrollPenampil.setViewportView(jPanel2);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(penampil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(scrollPenampil, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(penampil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(scrollPenampil, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
@@ -406,7 +430,13 @@ public void setNamaKaryawan(String nama) {
     }//GEN-LAST:event_cmdPenyewaanActionPerformed
 
     private void cmdPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPembayaranActionPerformed
-        // TODO add your handling code here:
+        penampil.removeAll();
+        Pembayaran pembayaran = new Pembayaran();   
+        pembayaran.setIDKaryawan(idKaryawan);
+        penampil.add(pembayaran);
+        penampil.repaint();
+        penampil.revalidate();
+        
     }//GEN-LAST:event_cmdPembayaranActionPerformed
 
     private void cmdKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKaryawanActionPerformed
@@ -473,6 +503,7 @@ public void setNamaKaryawan(String nama) {
      */
     public static void main(String args[]) {
         FlatMacDarkLaf.setup();
+        FlatLaf.registerCustomDefaultsSource("sample.themes");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
@@ -499,10 +530,12 @@ public void setNamaKaryawan(String nama) {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblNamaKaryawan;
     private javax.swing.JPanel penampil;
     private javax.swing.JScrollPane scroll;
+    private javax.swing.JScrollPane scrollPenampil;
     // End of variables declaration//GEN-END:variables
 }
