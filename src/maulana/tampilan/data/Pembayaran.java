@@ -54,10 +54,12 @@ public class Pembayaran extends javax.swing.JPanel {
         autoNumber();
         dataTabelPembayaran();
         init();
+        datePicker.setCloseAfterSelected(true);
+        datePicker.setEditor(txtTanggalPembayaran);
     }
 
-    private void aktif() {
-        txtTanggalPembayaran.setEditor(new JSpinner.DateEditor(txtTanggalPembayaran, "yyyy-mm-dd"));
+    private void aktif() {        
+        btnUbahPembayaran1.setVisible(false);
     }
 
     private void autoNumber() {
@@ -153,6 +155,13 @@ public class Pembayaran extends javax.swing.JPanel {
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;"
                 + "background:$TextField.background");
+        txtTanggalPembayaran.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:15;"
+                + "borderWidth:0;"
+                + "focusWidth:0;"
+                + "innerFocusWidth:0;"
+                + "margin:5,20,5,20;"
+                + "background:$TextField.background");
     }
 
     @SuppressWarnings("unchecked")
@@ -160,16 +169,17 @@ public class Pembayaran extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        datePicker = new raven.datetime.component.date.DatePicker();
         tabPanePembayaran = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         panelRounded1 = new maulana.swing.PanelRounded();
         txtIDPembayaran = new maulana.swing.TextFieldFlatLaf();
         panelRounded4 = new maulana.swing.PanelRounded();
-        txtTanggalPembayaran = new javax.swing.JSpinner();
         jLabel14 = new javax.swing.JLabel();
         txtIDKaryawan = new maulana.swing.TextFieldFlatLaf();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        txtTanggalPembayaran = new javax.swing.JFormattedTextField();
         panelRounded6 = new maulana.swing.PanelRounded();
         panelRounded2 = new maulana.swing.PanelRounded();
         txtIDPesanan = new maulana.swing.TextFieldFlatLaf();
@@ -231,17 +241,18 @@ public class Pembayaran extends javax.swing.JPanel {
         rdBtnTidak = new javax.swing.JRadioButton();
         btnTambahTarifSupir = new maulana.swing.ButtonAction();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblPembayaran = new javax.swing.JTable();
         btnEditPembayaran = new maulana.swing.ButtonAction();
         buttonHapusPembayaran = new maulana.swing.ButtonAction();
         txtCari = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPembayaran = new maulana.swing.TabelFlatLaf();
 
         tabPanePembayaran.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         panelRounded1.setBorder(javax.swing.BorderFactory.createTitledBorder("ID Pembayaran"));
 
         txtIDPembayaran.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIDPembayaran.setEnabled(false);
 
         javax.swing.GroupLayout panelRounded1Layout = new javax.swing.GroupLayout(panelRounded1);
         panelRounded1.setLayout(panelRounded1Layout);
@@ -259,9 +270,6 @@ public class Pembayaran extends javax.swing.JPanel {
                 .addComponent(txtIDPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
-
-        txtTanggalPembayaran.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTanggalPembayaran.setModel(new javax.swing.SpinnerDateModel());
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Tanggal");
@@ -282,26 +290,26 @@ public class Pembayaran extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 485, Short.MAX_VALUE)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtIDKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTanggalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(txtTanggalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         panelRounded4Layout.setVerticalGroup(
             panelRounded4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(panelRounded4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTanggalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
                     .addComponent(txtIDKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel16))
+                    .addComponent(jLabel16)
+                    .addComponent(txtTanggalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -526,14 +534,14 @@ public class Pembayaran extends javax.swing.JPanel {
             panelRounded7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUbahPembayaran1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUbahPembayaran1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBatalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnPembayaranBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addComponent(btnBatalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPembayaranBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         panelRounded7Layout.setVerticalGroup(
             panelRounded7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -863,19 +871,6 @@ public class Pembayaran extends javax.swing.JPanel {
 
         tabPanePembayaran.addTab("Pembayaran", jPanel1);
 
-        tblPembayaran.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblPembayaran);
-
         btnEditPembayaran.setText("EDIT");
         btnEditPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -890,18 +885,36 @@ public class Pembayaran extends javax.swing.JPanel {
             }
         });
 
+        txtCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCariKeyReleased(evt);
+            }
+        });
+
+        tblPembayaran.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblPembayaran);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1111, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonHapusPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnEditPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1111, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -912,7 +925,7 @@ public class Pembayaran extends javax.swing.JPanel {
                     .addComponent(buttonHapusPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE))
         );
 
         tabPanePembayaran.addTab("Data Pembayaran", jPanel2);
@@ -1004,6 +1017,7 @@ public class Pembayaran extends javax.swing.JPanel {
         txtNoTlpSupir.setEnabled(true);
         txtTarifSupir.setEnabled(true);
         btnCekDataSupir.setEnabled(true);
+        btnTambahTarifSupir.setEnabled(true);
     }//GEN-LAST:event_rdBtnYaActionPerformed
 
     private void btnCekDataSupirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekDataSupirActionPerformed
@@ -1135,7 +1149,7 @@ public class Pembayaran extends javax.swing.JPanel {
                 + "uang, "
                 + "kembali"
                 + ") "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             // Ambil data dari JTextField
@@ -1144,10 +1158,7 @@ public class Pembayaran extends javax.swing.JPanel {
             String namaPelanggan = txtNamaPelanggan.getText();
             String noTelpPelanggan = txtNoTlpPelanggan.getText();
             String idKaryawan = txtIDKaryawan.getText();
-            // Ambil tanggal dari JSpinner
-            java.util.Date tanggal = (java.util.Date) txtTanggalPembayaran.getValue(); // Ambil nilai dari JSpinner
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd"); // Format tanggal yang diinginkan
-            String tglPembayaran = sdf.format(tanggal);  // Ubah tanggal menjadi string dalam format "yyyy-MM-dd"
+            String tglPembayaran = txtTanggalPembayaran.getText();
             String idMobil = txtIDMobil.getText();
             String hargaMobil = txtHargaMobil.getText();
             String lamaSewa = txtLamaSewa.getText();
@@ -1208,7 +1219,7 @@ public class Pembayaran extends javax.swing.JPanel {
 
         // Periksa apakah ada baris yang dipilih
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Silakan pilih data pesanan yang ingin dihapus.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Silakan pilih data pembayaran yang ingin dihapus.", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -1220,7 +1231,7 @@ public class Pembayaran extends javax.swing.JPanel {
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 // Hapus data dari database
-                String query = "DELETE FROM pembayaran WHERE id_pembayran = '" + idPembayaran + "'";
+                String query = "DELETE FROM pembayaran WHERE id_pembayaran = '" + idPembayaran + "'";
                 Statement statement = koneksi.createStatement();
                 statement.executeUpdate(query);
 
@@ -1237,6 +1248,8 @@ public class Pembayaran extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonHapusPembayaranActionPerformed
 
     private void btnEditPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPembayaranActionPerformed
+        rdBtnYa.setActionCommand("Dengan supir");
+        rdBtnTidak.setActionCommand("Tanpa supir");
         // Pastikan pengguna memilih baris yang akan di-edit
         int selectedRow = tblPembayaran.getSelectedRow();
         if (selectedRow == -1) {
@@ -1257,7 +1270,8 @@ public class Pembayaran extends javax.swing.JPanel {
         String dp = tblPembayaran.getValueAt(selectedRow, 9).toString();
         String total = tblPembayaran.getValueAt(selectedRow, 10).toString();
         String supir = tblPembayaran.getValueAt(selectedRow, 11).toString();
-        String idSupir = tblPembayaran.getValueAt(selectedRow, 12).toString();
+        Object value = tblPembayaran.getValueAt(selectedRow, 12);
+        String idSupir = (value != null) ? value.toString() : "";
         String namaSupir = tblPembayaran.getValueAt(selectedRow, 13).toString();
         String noTlpSupir = tblPembayaran.getValueAt(selectedRow, 14).toString();
         String tarifSupi = tblPembayaran.getValueAt(selectedRow, 15).toString();
@@ -1267,6 +1281,7 @@ public class Pembayaran extends javax.swing.JPanel {
 
         // Tampilkan panel pesanan
         tabPanePembayaran.setSelectedIndex(0); // Asumsi tab pesanan ada di index 1        
+        btnUbahPembayaran1.setVisible(true);
 
         // Perbarui komponen input di tampilan pembayaran
         txtIDPembayaran.setText(idPembayaran);
@@ -1274,22 +1289,15 @@ public class Pembayaran extends javax.swing.JPanel {
         txtNamaPelanggan.setText(namaPelanggan);
         txtNoTlpPelanggan.setText(noTelpPelanggan);
         txtIDKaryawan.setText(idKaryawan);
-        java.util.Date tanggalPembayran = (java.util.Date) txtTanggalPembayaran.getValue();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date parsedDate = sdf.parse(tanggalPembayaran); // Mengonversi string tanggal ke objek Date
-            txtTanggalPembayaran.setValue(parsedDate); // Mengatur tanggal di JSpinner
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        txtTanggalPembayaran.setText(tanggalPembayaran);
         txtIDMobil.setText(idMobil);
         txtHargaMobil.setText(hargaMobil);
         txtLamaSewa.setText(lamaSewa);
         txtDp.setText(dp);
         txtTotal.setText(String.valueOf(total));
-        if (supir.equals("Ya")) {
+        if (supir.equals("Dengan supir")) {
             rdBtnYa.setSelected(true);
-        } else if (supir.equals("Tidak")) {
+        } else if (supir.equals("Tanpa supir")) {
             rdBtnTidak.setSelected(true);
         }
         txtIDSopir.setText(idSupir);
@@ -1301,7 +1309,7 @@ public class Pembayaran extends javax.swing.JPanel {
         txtKembali.setText(String.valueOf(kembali));
 
         // Tombol simpan perubahan
-        btnSimpan.addActionListener(new ActionListener() {
+        btnUbahPembayaran1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Ambil data yang telah diedit dari komponen input
@@ -1310,11 +1318,8 @@ public class Pembayaran extends javax.swing.JPanel {
                 String newIdPemesanan = txtIDPesanan.getText();
                 String newNamaPelanggan = txtNamaPelanggan.getText();
                 String newNoTelpPelanggan = txtNoTlpPelanggan.getText();
-                String newIdKaryawan = txtIDKaryawan.getText();
-                // Ambil tanggal dari JSpinner
-                java.util.Date tanggal = (java.util.Date) txtTanggalPembayaran.getValue(); // Ambil nilai dari JSpinner
-                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd"); // Format tanggal yang diinginkan
-                String newTglPembayaran = sdf.format(tanggal);  // Ubah tanggal menjadi string dalam format "yyyy-MM-dd"
+                String newIdKaryawan = txtIDKaryawan.getText();                
+                String newTglPembayaran = txtTanggalPembayaran.getText();
                 String newIdMobil = txtIDMobil.getText();
                 String newHargaMobil = txtHargaMobil.getText();
                 String newLamaSewa = txtLamaSewa.getText();
@@ -1337,55 +1342,74 @@ public class Pembayaran extends javax.swing.JPanel {
 
                 try {
                     // Simpan data yang telah diedit ke database
-                    String query = "UPDATE pemesanan SET nama_pelanggan = ?, nik = ?, notlpn_pelanggan = ?, id_karyawan = ?, tanggal_pemesanan = ?, id_mobil = ?, harga = ?, lama_sewa = ?, dp = ?, total = ? WHERE id_pemesanan = ?";
-                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);
-                    preparedStatement.setInt(1, Integer.parseInt(newIdPembayaran));
-                    preparedStatement.setInt(2, Integer.parseInt(newIdPemesanan));
-                    preparedStatement.setString(3, newNamaPelanggan);
-                    preparedStatement.setString(4, newNoTelpPelanggan);
-                    preparedStatement.setInt(5, Integer.parseInt(newIdKaryawan));
-                    preparedStatement.setString(6, newTglPembayaran);
-                    preparedStatement.setString(7, newIdMobil);
-                    preparedStatement.setInt(8, Integer.parseInt(newHargaMobil));
-                    preparedStatement.setInt(9, Integer.parseInt(newLamaSewa));
-                    preparedStatement.setInt(10, Integer.parseInt(newDp));
-                    preparedStatement.setInt(11, Integer.parseInt(newTotal));
-                    preparedStatement.setString(12, newSupir);
-                    preparedStatement.setString(13, (newIdSupir == null || newIdSupir.isEmpty()) ? null : newIdSupir);
-                    preparedStatement.setString(14, newNamaSupir);
-                    preparedStatement.setString(15, newNoTeleponSupir);
-                    preparedStatement.setInt(16, newTarifSupir);
-                    preparedStatement.setInt(17, Integer.parseInt(newTotalHarga));
-                    preparedStatement.setInt(18, Integer.parseInt(newUang));
-                    preparedStatement.setInt(19, Integer.parseInt(newKembali));
-                    preparedStatement.executeUpdate();
+                    String query = "UPDATE pembayaran SET "
+                            + "id_pemesanan = ?, "
+                            + "nama_pelanggan = ?, "
+                            + "no_telepon_pelanggan = ?, "
+                            + "id_karyawan = ?, "
+                            + "tanggal_pembayaran = ?, "
+                            + "id_mobil = ?, "
+                            + "harga_mobil = ?, "
+                            + "lama_sewa = ?, "
+                            + "dp = ?, "
+                            + "total = ?, "
+                            + "supir = ?, "
+                            + "id_supir = ?, "
+                            + "nama_supir = ?, "
+                            + "no_telepon_supir = ?, "
+                            + "tarif_supir = ?, "
+                            + "total_harga = ?, "
+                            + "uang = ?, "
+                            + "kembali = ? "
+                            + "WHERE id_pembayaran = ?";
+                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);                    
+                    preparedStatement.setInt(1, Integer.parseInt(newIdPemesanan));
+                    preparedStatement.setString(2, newNamaPelanggan);
+                    preparedStatement.setString(3, newNoTelpPelanggan);
+                    preparedStatement.setInt(4, Integer.parseInt(newIdKaryawan));
+                    preparedStatement.setString(5, newTglPembayaran);
+                    preparedStatement.setString(6, newIdMobil);
+                    preparedStatement.setInt(7, Integer.parseInt(newHargaMobil));
+                    preparedStatement.setInt(8, Integer.parseInt(newLamaSewa));
+                    preparedStatement.setInt(9, Integer.parseInt(newDp));
+                    preparedStatement.setInt(10, Integer.parseInt(newTotal));
+                    preparedStatement.setString(11, newSupir);
+                    preparedStatement.setString(12, (newIdSupir == null || newIdSupir.isEmpty()) ? null : newIdSupir);
+                    preparedStatement.setString(13, newNamaSupir);
+                    preparedStatement.setString(14, newNoTeleponSupir);
+                    preparedStatement.setInt(15, newTarifSupir);
+                    preparedStatement.setInt(16, Integer.parseInt(newTotalHarga));
+                    preparedStatement.setInt(17, Integer.parseInt(newUang));
+                    preparedStatement.setInt(18, Integer.parseInt(newKembali));
+                    preparedStatement.setInt(19, Integer.parseInt(newIdPembayaran));                    
+                    preparedStatement.executeUpdate();                    
 
                     // Perbarui data yang telah diedit di tabel
                     DefaultTableModel model = (DefaultTableModel) tblPembayaran.getModel();
-                    model.setValueAt(newIdPembayaran, selectedRow, 1);
-                    model.setValueAt(newIdPemesanan, selectedRow, 2);
-                    model.setValueAt(newNamaPelanggan, selectedRow, 3);
-                    model.setValueAt(newNoTelpPelanggan, selectedRow, 4);
-                    model.setValueAt(newIdKaryawan, selectedRow, 5);
-                    model.setValueAt(newTglPembayaran, selectedRow, 6);
-                    model.setValueAt(newIdMobil, selectedRow, 7);
-                    model.setValueAt(newHargaMobil, selectedRow, 8);
-                    model.setValueAt(newLamaSewa, selectedRow, 9);
-                    model.setValueAt(newDp, selectedRow, 10);
-                    model.setValueAt(newTotal, selectedRow, 11);
-                    model.setValueAt(newSupir, selectedRow, 12);
-                    model.setValueAt(newIdSupir, selectedRow, 13);
-                    model.setValueAt(newNamaSupir, selectedRow, 14);
-                    model.setValueAt(newNoTeleponSupir, selectedRow, 15);
-                    model.setValueAt(newTarifSupir, selectedRow, 16);
-                    model.setValueAt(newTotalHarga, selectedRow, 17);
-                    model.setValueAt(newUang, selectedRow, 18);
-                    model.setValueAt(newKembali, selectedRow, 19);
+                    model.setValueAt(newIdPemesanan, selectedRow, 1);
+                    model.setValueAt(newNamaPelanggan, selectedRow, 2);
+                    model.setValueAt(newNoTelpPelanggan, selectedRow, 3);
+                    model.setValueAt(newIdKaryawan, selectedRow, 4);
+                    model.setValueAt(newTglPembayaran, selectedRow, 5);
+                    model.setValueAt(newIdMobil, selectedRow, 6);
+                    model.setValueAt(newHargaMobil, selectedRow, 7);
+                    model.setValueAt(newLamaSewa, selectedRow, 8);
+                    model.setValueAt(newDp, selectedRow, 9);
+                    model.setValueAt(newTotal, selectedRow, 10);
+                    model.setValueAt(newSupir, selectedRow, 11);
+                    model.setValueAt(newIdSupir, selectedRow, 12);
+                    model.setValueAt(newNamaSupir, selectedRow, 13);
+                    model.setValueAt(newNoTeleponSupir, selectedRow, 14);
+                    model.setValueAt(newTarifSupir, selectedRow, 15);
+                    model.setValueAt(newTotalHarga, selectedRow, 16);
+                    model.setValueAt(newUang, selectedRow, 17);
+                    model.setValueAt(newKembali, selectedRow, 18);
 
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data pembayaran berhasil diperbarui");
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-                }
+                    ex.printStackTrace();
+                }                
             }
         });
     }//GEN-LAST:event_btnEditPembayaranActionPerformed
@@ -1393,6 +1417,10 @@ public class Pembayaran extends javax.swing.JPanel {
     private void btnUbahPembayaran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPembayaran1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUbahPembayaran1ActionPerformed
+
+    private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
+        dataTabelPembayaran();
+    }//GEN-LAST:event_txtCariKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1408,6 +1436,7 @@ public class Pembayaran extends javax.swing.JPanel {
     private maulana.swing.ButtonAction buttonAction1;
     private javax.swing.ButtonGroup buttonGroup1;
     private maulana.swing.ButtonAction buttonHapusPembayaran;
+    private raven.datetime.component.date.DatePicker datePicker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -1434,7 +1463,7 @@ public class Pembayaran extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblGambarMobil;
     private javax.swing.JLabel lblJenisMobil;
     private javax.swing.JLabel lblKapasitas;
@@ -1453,7 +1482,7 @@ public class Pembayaran extends javax.swing.JPanel {
     private javax.swing.JRadioButton rdBtnTidak;
     private javax.swing.JRadioButton rdBtnYa;
     private javax.swing.JTabbedPane tabPanePembayaran;
-    private javax.swing.JTable tblPembayaran;
+    private maulana.swing.TabelFlatLaf tblPembayaran;
     private javax.swing.JTextField txtCari;
     private maulana.swing.TextFieldFlatLaf txtDp;
     private maulana.swing.TextFieldFlatLaf txtHargaMobil;
@@ -1468,7 +1497,7 @@ public class Pembayaran extends javax.swing.JPanel {
     private maulana.swing.TextFieldFlatLaf txtNamaSupir;
     private maulana.swing.TextFieldFlatLaf txtNoTlpPelanggan;
     private maulana.swing.TextFieldFlatLaf txtNoTlpSupir;
-    private javax.swing.JSpinner txtTanggalPembayaran;
+    private javax.swing.JFormattedTextField txtTanggalPembayaran;
     private maulana.swing.TextFieldFlatLaf txtTarifSupir;
     private maulana.swing.TextFieldFlatLaf txtTotal;
     private maulana.swing.TextFieldFlatLaf txtTotalHarga;
