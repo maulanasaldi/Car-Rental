@@ -57,7 +57,7 @@ public class PopUpDataMobilPemesanan extends javax.swing.JPanel {
         String cariItem = txtCari.getText();
         try {
             // Modifikasi query untuk memilih data gambar (kolom gambar bisa diberi nama 'gambar' dalam database)
-            String sql = "SELECT id_mobil, merek, jenis, plat_nomor, kapasitas, tarif, status, gambar FROM mobil WHERE id_mobil LIKE '%" + cariItem + "%' OR merek LIKE '%" + cariItem + "%' ORDER BY id_mobil ASC";
+            String sql = "SELECT id_mobil, merek, jenis, plat_nomor, kapasitas, harga_mobil, status, gambar FROM mobil WHERE id_mobil LIKE '%" + cariItem + "%' OR merek LIKE '%" + cariItem + "%' ORDER BY id_mobil ASC";
             Statement stat = koneksi.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()) {

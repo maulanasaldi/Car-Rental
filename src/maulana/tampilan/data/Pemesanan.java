@@ -183,7 +183,7 @@ public class Pemesanan extends javax.swing.JPanel {
                 + "innerFocusWidth:0;"
                 + "margin:5,10,5,20;"
                 + "background:$Panel.background");
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -237,6 +237,7 @@ public class Pemesanan extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         txtTotal = new maulana.swing.TextFieldFlatLaf();
+        btnPembayaranBaru = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtCari = new javax.swing.JTextField();
         btnUbah = new maulana.swing.ButtonAction();
@@ -582,6 +583,14 @@ public class Pemesanan extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Total");
 
+        btnPembayaranBaru.setText("PEMBAYARAN BARU");
+        btnPembayaranBaru.setToolTipText("");
+        btnPembayaranBaru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPembayaranBaruActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel5Layout = new javax.swing.GroupLayout(panel5);
         panel5.setLayout(panel5Layout);
         panel5Layout.setHorizontalGroup(
@@ -591,10 +600,12 @@ public class Pemesanan extends javax.swing.JPanel {
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 558, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSimpanPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPembayaranBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
         panel5Layout.setVerticalGroup(
@@ -607,7 +618,8 @@ public class Pemesanan extends javax.swing.JPanel {
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSimpanPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPembayaranBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -747,7 +759,7 @@ public class Pemesanan extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnSimpanPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanPesananActionPerformed
-        String query = "INSERT INTO pemesanan (id_pemesanan, nama_pelanggan, nik, notlpn_pelanggan, id_karyawan, tanggal_pemesanan, id_mobil, harga, lama_sewa, dp, total) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO pemesanan (id_pemesanan, nama_pelanggan, nik, notlpn_pelanggan, id_karyawan, tanggal_pemesanan, id_mobil, harga_mobil, lama_sewa, dp, total) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             // Ambil data dari JTextField
@@ -817,7 +829,7 @@ public class Pemesanan extends javax.swing.JPanel {
 
         // Menambahkan panel PopUpDataPelanggan ke dalam dialog
         PopUpDataPelanggan dataPelanggan = new PopUpDataPelanggan(dialog);
-        dataPelanggan.pelanggan = this;        
+        dataPelanggan.pelanggan = this;
         dialog.add(dataPelanggan);
 
         // Mengatur ukuran dan lokasi dialog
@@ -911,7 +923,7 @@ public class Pemesanan extends javax.swing.JPanel {
         txtDp.setText(dp);
         txtTotal.setText(total);
 
-// Tombol simpan perubahan
+        // Tombol simpan perubahan
         btnSimpanPesanan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -968,10 +980,30 @@ public class Pemesanan extends javax.swing.JPanel {
         });
     }//GEN-LAST:event_btnUbahActionPerformed
 
+    private void btnPembayaranBaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembayaranBaruActionPerformed
+        autoNumber();
+        // Opsional: Mengosongkan JTextField (form input)        
+        txtNik.setText("");
+        txtNamaPelanggan.setText("");
+        txtNoTlpnPelanggan.setText("");
+        txtIDMobil.setText("");
+        txtHargaMobil.setText("");
+        txtLama.setText("");
+        txtDp.setText("");
+        txtTotal.setText("");
+        lblGambar.setIcon(null);
+        lblMerekMobil.setText("------------------");
+        lblJensiMobil.setText("------------------");
+        lblPlatNomor.setText("------------------");
+        lblKapasitas.setText("------------------");
+        lblStatus.setText("------------------");
+    }//GEN-LAST:event_btnPembayaranBaruActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCekDataMobil;
     private javax.swing.JButton btnCekDataPelanggan;
     private maulana.swing.ButtonAction btnHapus;
+    private javax.swing.JButton btnPembayaranBaru;
     private javax.swing.JButton btnSimpanPesanan;
     private maulana.swing.ButtonAction btnUbah;
     private javax.swing.JButton jButton5;
