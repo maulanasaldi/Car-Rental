@@ -4,7 +4,6 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.sql.Connection;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
 import maulana.tampilan.data.Dashboard;
 import maulana.tampilan.data.DataMobil;
@@ -12,12 +11,13 @@ import maulana.tampilan.data.DataKaryawan;
 import maulana.tampilan.data.DataPelanggan;
 import maulana.tampilan.data.DataSupir;
 import maulana.koneksi.KoneksiDB;
+import maulana.panel.report.ReportMobil;
+import maulana.panel.report.ReportPelanggan;
+import maulana.panel.report.ReportPembayaran;
+import maulana.panel.report.ReportPemesanan;
 import maulana.tampilan.data.Pembayaran;
 import maulana.tampilan.data.Pemesanan;
 import maulana.tampilan.login.Login;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 import raven.popup.GlassPanePopup;
 import raven.toast.Notifications;
 
@@ -159,7 +159,7 @@ public void setNamaKaryawan(String nama) {
 
         cmdPenyewaan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmdPenyewaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Car Rental.png"))); // NOI18N
-        cmdPenyewaan.setText("Penyewaan");
+        cmdPenyewaan.setText("Pemesanan");
         cmdPenyewaan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmdPenyewaan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cmdPenyewaan.setMargin(new java.awt.Insets(10, 5, 10, 14));
@@ -240,7 +240,7 @@ public void setNamaKaryawan(String nama) {
 
         cmdReportPemesanan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmdReportPemesanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Purchase Order.png"))); // NOI18N
-        cmdReportPemesanan.setText("Laporan Penyewaan");
+        cmdReportPemesanan.setText("Laporan Pemesanan");
         cmdReportPemesanan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmdReportPemesanan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cmdReportPemesanan.setMargin(new java.awt.Insets(10, 5, 10, 14));
@@ -468,26 +468,31 @@ public void setNamaKaryawan(String nama) {
     }//GEN-LAST:event_cmdSopirActionPerformed
 
     private void cmdReportPemesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdReportPemesananActionPerformed
-
+        penampil.removeAll();
+        penampil.add(new ReportPemesanan());
+        penampil.repaint();
+        penampil.revalidate();
     }//GEN-LAST:event_cmdReportPemesananActionPerformed
 
     private void cmdRepotPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRepotPembayaranActionPerformed
-        // TODO add your handling code here:
+        penampil.removeAll();
+        penampil.add(new ReportPembayaran());
+        penampil.repaint();
+        penampil.revalidate();
     }//GEN-LAST:event_cmdRepotPembayaranActionPerformed
 
     private void cmdRepotMobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRepotMobilActionPerformed
-        // TODO add your handling code here:
+        penampil.removeAll();
+        penampil.add(new ReportMobil());
+        penampil.repaint();
+        penampil.revalidate();
     }//GEN-LAST:event_cmdRepotMobilActionPerformed
 
     private void cmdRepotPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRepotPelangganActionPerformed
-        try {
-            String path = "./src/Report/reportPelanggan.jrxml";
-            HashMap parameter = new HashMap();
-            JasperPrint print = JasperFillManager.fillReport(path, parameter, koneksi);
-            JasperViewer.viewReport(print, false);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, "Dokumen tidak ada" + ex);
-        }
+        penampil.removeAll();
+        penampil.add(new ReportPelanggan());
+        penampil.repaint();
+        penampil.revalidate();        
     }//GEN-LAST:event_cmdRepotPelangganActionPerformed
 
     private void cmdLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogOutActionPerformed

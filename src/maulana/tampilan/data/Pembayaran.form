@@ -321,7 +321,7 @@
                         <Property name="text" type="java.lang.String" value="ID Pesanan"/>
                       </Properties>
                     </Component>
-                    <Component class="maulana.swing.ButtonAction" name="btnCekDataPesanan">
+                    <Component class="maulana.swing.ButtonActionFlatLaf" name="btnCekDataPesanan">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="CEK"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -460,7 +460,7 @@
                         <Property name="text" type="java.lang.String" value="ID Mobil"/>
                       </Properties>
                     </Component>
-                    <Component class="maulana.swing.ButtonAction" name="btnCekDataMobil">
+                    <Component class="maulana.swing.ButtonActionFlatLaf" name="btnCekDataMobil">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="CEK"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -561,7 +561,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="maulana.swing.ButtonAction" name="btnSimpan">
+                <Component class="maulana.swing.ButtonActionFlatLaf" name="btnSimpan">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="SIMPAN PEMBAYARAN"/>
                   </Properties>
@@ -569,7 +569,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSimpanActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="maulana.swing.ButtonAction" name="btnBatalPembayaran">
+                <Component class="maulana.swing.ButtonActionFlatLaf" name="btnBatalPembayaran">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="BATAL PEMBAYARAN"/>
                   </Properties>
@@ -577,7 +577,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalPembayaranActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="maulana.swing.ButtonAction" name="btnPembayaranBaru">
+                <Component class="maulana.swing.ButtonActionFlatLaf" name="btnPembayaranBaru">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="PEMBAYARAN BARU"/>
                   </Properties>
@@ -585,7 +585,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPembayaranBaruActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="maulana.swing.ButtonAction" name="btnUbahPembayaran1">
+                <Component class="maulana.swing.ButtonActionFlatLaf" name="btnUbahPembayaran1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="UBAH PEMBAYARAN"/>
                   </Properties>
@@ -698,7 +698,7 @@
                     <Property name="text" type="java.lang.String" value="Kembali"/>
                   </Properties>
                 </Component>
-                <Component class="maulana.swing.ButtonAction" name="buttonAction1">
+                <Component class="maulana.swing.ButtonActionFlatLaf" name="buttonAction1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="HITUNG"/>
                   </Properties>
@@ -997,7 +997,7 @@
                         <Property name="horizontalAlignment" type="int" value="2"/>
                       </Properties>
                     </Component>
-                    <Component class="maulana.swing.ButtonAction" name="btnCekDataSupir">
+                    <Component class="maulana.swing.ButtonActionFlatLaf" name="btnCekDataSupir">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="CEK"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -1049,7 +1049,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdBtnTidakActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="maulana.swing.ButtonAction" name="btnTambahTarifSupir">
+                    <Component class="maulana.swing.ButtonActionFlatLaf" name="btnTambahTarifSupir">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="TAMBAH"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -1104,7 +1104,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="maulana.swing.ButtonAction" name="btnEditPembayaran">
+            <Component class="maulana.swing.ButtonActionFlatLaf" name="btnEditPembayaran">
               <Properties>
                 <Property name="text" type="java.lang.String" value="EDIT"/>
               </Properties>
@@ -1112,7 +1112,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditPembayaranActionPerformed"/>
               </Events>
             </Component>
-            <Component class="maulana.swing.ButtonAction" name="buttonHapusPembayaran">
+            <Component class="maulana.swing.ButtonActionFlatLaf" name="buttonHapusPembayaran">
               <Properties>
                 <Property name="text" type="java.lang.String" value="HAPUS"/>
               </Properties>

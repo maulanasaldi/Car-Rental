@@ -28,7 +28,7 @@ public class DataPelanggan extends javax.swing.JPanel {
     public DataPelanggan() {
         initComponents();
         init();
-        dataTabel();
+        dataTabel();        
     }
 
     private void init() {
@@ -100,9 +100,9 @@ public class DataPelanggan extends javax.swing.JPanel {
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
         tabelPelanggan = new maulana.swing.TabelFlatLaf();
-        btnTambah = new maulana.swing.ButtonAction();
-        btnEdit = new maulana.swing.ButtonAction();
-        buttonAction3 = new maulana.swing.ButtonAction();
+        btnTambah = new maulana.swing.ButtonActionFlatLaf();
+        btnEdit = new maulana.swing.ButtonActionFlatLaf();
+        btnHapus = new maulana.swing.ButtonActionFlatLaf();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Data Pelanggan");
@@ -144,11 +144,11 @@ public class DataPelanggan extends javax.swing.JPanel {
             }
         });
 
-        buttonAction3.setText("HAPUS");
-        buttonAction3.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        buttonAction3.addActionListener(new java.awt.event.ActionListener() {
+        btnHapus.setText("HAPUS");
+        btnHapus.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAction3ActionPerformed(evt);
+                btnHapusActionPerformed(evt);
             }
         });
 
@@ -165,7 +165,7 @@ public class DataPelanggan extends javax.swing.JPanel {
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
-                        .addComponent(buttonAction3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,7 +183,7 @@ public class DataPelanggan extends javax.swing.JPanel {
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAction3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))
         );
@@ -314,7 +314,7 @@ public class DataPelanggan extends javax.swing.JPanel {
         }), option);
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void buttonAction3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction3ActionPerformed
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         int selectedRow = tabelPelanggan.getSelectedRow();
 
         // Periksa apakah ada baris yang dipilih
@@ -345,13 +345,13 @@ public class DataPelanggan extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Data gagal dihapus: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_buttonAction3ActionPerformed
+    }//GEN-LAST:event_btnHapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private maulana.swing.ButtonAction btnEdit;
-    private maulana.swing.ButtonAction btnTambah;
-    private maulana.swing.ButtonAction buttonAction3;
+    private maulana.swing.ButtonActionFlatLaf btnEdit;
+    private maulana.swing.ButtonActionFlatLaf btnHapus;
+    private maulana.swing.ButtonActionFlatLaf btnTambah;
     private javax.swing.JLabel jLabel1;
     private maulana.swing.PanelRounded panel;
     private javax.swing.JScrollPane scroll;

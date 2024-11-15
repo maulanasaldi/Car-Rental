@@ -114,7 +114,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="maulana.swing.ButtonAction" name="btnTambah">
+        <Component class="maulana.swing.ButtonActionFlatLaf" name="btnTambah">
           <Properties>
             <Property name="text" type="java.lang.String" value="TAMBAH"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -125,7 +125,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahActionPerformed"/>
           </Events>
         </Component>
-        <Component class="maulana.swing.ButtonAction" name="btnEdit">
+        <Component class="maulana.swing.ButtonActionFlatLaf" name="btnEdit">
           <Properties>
             <Property name="text" type="java.lang.String" value="EDIT"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -136,7 +136,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
           </Events>
         </Component>
-        <Component class="maulana.swing.ButtonAction" name="btnEdit1">
+        <Component class="maulana.swing.ButtonActionFlatLaf" name="btnEdit1">
           <Properties>
             <Property name="text" type="java.lang.String" value="HAPUS"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">

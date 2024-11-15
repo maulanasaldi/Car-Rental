@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ButtonModel;
@@ -58,7 +59,7 @@ public class Pembayaran extends javax.swing.JPanel {
         datePicker.setEditor(txtTanggalPembayaran);
     }
 
-    private void aktif() {        
+    private void aktif() {
         btnUbahPembayaran1.setVisible(false);
     }
 
@@ -184,7 +185,7 @@ public class Pembayaran extends javax.swing.JPanel {
         panelRounded2 = new maulana.swing.PanelRounded();
         txtIDPesanan = new maulana.swing.TextFieldFlatLaf();
         jLabel1 = new javax.swing.JLabel();
-        btnCekDataPesanan = new maulana.swing.ButtonAction();
+        btnCekDataPesanan = new maulana.swing.ButtonActionFlatLaf();
         jLabel2 = new javax.swing.JLabel();
         txtNamaPelanggan = new maulana.swing.TextFieldFlatLaf();
         txtNoTlpPelanggan = new maulana.swing.TextFieldFlatLaf();
@@ -192,7 +193,7 @@ public class Pembayaran extends javax.swing.JPanel {
         panelRounded3 = new maulana.swing.PanelRounded();
         txtIDMobil = new maulana.swing.TextFieldFlatLaf();
         jLabel5 = new javax.swing.JLabel();
-        btnCekDataMobil = new maulana.swing.ButtonAction();
+        btnCekDataMobil = new maulana.swing.ButtonActionFlatLaf();
         jLabel6 = new javax.swing.JLabel();
         txtHargaMobil = new maulana.swing.TextFieldFlatLaf();
         txtLamaSewa = new maulana.swing.TextFieldFlatLaf();
@@ -202,10 +203,10 @@ public class Pembayaran extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         txtTotal = new maulana.swing.TextFieldFlatLaf();
         panelRounded7 = new maulana.swing.PanelRounded();
-        btnSimpan = new maulana.swing.ButtonAction();
-        btnBatalPembayaran = new maulana.swing.ButtonAction();
-        btnPembayaranBaru = new maulana.swing.ButtonAction();
-        btnUbahPembayaran1 = new maulana.swing.ButtonAction();
+        btnSimpan = new maulana.swing.ButtonActionFlatLaf();
+        btnBatalPembayaran = new maulana.swing.ButtonActionFlatLaf();
+        btnPembayaranBaru = new maulana.swing.ButtonActionFlatLaf();
+        btnUbahPembayaran1 = new maulana.swing.ButtonActionFlatLaf();
         panelRounded5 = new maulana.swing.PanelRounded();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -213,7 +214,7 @@ public class Pembayaran extends javax.swing.JPanel {
         txtUang = new maulana.swing.TextFieldFlatLaf();
         txtKembali = new maulana.swing.TextFieldFlatLaf();
         jLabel33 = new javax.swing.JLabel();
-        buttonAction1 = new maulana.swing.ButtonAction();
+        buttonAction1 = new maulana.swing.ButtonActionFlatLaf();
         panelRounded8 = new maulana.swing.PanelRounded();
         lblGambarMobil = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -234,15 +235,15 @@ public class Pembayaran extends javax.swing.JPanel {
         jLabel22 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         txtIDSopir = new maulana.swing.TextFieldFlatLaf();
-        btnCekDataSupir = new maulana.swing.ButtonAction();
+        btnCekDataSupir = new maulana.swing.ButtonActionFlatLaf();
         rdBtnYa = new javax.swing.JRadioButton();
         txtTarifSupir = new maulana.swing.TextFieldFlatLaf();
         jLabel35 = new javax.swing.JLabel();
         rdBtnTidak = new javax.swing.JRadioButton();
-        btnTambahTarifSupir = new maulana.swing.ButtonAction();
+        btnTambahTarifSupir = new maulana.swing.ButtonActionFlatLaf();
         jPanel2 = new javax.swing.JPanel();
-        btnEditPembayaran = new maulana.swing.ButtonAction();
-        buttonHapusPembayaran = new maulana.swing.ButtonAction();
+        btnEditPembayaran = new maulana.swing.ButtonActionFlatLaf();
+        buttonHapusPembayaran = new maulana.swing.ButtonActionFlatLaf();
         txtCari = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPembayaran = new maulana.swing.TabelFlatLaf();
@@ -944,7 +945,7 @@ public class Pembayaran extends javax.swing.JPanel {
 
     private void btnCekDataPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekDataPesananActionPerformed
         // Membuat dialog baru yang berisi panel PopUpDataPelanggan
-        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Data Pelanggan", true);
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Data Pemesanan", true);
 
         // Menambahkan panel PopUpDataPelanggan ke dalam dialog
         PopUpDataPemesanan dataPemesanan = new PopUpDataPemesanan(dialog);
@@ -1227,7 +1228,7 @@ public class Pembayaran extends javax.swing.JPanel {
         String idPembayaran = tblPembayaran.getValueAt(selectedRow, 0).toString();
 
         // Konfirmasi penghapusan
-        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus data pembayaran dengan ID: " + idMobil + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus data pembayaran dengan ID: " + idPembayaran + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 // Hapus data dari database
@@ -1289,7 +1290,26 @@ public class Pembayaran extends javax.swing.JPanel {
         txtNamaPelanggan.setText(namaPelanggan);
         txtNoTlpPelanggan.setText(noTelpPelanggan);
         txtIDKaryawan.setText(idKaryawan);
-        txtTanggalPembayaran.setText(tanggalPembayaran);
+        // Konversi format tanggal dari yyyy-MM-dd menjadi dd/MM/yyyy
+        try {
+            // Buat SimpleDateFormat dengan format input yang sesuai (yyyy-MM-dd)
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Parsing tanggal yang diambil dari tabel menjadi objek Date
+            Date tanggal = inputFormat.parse(tanggalPembayaran);
+
+            // Buat SimpleDateFormat dengan format output yang diinginkan (dd/MM/yyyy)
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            // Format tanggal ke dalam format yang diinginkan
+            String formattedDate = outputFormat.format(tanggal);
+
+            // Tampilkan tanggal yang sudah diformat ke dalam txtTanggalPemesanan
+            txtTanggalPembayaran.setText(formattedDate);
+        } catch (ParseException e) {
+            // Tangani kesalahan jika format tanggal tidak valid
+            e.printStackTrace();
+        }
         txtIDMobil.setText(idMobil);
         txtHargaMobil.setText(hargaMobil);
         txtLamaSewa.setText(lamaSewa);
@@ -1318,7 +1338,7 @@ public class Pembayaran extends javax.swing.JPanel {
                 String newIdPemesanan = txtIDPesanan.getText();
                 String newNamaPelanggan = txtNamaPelanggan.getText();
                 String newNoTelpPelanggan = txtNoTlpPelanggan.getText();
-                String newIdKaryawan = txtIDKaryawan.getText();                
+                String newIdKaryawan = txtIDKaryawan.getText();
                 String newTglPembayaran = txtTanggalPembayaran.getText();
                 String newIdMobil = txtIDMobil.getText();
                 String newHargaMobil = txtHargaMobil.getText();
@@ -1347,7 +1367,7 @@ public class Pembayaran extends javax.swing.JPanel {
                             + "nama_pelanggan = ?, "
                             + "no_telepon_pelanggan = ?, "
                             + "id_karyawan = ?, "
-                            + "tanggal_pembayaran = ?, "
+                            + "tanggal_pembayaran = STR_TO_DATE(?, '%d/%m/%Y'), "
                             + "id_mobil = ?, "
                             + "harga_mobil = ?, "
                             + "lama_sewa = ?, "
@@ -1362,7 +1382,7 @@ public class Pembayaran extends javax.swing.JPanel {
                             + "uang = ?, "
                             + "kembali = ? "
                             + "WHERE id_pembayaran = ?";
-                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);                    
+                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);
                     preparedStatement.setInt(1, Integer.parseInt(newIdPemesanan));
                     preparedStatement.setString(2, newNamaPelanggan);
                     preparedStatement.setString(3, newNoTelpPelanggan);
@@ -1381,8 +1401,8 @@ public class Pembayaran extends javax.swing.JPanel {
                     preparedStatement.setInt(16, Integer.parseInt(newTotalHarga));
                     preparedStatement.setInt(17, Integer.parseInt(newUang));
                     preparedStatement.setInt(18, Integer.parseInt(newKembali));
-                    preparedStatement.setInt(19, Integer.parseInt(newIdPembayaran));                    
-                    preparedStatement.executeUpdate();                    
+                    preparedStatement.setInt(19, Integer.parseInt(newIdPembayaran));
+                    preparedStatement.executeUpdate();
 
                     // Perbarui data yang telah diedit di tabel
                     DefaultTableModel model = (DefaultTableModel) tblPembayaran.getModel();
@@ -1409,7 +1429,7 @@ public class Pembayaran extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                     ex.printStackTrace();
-                }                
+                }
             }
         });
     }//GEN-LAST:event_btnEditPembayaranActionPerformed
@@ -1424,18 +1444,18 @@ public class Pembayaran extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private maulana.swing.ButtonAction btnBatalPembayaran;
-    private maulana.swing.ButtonAction btnCekDataMobil;
-    private maulana.swing.ButtonAction btnCekDataPesanan;
-    private maulana.swing.ButtonAction btnCekDataSupir;
-    private maulana.swing.ButtonAction btnEditPembayaran;
-    private maulana.swing.ButtonAction btnPembayaranBaru;
-    private maulana.swing.ButtonAction btnSimpan;
-    private maulana.swing.ButtonAction btnTambahTarifSupir;
-    private maulana.swing.ButtonAction btnUbahPembayaran1;
-    private maulana.swing.ButtonAction buttonAction1;
+    private maulana.swing.ButtonActionFlatLaf btnBatalPembayaran;
+    private maulana.swing.ButtonActionFlatLaf btnCekDataMobil;
+    private maulana.swing.ButtonActionFlatLaf btnCekDataPesanan;
+    private maulana.swing.ButtonActionFlatLaf btnCekDataSupir;
+    private maulana.swing.ButtonActionFlatLaf btnEditPembayaran;
+    private maulana.swing.ButtonActionFlatLaf btnPembayaranBaru;
+    private maulana.swing.ButtonActionFlatLaf btnSimpan;
+    private maulana.swing.ButtonActionFlatLaf btnTambahTarifSupir;
+    private maulana.swing.ButtonActionFlatLaf btnUbahPembayaran1;
+    private maulana.swing.ButtonActionFlatLaf buttonAction1;
     private javax.swing.ButtonGroup buttonGroup1;
-    private maulana.swing.ButtonAction buttonHapusPembayaran;
+    private maulana.swing.ButtonActionFlatLaf buttonHapusPembayaran;
     private raven.datetime.component.date.DatePicker datePicker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

@@ -24,45 +24,35 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnPilihGambar" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonActionFlatLaf1" min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" pref="110" max="32767" attributes="0"/>
-                                  <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel7" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jLabel2" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel10" alignment="0" pref="90" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="rbTersedia" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbTersedia" min="-2" pref="75" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="rbTidakTersedia" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                           </Group>
                           <Component id="lblImagePreview" max="32767" attributes="0"/>
-                          <Component id="txtID" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtMerek" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtJenis" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtPlatNomer" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtMerekMobil" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtJenisMobil" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtPlatNomor" alignment="1" max="32767" attributes="0"/>
                           <Component id="txtKapasitas" alignment="1" max="32767" attributes="0"/>
                           <Component id="txtTarif" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtIDMobil" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -73,35 +63,35 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="txtID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtIDMobil" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="txtMerek" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtMerekMobil" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="txtJenis" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtJenisMobil" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="txtPlatNomer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtPlatNomor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="txtKapasitas" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtKapasitas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel9" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="txtTarif" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtTarif" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -115,7 +105,7 @@
                   <Component id="lblImagePreview" min="-2" pref="140" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnPilihGambar" min="-2" max="-2" attributes="0"/>
+              <Component id="buttonActionFlatLaf1" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -177,9 +167,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Tersedia"/>
       </Properties>
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rbTersediaKeyPressed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbTidakTersedia">
       <Properties>
@@ -191,9 +178,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Tidak Tersedia"/>
       </Properties>
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rbTidakTersediaKeyPressed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -222,17 +206,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPilihGambar">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Pilih Gambar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPilihGambarActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -240,22 +213,46 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Gambar"/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
-    <Component class="maulana.swing.TextFieldFlatLaf" name="txtID">
+    <Component class="maulana.swing.TextFieldFlatLaf" name="txtIDMobil">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="maulana.swing.TextFieldFlatLaf" name="txtMerek">
+    <Component class="maulana.swing.TextFieldFlatLaf" name="txtMerekMobil">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMerekMobilKeyPressed"/>
+      </Events>
     </Component>
-    <Component class="maulana.swing.TextFieldFlatLaf" name="txtJenis">
+    <Component class="maulana.swing.TextFieldFlatLaf" name="txtJenisMobil">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtJenisMobilKeyPressed"/>
+      </Events>
     </Component>
-    <Component class="maulana.swing.TextFieldFlatLaf" name="txtPlatNomer">
+    <Component class="maulana.swing.TextFieldFlatLaf" name="txtPlatNomor">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPlatNomorKeyPressed"/>
+      </Events>
     </Component>
     <Component class="maulana.swing.TextFieldFlatLaf" name="txtKapasitas">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKapasitasKeyPressed"/>
+      </Events>
     </Component>
     <Component class="maulana.swing.TextFieldFlatLaf" name="txtTarif">
+    </Component>
+    <Component class="maulana.swing.ButtonActionFlatLaf" name="buttonActionFlatLaf1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PILIH GAMBAR"/>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[2, 5, 2, 5]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonActionFlatLaf1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

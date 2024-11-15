@@ -41,7 +41,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="txtCari" min="-2" pref="200" max="-2" attributes="0"/>
                           <EmptySpace pref="492" max="32767" attributes="0"/>
-                          <Component id="buttonAction3" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="btnHapus" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnEdit" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
                       <Component id="txtCari" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnTambah" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnEdit" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="buttonAction3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnHapus" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scroll" pref="446" max="32767" attributes="0"/>
@@ -114,7 +114,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="maulana.swing.ButtonAction" name="btnTambah">
+        <Component class="maulana.swing.ButtonActionFlatLaf" name="btnTambah">
           <Properties>
             <Property name="text" type="java.lang.String" value="TAMBAH"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -125,7 +125,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahActionPerformed"/>
           </Events>
         </Component>
-        <Component class="maulana.swing.ButtonAction" name="btnEdit">
+        <Component class="maulana.swing.ButtonActionFlatLaf" name="btnEdit">
           <Properties>
             <Property name="text" type="java.lang.String" value="EDIT"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -136,7 +136,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
           </Events>
         </Component>
-        <Component class="maulana.swing.ButtonAction" name="buttonAction3">
+        <Component class="maulana.swing.ButtonActionFlatLaf" name="btnHapus">
           <Properties>
             <Property name="text" type="java.lang.String" value="HAPUS"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -144,7 +144,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAction3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

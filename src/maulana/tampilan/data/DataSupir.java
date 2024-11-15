@@ -105,7 +105,7 @@ public class DataSupir extends javax.swing.JPanel {
                 int Angka = Integer.parseInt(id_supir) + 1; // Menaikkan angka
 
                 // Menentukan jumlah nol di depan berdasarkan nilai Angka
-                String Nol = String.format("%03d", Angka); // Membuat format string "000", "00", "0", atau "" sesuai dengan nilai Angka
+                String Nol = String.format("%04d", Angka); // Membuat format string "000", "00", "0", atau "" sesuai dengan nilai Angka
                 nextID = "SP" + Nol; // Membuat ID baru
             }
 
@@ -126,9 +126,9 @@ public class DataSupir extends javax.swing.JPanel {
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
         tabelSopir = new maulana.swing.TabelFlatLaf();
-        buttonAction1 = new maulana.swing.ButtonAction();
-        buttonAction2 = new maulana.swing.ButtonAction();
-        buttonAction3 = new maulana.swing.ButtonAction();
+        buttonAction1 = new maulana.swing.ButtonActionFlatLaf();
+        buttonAction2 = new maulana.swing.ButtonActionFlatLaf();
+        buttonAction3 = new maulana.swing.ButtonActionFlatLaf();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Data Supir");
@@ -255,7 +255,7 @@ public class DataSupir extends javax.swing.JPanel {
 
                 try {
                     // Simpan data ke database
-                    String query = "INSERT INTO supir (id_supir, nama_supir, no_telepon_supir, alamat_supir, tarif) VALUES ('" + id + "', '" + nama + "', '" + noTelepon + "', '" + alamat + "', '" + tarif + "')";
+                    String query = "INSERT INTO supir (id_supir, nama_supir, no_telepon_supir, alamat_supir, tarif_supir) VALUES ('" + id + "', '" + nama + "', '" + noTelepon + "', '" + alamat + "', '" + tarif + "')";
                     Statement statement = koneksi.createStatement();
                     statement.executeUpdate(query);
                     pc.closePopup();
@@ -315,7 +315,7 @@ public class DataSupir extends javax.swing.JPanel {
 
                 try {
                     // Simpan data yang telah diedit ke database
-                    String query = "UPDATE supir SET nama_supir = ?, no_telepon_supir = ?, alamat_supir = ?, tarif = ? WHERE id_supir = ?";
+                    String query = "UPDATE supir SET nama_supir = ?, no_telepon_supir = ?, alamat_supir = ?, tarif_supir = ? WHERE id_supir = ?";
                     PreparedStatement preparedStatement = koneksi.prepareStatement(query);
                     preparedStatement.setString(1, newNama);
                     preparedStatement.setString(2, newNoTelepon);
@@ -378,9 +378,9 @@ public class DataSupir extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private maulana.swing.ButtonAction buttonAction1;
-    private maulana.swing.ButtonAction buttonAction2;
-    private maulana.swing.ButtonAction buttonAction3;
+    private maulana.swing.ButtonActionFlatLaf buttonAction1;
+    private maulana.swing.ButtonActionFlatLaf buttonAction2;
+    private maulana.swing.ButtonActionFlatLaf buttonAction3;
     private javax.swing.JLabel jLabel1;
     private maulana.swing.PanelRounded panel;
     private javax.swing.JScrollPane scroll;

@@ -203,7 +203,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/maulana/icon/Car Rental.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Penyewaan"/>
+                <Property name="text" type="java.lang.String" value="Pemesanan"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -353,7 +353,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/maulana/icon/Purchase Order.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Laporan Penyewaan"/>
+                <Property name="text" type="java.lang.String" value="Laporan Pemesanan"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>

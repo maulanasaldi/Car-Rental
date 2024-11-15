@@ -2,7 +2,6 @@ package maulana.tampilan.data;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -17,7 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -42,9 +40,11 @@ public class Pemesanan extends javax.swing.JPanel {
     public Pemesanan() {
         initComponents();
         init();
-        aktif();
         dataTabel();
         autoNumber();
+        datePickerPemesanan.setCloseAfterSelected(true);
+        datePickerPemesanan.setEditor(txtTanggalPemesanan);
+        btnUbahPesanan.setVisible(false);
     }
 
     public void setIdKaryawan(String idKaryawan) {
@@ -73,10 +73,6 @@ public class Pemesanan extends javax.swing.JPanel {
         lblPlatNomor.setText(platNomor);
         lblKapasitas.setText(kapasitas + " Orang");
         lblStatus.setText(status);
-    }
-
-    protected void aktif() {
-        txtTanggal.setEditor(new JSpinner.DateEditor(txtTanggal, "yyyy/mm/dd"));
     }
 
     private void autoNumber() {
@@ -183,6 +179,14 @@ public class Pemesanan extends javax.swing.JPanel {
                 + "innerFocusWidth:0;"
                 + "margin:5,10,5,20;"
                 + "background:$Panel.background");
+        txtTanggalPemesanan.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:15;"
+                + "borderWidth:0;"
+                + "focusWidth:0;"
+                + "innerFocusWidth:0;"
+                + "margin:5,10,5,20;"
+                + "background:$TextField.background");
+        txtTanggalPemesanan.setFont(getFont().deriveFont(14f));
 
     }
 
@@ -190,14 +194,15 @@ public class Pemesanan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        datePickerPemesanan = new raven.datetime.component.date.DatePicker();
         tabPane = new javax.swing.JTabbedPane();
         panelPemesanan = new javax.swing.JPanel();
         panel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtTanggal = new javax.swing.JSpinner();
         txtIDKaryawan = new maulana.swing.TextFieldFlatLaf();
+        txtTanggalPemesanan = new javax.swing.JFormattedTextField();
         panel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -238,10 +243,11 @@ public class Pemesanan extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         txtTotal = new maulana.swing.TextFieldFlatLaf();
         btnPembayaranBaru = new javax.swing.JButton();
+        btnUbahPesanan = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtCari = new javax.swing.JTextField();
-        btnUbah = new maulana.swing.ButtonAction();
-        btnHapus = new maulana.swing.ButtonAction();
+        btnUbah = new maulana.swing.ButtonActionFlatLaf();
+        btnHapus = new maulana.swing.ButtonActionFlatLaf();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPemesanan = new maulana.swing.TabelFlatLaf();
 
@@ -259,12 +265,6 @@ public class Pemesanan extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Pemesanan");
 
-        txtTanggal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTanggal.setModel(new javax.swing.SpinnerDateModel());
-        txtTanggal.setBorder(null);
-        txtTanggal.setEnabled(false);
-        txtTanggal.setOpaque(true);
-
         txtIDKaryawan.setEnabled(false);
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -274,15 +274,15 @@ public class Pemesanan extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 455, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtIDKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addComponent(txtTanggalPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,8 +292,8 @@ public class Pemesanan extends javax.swing.JPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIDKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIDKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTanggalPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
 
@@ -591,6 +591,14 @@ public class Pemesanan extends javax.swing.JPanel {
             }
         });
 
+        btnUbahPesanan.setText("UBAH PESANAN");
+        btnUbahPesanan.setToolTipText("");
+        btnUbahPesanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahPesananActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel5Layout = new javax.swing.GroupLayout(panel5);
         panel5.setLayout(panel5Layout);
         panel5Layout.setHorizontalGroup(
@@ -601,6 +609,8 @@ public class Pemesanan extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUbahPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSimpanPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -619,7 +629,8 @@ public class Pemesanan extends javax.swing.JPanel {
                     .addGroup(panel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSimpanPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPembayaranBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPembayaranBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUbahPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -759,7 +770,18 @@ public class Pemesanan extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnSimpanPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanPesananActionPerformed
-        String query = "INSERT INTO pemesanan (id_pemesanan, nama_pelanggan, nik, notlpn_pelanggan, id_karyawan, tanggal_pemesanan, id_mobil, harga_mobil, lama_sewa, dp, total) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO pemesanan ("
+                + "id_pemesanan, "
+                + "nama_pelanggan, "
+                + "nik, "
+                + "notlpn_pelanggan, "
+                + "id_karyawan, "
+                + "tanggal_pemesanan, "
+                + "id_mobil, "
+                + "harga_mobil, "
+                + "lama_sewa, "
+                + "dp, "
+                + "total) VALUES (?, ?, ?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?, ?)";
 
         try {
             // Ambil data dari JTextField
@@ -768,10 +790,7 @@ public class Pemesanan extends javax.swing.JPanel {
             String nik = txtNik.getText();                // NIK
             String noTelpPelanggan = txtNoTlpnPelanggan.getText();          // No. Telepon
             String idKaryawan = txtIDKaryawan.getText();  // ID Karyawan           
-            // Ambil tanggal dari JSpinner
-            java.util.Date tanggal = (java.util.Date) txtTanggal.getValue(); // Ambil nilai dari JSpinner
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd"); // Format tanggal yang diinginkan
-            String tanggalPemesanan = sdf.format(tanggal);  // Ubah tanggal menjadi string dalam format "yyyy-MM-dd"
+            String tglPemesanan = txtTanggalPemesanan.getText();
             String idMobil = txtIDMobil.getText();
             String hargaMobil = txtHargaMobil.getText();
             String lamaSewa = txtLama.getText();
@@ -787,7 +806,7 @@ public class Pemesanan extends javax.swing.JPanel {
             statement.setString(3, nik);               // NIK
             statement.setString(4, noTelpPelanggan);   // No. Telepon
             statement.setInt(5, Integer.parseInt(idKaryawan));        // ID Karyawan
-            statement.setString(6, tanggalPemesanan);  // Tanggal Pemesanan
+            statement.setString(6, tglPemesanan);  // Tanggal Pemesanan
             statement.setString(7, idMobil);
             statement.setInt(8, Integer.parseInt(hargaMobil));
             statement.setInt(9, Integer.parseInt(lamaSewa));
@@ -840,11 +859,30 @@ public class Pemesanan extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCekDataPelangganActionPerformed
 
     private void txtDpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDpKeyReleased
-        int harga = Integer.parseInt(txtHargaMobil.getText());
-        int lamaSewa = Integer.parseInt(txtLama.getText());
-        int dp = Integer.parseInt(txtDp.getText());
-        int total = (harga * lamaSewa) - dp;
-        txtTotal.setText(String.valueOf(total));
+        // Kosongkan txtTotal setiap kali ada perubahan di txtDp
+        txtTotal.setText("");
+
+        try {
+            // Cek apakah txtHargaMobil, txtLama, dan txtDp tidak kosong
+            String hargaText = txtHargaMobil.getText();
+            String lamaSewaText = txtLama.getText();
+            String dpText = txtDp.getText();
+
+            if (!hargaText.isEmpty() && !lamaSewaText.isEmpty() && !dpText.isEmpty()) {
+                // Konversi hanya jika semua field tidak kosong
+                int harga = Integer.parseInt(hargaText);
+                int lamaSewa = Integer.parseInt(lamaSewaText);
+                int dp = Integer.parseInt(dpText);
+                int total = (harga * lamaSewa) - dp;
+                txtTotal.setText(String.valueOf(total)); // Update txtTotal
+            } else {
+                // Jika ada field yang kosong, jangan set nilai total
+                txtTotal.setText(""); // Kosongkan txtTotal jika ada yang kosong
+            }
+        } catch (NumberFormatException e) {
+            // Tangani error jika ada input yang tidak bisa di-convert
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_txtDpKeyReleased
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
@@ -860,7 +898,7 @@ public class Pemesanan extends javax.swing.JPanel {
         String idMobil = tblPemesanan.getValueAt(selectedRow, 0).toString();
 
         // Konfirmasi penghapusan
-        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus Pesanan dengan ID: " + idMobil + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus data pesanan dengan ID: " + idMobil + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 // Hapus data dari database
@@ -881,6 +919,7 @@ public class Pemesanan extends javax.swing.JPanel {
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        btnUbahPesanan.setVisible(true);
         // Pastikan pengguna memilih baris yang akan di-edit
         int selectedRow = tblPemesanan.getSelectedRow();
         if (selectedRow == -1) {
@@ -910,11 +949,24 @@ public class Pemesanan extends javax.swing.JPanel {
         txtNik.setText(nik);
         txtNoTlpnPelanggan.setText(noTelpPelanggan);
         txtIDKaryawan.setText(idKaryawan);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // Konversi format tanggal dari yyyy-MM-dd menjadi dd/MM/yyyy
         try {
-            Date parsedDate = sdf.parse(tanggalPemesanan); // Mengonversi string tanggal ke objek Date
-            txtTanggal.setValue(parsedDate); // Mengatur tanggal di JSpinner
-        } catch (Exception e) {
+            // Buat SimpleDateFormat dengan format input yang sesuai (yyyy-MM-dd)
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Parsing tanggal yang diambil dari tabel menjadi objek Date
+            Date tanggal = inputFormat.parse(tanggalPemesanan);
+
+            // Buat SimpleDateFormat dengan format output yang diinginkan (dd/MM/yyyy)
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            // Format tanggal ke dalam format yang diinginkan
+            String formattedDate = outputFormat.format(tanggal);
+
+            // Tampilkan tanggal yang sudah diformat ke dalam txtTanggalPemesanan
+            txtTanggalPemesanan.setText(formattedDate);
+        } catch (ParseException e) {
+            // Tangani kesalahan jika format tanggal tidak valid
             e.printStackTrace();
         }
         txtIDMobil.setText(idMobil);
@@ -924,7 +976,7 @@ public class Pemesanan extends javax.swing.JPanel {
         txtTotal.setText(total);
 
         // Tombol simpan perubahan
-        btnSimpanPesanan.addActionListener(new ActionListener() {
+        btnUbahPesanan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Ambil data yang telah diedit dari komponen input
@@ -933,9 +985,7 @@ public class Pemesanan extends javax.swing.JPanel {
                 String newNik = txtNik.getText();
                 String newNoTelp = txtNoTlpnPelanggan.getText();
                 String newIDKaryawan = txtIDKaryawan.getText();
-                Date newTanggalPemesanan = (Date) txtTanggal.getValue(); // txtTanggal adalah JSpinner
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String newTanggalPemesananStr = sdf.format(newTanggalPemesanan); // Mengonversi tanggal ke string dengan format yang diinginkan
+                String newTglPemesanan = txtTanggalPemesanan.getText();
                 String newIDMobil = txtIDMobil.getText();
                 String newHarga = txtHargaMobil.getText();
                 String newLamaSewa = txtLama.getText();
@@ -944,13 +994,13 @@ public class Pemesanan extends javax.swing.JPanel {
 
                 try {
                     // Simpan data yang telah diedit ke database
-                    String query = "UPDATE pemesanan SET nama_pelanggan = ?, nik = ?, notlpn_pelanggan = ?, id_karyawan = ?, tanggal_pemesanan = ?, id_mobil = ?, harga = ?, lama_sewa = ?, dp = ?, total = ? WHERE id_pemesanan = ?";
+                    String query = "UPDATE pemesanan SET nama_pelanggan = ?, nik = ?, notlpn_pelanggan = ?, id_karyawan = ?, tanggal_pemesanan = STR_TO_DATE(?, '%d/%m/%Y'), id_mobil = ?, harga_mobil = ?, lama_sewa = ?, dp = ?, total = ? WHERE id_pemesanan = ?";
                     PreparedStatement preparedStatement = koneksi.prepareStatement(query);
                     preparedStatement.setString(1, newNamaPelanggan);
                     preparedStatement.setString(2, newNik);
                     preparedStatement.setString(3, newNoTelp);
                     preparedStatement.setString(4, newIDKaryawan);
-                    preparedStatement.setString(5, newTanggalPemesananStr);
+                    preparedStatement.setString(5, newTglPemesanan);
                     preparedStatement.setString(6, newIDMobil);
                     preparedStatement.setString(7, newHarga);
                     preparedStatement.setString(8, newLamaSewa);
@@ -965,7 +1015,7 @@ public class Pemesanan extends javax.swing.JPanel {
                     model.setValueAt(newNik, selectedRow, 2);
                     model.setValueAt(newNoTelp, selectedRow, 3);
                     model.setValueAt(newIDKaryawan, selectedRow, 4);
-                    model.setValueAt(newTanggalPemesanan, selectedRow, 5);
+                    model.setValueAt(newTglPemesanan, selectedRow, 5);
                     model.setValueAt(newIDMobil, selectedRow, 6);
                     model.setValueAt(newHarga, selectedRow, 7);
                     model.setValueAt(newLamaSewa, selectedRow, 8);
@@ -999,13 +1049,19 @@ public class Pemesanan extends javax.swing.JPanel {
         lblStatus.setText("------------------");
     }//GEN-LAST:event_btnPembayaranBaruActionPerformed
 
+    private void btnUbahPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPesananActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUbahPesananActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCekDataMobil;
     private javax.swing.JButton btnCekDataPelanggan;
-    private maulana.swing.ButtonAction btnHapus;
+    private maulana.swing.ButtonActionFlatLaf btnHapus;
     private javax.swing.JButton btnPembayaranBaru;
     private javax.swing.JButton btnSimpanPesanan;
-    private maulana.swing.ButtonAction btnUbah;
+    private maulana.swing.ButtonActionFlatLaf btnUbah;
+    private javax.swing.JButton btnUbahPesanan;
+    private raven.datetime.component.date.DatePicker datePickerPemesanan;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1052,7 +1108,7 @@ public class Pemesanan extends javax.swing.JPanel {
     private maulana.swing.TextFieldFlatLaf txtNamaPelanggan;
     private maulana.swing.TextFieldFlatLaf txtNik;
     private maulana.swing.TextFieldFlatLaf txtNoTlpnPelanggan;
-    private javax.swing.JSpinner txtTanggal;
+    private javax.swing.JFormattedTextField txtTanggalPemesanan;
     private maulana.swing.TextFieldFlatLaf txtTotal;
     // End of variables declaration//GEN-END:variables
 }

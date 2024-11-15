@@ -5,35 +5,35 @@ import java.awt.event.KeyEvent;
 public class FormPelanggan extends javax.swing.JPanel {
 
     public String getTxtNIK() {
-        return txtNIK.getText();
+        return txtNikPelanggan.getText();
     }
 
     public void setTxtNIK(String nik) {
-        txtNIK.setText(nik);
+        txtNikPelanggan.setText(nik);
     }
     
     public String getTxtNoSim(){
-        return txtNoSim.getText();
+        return txtNoSimPelanggan.getText();
     }
     
     public void setTxtNoSim(String noSim){
-        txtNoSim.setText(noSim);
+        txtNoSimPelanggan.setText(noSim);
     }
     
     public String getTxtNama() {
-        return txtNama.getText();
+        return txtNamaPelanggan.getText();
     }
 
     public void setTxtNama(String nama) {
-        txtNama.setText(nama);
+        txtNamaPelanggan.setText(nama);
     }        
     
     public String getTxtNoTelepon(){
-        return txtNoTelepon.getText();
+        return txtNoTlpnPelanggan.getText();
     }
     
     public void setTxtNoTelepon(String noTelepon){
-        txtNoTelepon.setText(noTelepon);
+        txtNoTlpnPelanggan.setText(noTelepon);
     }        
     
     public String getTxtAlamat() {
@@ -55,45 +55,24 @@ public class FormPelanggan extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        txtNIK = new javax.swing.JTextField();
-        txtNama = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtNoTelepon = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtNikPelanggan = new maulana.swing.TextFieldFlatLaf();
+        txtNoSimPelanggan = new maulana.swing.TextFieldFlatLaf();
+        txtNamaPelanggan = new maulana.swing.TextFieldFlatLaf();
+        txtNoTlpnPelanggan = new maulana.swing.TextFieldFlatLaf();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAlamat = new javax.swing.JTextArea();
-        txtNoSim = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("NIK");
 
-        txtNIK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNIK.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNIKKeyPressed(evt);
-            }
-        });
-
-        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNama.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNamaKeyPressed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nama Lengkap");
-
-        txtNoTelepon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNoTelepon.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNoTeleponKeyPressed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -103,25 +82,38 @@ public class FormPelanggan extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Alamat");
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(264, 110));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("No. SIM");
+
+        txtNikPelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNikPelangganKeyPressed(evt);
+            }
+        });
+
+        txtNoSimPelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoSimPelangganKeyPressed(evt);
+            }
+        });
+
+        txtNamaPelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamaPelangganKeyPressed(evt);
+            }
+        });
+
+        txtNoTlpnPelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoTlpnPelangganKeyPressed(evt);
+            }
+        });
 
         txtAlamat.setColumns(20);
         txtAlamat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAlamat.setRows(5);
-        txtAlamat.setPreferredSize(new java.awt.Dimension(252, 110));
         jScrollPane1.setViewportView(txtAlamat);
-
-        txtNoSim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNoSim.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNoSimKeyPressed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("No. SIM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -135,65 +127,65 @@ public class FormPelanggan extends javax.swing.JPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNIK)
-                    .addComponent(txtNama)
-                    .addComponent(txtNoTelepon)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                    .addComponent(txtNoSim))
-                .addGap(20, 20, 20))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtNoSimPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNamaPelanggan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNoTlpnPelanggan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNikPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNIK))
+                    .addComponent(txtNikPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNoSim))
+                    .addComponent(txtNoSimPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNama))
+                    .addComponent(txtNamaPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtNoTelepon)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNoTlpnPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNIKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNIKKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtNoSim.requestFocus();
+    private void txtNikPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNikPelangganKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {            
+            txtNoSimPelanggan.requestFocus();
         }
-    }//GEN-LAST:event_txtNIKKeyPressed
+    }//GEN-LAST:event_txtNikPelangganKeyPressed
 
-    private void txtNamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaKeyPressed
+    private void txtNoSimPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoSimPelangganKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtNoTelepon.requestFocus();            
+            txtNamaPelanggan.requestFocus();
         }
-    }//GEN-LAST:event_txtNamaKeyPressed
+    }//GEN-LAST:event_txtNoSimPelangganKeyPressed
 
-    private void txtNoTeleponKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoTeleponKeyPressed
+    private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaPelangganKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtNoTlpnPelanggan.requestFocus();
+        }
+    }//GEN-LAST:event_txtNamaPelangganKeyPressed
+
+    private void txtNoTlpnPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoTlpnPelangganKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtAlamat.requestFocus();
         }
-    }//GEN-LAST:event_txtNoTeleponKeyPressed
-
-    private void txtNoSimKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoSimKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            txtNama.requestFocus();
-        }
-    }//GEN-LAST:event_txtNoSimKeyPressed
+    }//GEN-LAST:event_txtNoTlpnPelangganKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -205,9 +197,9 @@ public class FormPelanggan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAlamat;
-    private javax.swing.JTextField txtNIK;
-    private javax.swing.JTextField txtNama;
-    private javax.swing.JTextField txtNoSim;
-    private javax.swing.JTextField txtNoTelepon;
+    private maulana.swing.TextFieldFlatLaf txtNamaPelanggan;
+    private maulana.swing.TextFieldFlatLaf txtNikPelanggan;
+    private maulana.swing.TextFieldFlatLaf txtNoSimPelanggan;
+    private maulana.swing.TextFieldFlatLaf txtNoTlpnPelanggan;
     // End of variables declaration//GEN-END:variables
 }

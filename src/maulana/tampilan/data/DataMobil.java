@@ -25,7 +25,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import maulana.koneksi.KoneksiDB;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -89,7 +88,7 @@ public class DataMobil extends javax.swing.JPanel {
                 String jenis = hasil.getString("jenis");
                 String platNomor = hasil.getString("plat_nomor");
                 String kapasitas = hasil.getString("kapasitas");
-                String tarif = hasil.getString("tarif");
+                String tarif = hasil.getString("harga_mobil");
                 String status = hasil.getString("status");
 
                 // Mengambil data gambar dari database
@@ -171,9 +170,9 @@ public class DataMobil extends javax.swing.JPanel {
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
         tabelMobil = new maulana.swing.TabelFlatLaf();
-        buttonAction1 = new maulana.swing.ButtonAction();
-        buttonAction2 = new maulana.swing.ButtonAction();
-        buttonAction3 = new maulana.swing.ButtonAction();
+        buttonAction1 = new maulana.swing.ButtonActionFlatLaf();
+        buttonAction2 = new maulana.swing.ButtonActionFlatLaf();
+        buttonAction3 = new maulana.swing.ButtonActionFlatLaf();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Data Mobil");
@@ -339,7 +338,7 @@ public class DataMobil extends javax.swing.JPanel {
                 model.addRow(new Object[]{id, merek, jenis, platNomer, kapasitas, formatRupiah(tarif), status, gambar});
 
                 // Simpan data ke database dengan PreparedStatement
-                String query = "INSERT INTO mobil (id_mobil, merek, jenis, plat_nomor, kapasitas, tarif, status, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO mobil (id_mobil, merek, jenis, plat_nomor, kapasitas, harga_mobil, status, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement preparedStatement = koneksi.prepareStatement(query)) {
                     preparedStatement.setString(1, id);
                     preparedStatement.setString(2, merek);
@@ -418,7 +417,7 @@ public class DataMobil extends javax.swing.JPanel {
 
                 try {
                     // Simpan data yang telah diedit ke database
-                    String query = "UPDATE mobil SET merek = ?, jenis = ?, plat_nomor = ?, kapasitas = ?, tarif = ?, status = ?, gambar = ? WHERE id_mobil = ?";
+                    String query = "UPDATE mobil SET merek = ?, jenis = ?, plat_nomor = ?, kapasitas = ?, harga_mobil = ?, status = ?, gambar = ? WHERE id_mobil = ?";
                     PreparedStatement preparedStatement = koneksi.prepareStatement(query);
                     preparedStatement.setString(1, newMerek);
                     preparedStatement.setString(2, newJenis);
@@ -467,7 +466,7 @@ public class DataMobil extends javax.swing.JPanel {
         String idMobil = tabelMobil.getValueAt(selectedRow, 0).toString();
 
         // Konfirmasi penghapusan
-        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus mobil dengan ID: " + idMobil + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus data mobil dengan ID: " + idMobil + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 // Hapus data dari database
@@ -488,9 +487,9 @@ public class DataMobil extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonAction3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private maulana.swing.ButtonAction buttonAction1;
-    private maulana.swing.ButtonAction buttonAction2;
-    private maulana.swing.ButtonAction buttonAction3;
+    private maulana.swing.ButtonActionFlatLaf buttonAction1;
+    private maulana.swing.ButtonActionFlatLaf buttonAction2;
+    private maulana.swing.ButtonActionFlatLaf buttonAction3;
     private javax.swing.JLabel jLabel1;
     private maulana.swing.PanelRounded panel;
     private javax.swing.JScrollPane scroll;

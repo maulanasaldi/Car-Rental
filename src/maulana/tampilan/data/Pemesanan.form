@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="raven.datetime.component.date.DatePicker" name="datePickerPemesanan">
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -103,15 +107,15 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="455" max="32767" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtIDKaryawan" min="-2" pref="139" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtTanggal" min="-2" pref="139" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="txtTanggalPemesanan" min="-2" pref="139" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -123,8 +127,8 @@
                               <Component id="jLabel4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTanggal" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="txtIDKaryawan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtTanggalPemesanan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
@@ -156,25 +160,12 @@
                     <Property name="text" type="java.lang.String" value="Pemesanan"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JSpinner" name="txtTanggal">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="0"/>
-                    </Property>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="now" stepSize="5" type="date"/>
-                    </Property>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                    <Property name="opaque" type="boolean" value="true"/>
-                  </Properties>
-                </Component>
                 <Component class="maulana.swing.TextFieldFlatLaf" name="txtIDKaryawan">
                   <Properties>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="txtTanggalPemesanan">
                 </Component>
               </SubComponents>
             </Container>
@@ -671,6 +662,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnUbahPesanan" min="-2" pref="150" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton5" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnSimpanPesanan" min="-2" pref="150" max="-2" attributes="0"/>
@@ -693,6 +686,7 @@
                                   <Component id="btnSimpanPesanan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="jButton5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="btnPembayaranBaru" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnUbahPesanan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -736,6 +730,15 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPembayaranBaruActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnUbahPesanan">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="UBAH PESANAN"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUbahPesananActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -797,7 +800,7 @@
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCariKeyReleased"/>
               </Events>
             </Component>
-            <Component class="maulana.swing.ButtonAction" name="btnUbah">
+            <Component class="maulana.swing.ButtonActionFlatLaf" name="btnUbah">
               <Properties>
                 <Property name="text" type="java.lang.String" value="EDIT"/>
               </Properties>
@@ -805,7 +808,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUbahActionPerformed"/>
               </Events>
             </Component>
-            <Component class="maulana.swing.ButtonAction" name="btnHapus">
+            <Component class="maulana.swing.ButtonActionFlatLaf" name="btnHapus">
               <Properties>
                 <Property name="text" type="java.lang.String" value="HAPUS"/>
               </Properties>

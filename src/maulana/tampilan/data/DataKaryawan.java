@@ -128,9 +128,9 @@ public class DataKaryawan extends javax.swing.JPanel {
         txtCari = new javax.swing.JTextField();
         scroll = new javax.swing.JScrollPane();
         tabelKaryawan = new maulana.swing.TabelFlatLaf();
-        btnTambah = new maulana.swing.ButtonAction();
-        btnEdit = new maulana.swing.ButtonAction();
-        btnEdit1 = new maulana.swing.ButtonAction();
+        btnTambah = new maulana.swing.ButtonActionFlatLaf();
+        btnEdit = new maulana.swing.ButtonActionFlatLaf();
+        btnEdit1 = new maulana.swing.ButtonActionFlatLaf();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Data Karyawan");
@@ -365,7 +365,7 @@ public class DataKaryawan extends javax.swing.JPanel {
         String idKaryawan = tabelKaryawan.getValueAt(selectedRow, 0).toString();
 
         // Konfirmasi penghapusan
-        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus karyawan dengan ID: " + idKaryawan + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus data karyawan dengan ID: " + idKaryawan + "?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 // Hapus data dari database
@@ -387,9 +387,9 @@ public class DataKaryawan extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private maulana.swing.ButtonAction btnEdit;
-    private maulana.swing.ButtonAction btnEdit1;
-    private maulana.swing.ButtonAction btnTambah;
+    private maulana.swing.ButtonActionFlatLaf btnEdit;
+    private maulana.swing.ButtonActionFlatLaf btnEdit1;
+    private maulana.swing.ButtonActionFlatLaf btnTambah;
     private javax.swing.JLabel jLabel1;
     private maulana.swing.PanelRounded panel;
     private javax.swing.JScrollPane scroll;
