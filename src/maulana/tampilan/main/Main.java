@@ -3,6 +3,7 @@ package maulana.tampilan.main;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import maulana.tampilan.data.Dashboard;
@@ -30,7 +31,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         init();
         super.setExtendedState(MAXIMIZED_BOTH);
-    }            
+    }
 
     public void setIdKaryawan(String id) {
         if (id != null) {
@@ -40,7 +41,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-public void setNamaKaryawan(String nama) {
+    public void setNamaKaryawan(String nama) {
         lblNamaKaryawan.setText(nama);
     }
 
@@ -56,7 +57,7 @@ public void setNamaKaryawan(String nama) {
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
-                + "background:$Panel.background;");        
+                + "background:$Panel.background;");
         cmdDashboard.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
         cmdLogOut.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
         cmdPenyewaan.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
@@ -417,26 +418,26 @@ public void setNamaKaryawan(String nama) {
     private void cmdPenyewaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPenyewaanActionPerformed
         penampil.removeAll();
         Pemesanan pesanan = new Pemesanan();
-        
+
         // Set idKaryawan ke Pemesanan
         pesanan.setIdKaryawan(idKaryawan);
-        
+
         penampil.add(pesanan);
         penampil.repaint();
         penampil.revalidate();
-        
+
         // Debugging untuk memastikan idKaryawan dikirim ke Pemesanan
         System.out.println("ID Karyawan after setting in Pemesanan: " + idKaryawan);
     }//GEN-LAST:event_cmdPenyewaanActionPerformed
 
     private void cmdPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPembayaranActionPerformed
         penampil.removeAll();
-        Pembayaran pembayaran = new Pembayaran();   
+        Pembayaran pembayaran = new Pembayaran();
         pembayaran.setIDKaryawan(idKaryawan);
         penampil.add(pembayaran);
         penampil.repaint();
         penampil.revalidate();
-        
+
     }//GEN-LAST:event_cmdPembayaranActionPerformed
 
     private void cmdKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKaryawanActionPerformed
@@ -492,12 +493,12 @@ public void setNamaKaryawan(String nama) {
         penampil.removeAll();
         penampil.add(new ReportPelanggan());
         penampil.repaint();
-        penampil.revalidate();        
+        penampil.revalidate();
     }//GEN-LAST:event_cmdRepotPelangganActionPerformed
 
     private void cmdLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogOutActionPerformed
-        int confrim = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin Log Out?", "Konfirmasi Log Out", JOptionPane.YES_NO_OPTION);
-        if (confrim == JOptionPane.YES_OPTION) {
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin Log Out?", "Konfirmasi Log Out", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
             new Login().setVisible(true);
             this.dispose();
         }
