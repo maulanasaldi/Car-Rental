@@ -103,7 +103,7 @@
     </Component>
     <Component class="maulana.swing.ButtonActionFlatLaf" name="buttonAction3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CETAK KE WORD"/>
+        <Property name="text" type="java.lang.String" value="CETAK KE DOCX"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAction3ActionPerformed"/>
@@ -111,7 +111,7 @@
     </Component>
     <Component class="maulana.swing.ButtonActionFlatLaf" name="buttonAction4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CETAK KE EXCEL"/>
+        <Property name="text" type="java.lang.String" value="CETAK KE XLSX"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAction4ActionPerformed"/>

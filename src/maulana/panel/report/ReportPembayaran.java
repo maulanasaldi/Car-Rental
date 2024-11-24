@@ -34,15 +34,15 @@ public class ReportPembayaran extends javax.swing.JPanel {
         model = new DefaultTableModel();
         tabel.setModel(model);
 
-        model.addColumn("ID Pembayaran");
-        model.addColumn("Nama Pelanggan");
-        model.addColumn("Tanggal");
+        model.addColumn("ID Pembayaran");        
+        model.addColumn("ID Pemesanan");
+        model.addColumn("ID Karyawan");
+        model.addColumn("Tgl. Pembayaran");
         model.addColumn("ID Mobil");
-        model.addColumn("Lama");
-        model.addColumn("DP");
         model.addColumn("Supir");
-        model.addColumn("Total");
-        model.addColumn("Uang");
+        model.addColumn("ID Supir");
+        model.addColumn("Total Harga");
+        model.addColumn("Uang Tunai");
         model.addColumn("Kembali");
         loadDataPelanggan();
     }
@@ -52,24 +52,22 @@ public class ReportPembayaran extends javax.swing.JPanel {
 
         try {
             Connection conn = new KoneksiDB().connect(); 
-            String sql = "SELECT id_pembayaran, nama_pelanggan, tanggal_pembayaran, id_mobil, lama_sewa, dp, supir, total_harga, uang, kembali  FROM pembayaran";
+            String sql = "SELECT id_pembayaran, id_pemesanan, id_karyawan, tanggal_pembayaran, id_mobil, supir, id_supir, supir, total_harga, uang_tunai, kembali  FROM pembayaran";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 Object[] rowData = {
                     rs.getString("id_pembayaran"),
-                    rs.getString("nama_pelanggan"),
+                    rs.getString("id_Pemesanan"),
+                    rs.getString("id_karyawan"),
                     rs.getString("tanggal_pembayaran"),
-                    rs.getString("id_mobil"),
-                    rs.getString("lama_sewa"),
-                    rs.getString("dp"),
+                    rs.getString("id_mobil"),                                                            
                     rs.getString("supir"),
+                    rs.getString("id_supir"),
+                    rs.getString("total_harga"),                                        
                     rs.getString("total_harga"),
-                    rs.getString("dp"),
-                    rs.getString("supir"),
-                    rs.getString("total_harga"),
-                    rs.getString("uang"),
+                    rs.getString("uang_tunai"),
                     rs.getString("kembali")
                 };
                 model.addRow(rowData);
@@ -125,14 +123,14 @@ public class ReportPembayaran extends javax.swing.JPanel {
             }
         });
 
-        buttonAction3.setText("CETAK KE WORD");
+        buttonAction3.setText("CETAK KE DOCX");
         buttonAction3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAction3ActionPerformed(evt);
             }
         });
 
-        buttonAction4.setText("CETAK KE EXCEL");
+        buttonAction4.setText("CETAK KE XLSX");
         buttonAction4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAction4ActionPerformed(evt);

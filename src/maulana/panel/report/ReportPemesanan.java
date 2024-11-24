@@ -34,13 +34,11 @@ public class ReportPemesanan extends javax.swing.JPanel {
         model = new DefaultTableModel();
         tabel.setModel(model);
 
-        model.addColumn("ID Pemesanan");
-        model.addColumn("Nama Pelanggan");
+        model.addColumn("ID Pemesanan");        
         model.addColumn("NIK");
-        model.addColumn("No Telepon");
+        model.addColumn("ID Karyawan");
         model.addColumn("Tanggal");
-        model.addColumn("ID Mobil");
-        model.addColumn("Harga");
+        model.addColumn("ID Mobil");       
         model.addColumn("Lama");
         model.addColumn("DP");
         model.addColumn("Total");
@@ -52,19 +50,17 @@ public class ReportPemesanan extends javax.swing.JPanel {
 
         try {
             Connection conn = new KoneksiDB().connect();
-            String sql = "SELECT id_pemesanan, nama_pelanggan, nik, notlpn_pelanggan, tanggal_pemesanan, id_mobil, harga_mobil, lama_sewa, dp, total  FROM pemesanan";
+            String sql = "SELECT id_pemesanan, nik, id_karyawan, tanggal_pemesanan, id_mobil, lama_sewa, dp, total  FROM pemesanan";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 Object[] rowData = {
-                    rs.getString("id_pemesanan"),
-                    rs.getString("nama_pelanggan"),
+                    rs.getString("id_pemesanan"),                    
                     rs.getString("nik"),
-                    rs.getString("notlpn_pelanggan"),
+                    rs.getString("id_karyawan"),                    
                     rs.getString("tanggal_pemesanan"),
-                    rs.getString("id_mobil"),
-                    rs.getString("harga_mobil"),
+                    rs.getString("id_mobil"),                    
                     rs.getString("lama_sewa"),
                     rs.getString("dp"),
                     rs.getString("total")
@@ -122,14 +118,14 @@ public class ReportPemesanan extends javax.swing.JPanel {
             }
         });
 
-        buttonAction3.setText("CETAK KE WORD");
+        buttonAction3.setText("CETAK KE DOCX");
         buttonAction3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAction3ActionPerformed(evt);
             }
         });
 
-        buttonAction4.setText("CETAK KE EXCEL");
+        buttonAction4.setText("CETAK KE XLSX");
         buttonAction4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAction4ActionPerformed(evt);

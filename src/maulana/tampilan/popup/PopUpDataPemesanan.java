@@ -38,11 +38,11 @@ public class PopUpDataPemesanan extends javax.swing.JPanel {
     }
 
     private void dataTable() {
-        Object[] baris = {"ID Pemesanan", "Nama Pelanggan", "NIK", "No. Tlp Pelanggan ", "Id Karyawan", "Tgl Pemesanan", "ID Mobil", "Harga", "Lama Sewa", "DP", "Total"};
+        Object[] baris = {"ID Pemesanan", "NIK", "Id Karyawan", "Tgl Pemesanan", "ID Mobil", "Lama Sewa", "DP", "Total"};
         tabmode = new DefaultTableModel(null, baris);
         String cariItem = txtCari.getText();
         try {
-            String sql = "SELECT * FROM pemesanan WHERE id_pemesanan LIKE '%" + cariItem + "%' OR nama_pelanggan LIKE '%" + cariItem + "%' ORDER BY id_pemesanan ASC";
+            String sql = "SELECT * FROM pemesanan WHERE id_pemesanan LIKE '%" + cariItem + "%' OR nik LIKE '%" + cariItem + "%' ORDER BY id_pemesanan ASC";
             Statement stat = koneksi.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()) {
@@ -54,10 +54,7 @@ public class PopUpDataPemesanan extends javax.swing.JPanel {
                     hasil.getString(5),
                     hasil.getString(6),
                     hasil.getString(7),
-                    hasil.getString(8),
-                    hasil.getString(9),
-                    hasil.getString(10),
-                    hasil.getString(11)
+                    hasil.getString(8)                    
                 });
             }
             tblPelanggan.setModel(tabmode);
@@ -131,14 +128,14 @@ public class PopUpDataPemesanan extends javax.swing.JPanel {
 
     private void tblPelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPelangganMouseClicked
         int tabelPelanggan = tblPelanggan.getSelectedRow();
-        pemesanan.idPesanan = tblPelanggan.getValueAt(tabelPelanggan, 0).toString();
-        pemesanan.namaPelanggan = tblPelanggan.getValueAt(tabelPelanggan, 1).toString();
-        pemesanan.noTlpnPelanggan = tblPelanggan.getValueAt(tabelPelanggan, 3).toString();
-        pemesanan.idMobil = tblPelanggan.getValueAt(tabelPelanggan, 6).toString();
-        pemesanan.hargaMobil = tblPelanggan.getValueAt(tabelPelanggan, 7).toString();
-        pemesanan.lamaSewa = tblPelanggan.getValueAt(tabelPelanggan, 8).toString();
-        pemesanan.dp = tblPelanggan.getValueAt(tabelPelanggan, 9).toString();
-        pemesanan.totalHarga = Integer.parseInt(tblPelanggan.getValueAt(tabelPelanggan, 10).toString());       
+        pemesanan.idPesanan = tblPelanggan.getValueAt(tabelPelanggan, 0).toString();       
+        pemesanan.nik = tblPelanggan.getValueAt(tabelPelanggan, 1).toString();
+        pemesanan.idKaryawan = tblPelanggan.getValueAt(tabelPelanggan, 2).toString();
+        pemesanan.tglPemesanan = tblPelanggan.getValueAt(tabelPelanggan, 3).toString();
+        pemesanan.idMobil = tblPelanggan.getValueAt(tabelPelanggan, 4).toString();
+        pemesanan.lamaSewa = tblPelanggan.getValueAt(tabelPelanggan, 5).toString();
+        pemesanan.dp = Integer.parseInt(tblPelanggan.getValueAt(tabelPelanggan, 6).toString());       
+        pemesanan.total = Integer.parseInt(tblPelanggan.getValueAt(tabelPelanggan, 7).toString());       
         pemesanan.itemTerpilihPemesanan();        
         parentDialog.dispose();
     }//GEN-LAST:event_tblPelangganMouseClicked

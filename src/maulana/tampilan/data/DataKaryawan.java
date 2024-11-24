@@ -164,7 +164,7 @@ public class DataKaryawan extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setText("EDIT");
+        btnEdit.setText("UBAH");
         btnEdit.setMargin(new java.awt.Insets(2, 10, 2, 10));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,7 +278,7 @@ public class DataKaryawan extends javax.swing.JPanel {
         // Pastikan pengguna memilih baris yang akan di-edit
         int selectedRow = tabelKaryawan.getSelectedRow();
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di ubah terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -308,7 +308,7 @@ public class DataKaryawan extends javax.swing.JPanel {
         };
         String actions[] = new String[]{"Batal", "Simpan"};
 
-        GlassPanePopup.showPopup(new SimplePopupBorder(editDataKaryawan, "Edit Data Karyawan", actions, (pc, i) -> {
+        GlassPanePopup.showPopup(new SimplePopupBorder(editDataKaryawan, "Ubah Data Karyawan", actions, (pc, i) -> {
             if (i == 1) {
                 // Ambil data yang telah diedit dari form
                 String newIDKaryawan = editDataKaryawan.getTxtID();

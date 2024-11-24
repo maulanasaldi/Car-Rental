@@ -102,12 +102,20 @@ public class Pemesanan extends javax.swing.JPanel {
     }
 
     private void dataTabel() {
-        Object[] baris = {"ID Pesanan", "Nama Pelanggan", "NIK", "No. Telepon", "ID Karyawan", "Tgl. Pesanan", "ID Mobil", "Harga Mobil", "Lama Sewa", "DP", "Total"};
+        Object[] baris = {
+            "ID Pesanan",             
+            "NIK",             
+            "ID Karyawan", 
+            "Tgl. Pesanan", 
+            "ID Mobil",             
+            "Lama Sewa", 
+            "DP", 
+            "Total"};
         tabmodelPemesanan = new DefaultTableModel(null, baris);
         String cariItem = txtCari.getText();
 
         try {
-            String query = "SELECT * FROM pemesanan WHERE id_pemesanan LIKE '%" + cariItem + "%' OR nama_pelanggan LIKE'%" + cariItem + "%' ORDER BY id_pemesanan ASC";
+            String query = "SELECT * FROM pemesanan WHERE id_pemesanan LIKE '%" + cariItem + "%' OR nik LIKE'%" + cariItem + "%' ORDER BY id_pemesanan ASC";
             Statement statment = koneksi.createStatement();
             ResultSet hasil = statment.executeQuery(query);
             while (hasil.next()) {
@@ -119,10 +127,7 @@ public class Pemesanan extends javax.swing.JPanel {
                     hasil.getString(5),
                     hasil.getString(6),
                     hasil.getString(7),
-                    hasil.getString(8),
-                    hasil.getString(9),
-                    hasil.getString(10),
-                    hasil.getString(11)
+                    hasil.getString(8)                                        
                 });
             }
             tblPemesanan.setModel(tabmodelPemesanan);
@@ -142,13 +147,7 @@ public class Pemesanan extends javax.swing.JPanel {
             kolom = tblPemesanan.getColumnModel().getColumn(6);
             kolom.setPreferredWidth(100);
             kolom = tblPemesanan.getColumnModel().getColumn(7);
-            kolom.setPreferredWidth(100);
-            kolom = tblPemesanan.getColumnModel().getColumn(8);
-            kolom.setPreferredWidth(50);
-            kolom = tblPemesanan.getColumnModel().getColumn(9);
-            kolom.setPreferredWidth(100);
-            kolom = tblPemesanan.getColumnModel().getColumn(10);
-            kolom.setPreferredWidth(100);
+            kolom.setPreferredWidth(100);            
             tblPemesanan.revalidate();
             tblPemesanan.repaint();
         } catch (Exception e) {
@@ -298,7 +297,7 @@ public class Pemesanan extends javax.swing.JPanel {
         );
 
         panel2.setBackground(new java.awt.Color(51, 51, 51));
-        panel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Pelanggan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        panel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Pelanggan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("NIK Pelanggan");
@@ -446,7 +445,7 @@ public class Pemesanan extends javax.swing.JPanel {
         );
 
         panel4.setBackground(new java.awt.Color(51, 51, 51));
-        panel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Pesanan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        panel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Pesanan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("ID Mobil");
@@ -677,7 +676,7 @@ public class Pemesanan extends javax.swing.JPanel {
             }
         });
 
-        btnUbah.setText("EDIT");
+        btnUbah.setText("UBAH");
         btnUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUbahActionPerformed(evt);
@@ -771,28 +770,22 @@ public class Pemesanan extends javax.swing.JPanel {
 
     private void btnSimpanPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanPesananActionPerformed
         String query = "INSERT INTO pemesanan ("
-                + "id_pemesanan, "
-                + "nama_pelanggan, "
-                + "nik, "
-                + "notlpn_pelanggan, "
+                + "id_pemesanan, "                
+                + "nik, "                
                 + "id_karyawan, "
                 + "tanggal_pemesanan, "
-                + "id_mobil, "
-                + "harga_mobil, "
+                + "id_mobil, "                
                 + "lama_sewa, "
                 + "dp, "
-                + "total) VALUES (?, ?, ?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?, ?)";
+                + "total) VALUES (?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?)";
 
         try {
             // Ambil data dari JTextField
-            String idPemesanan = txtIDPesanan.getText();  // ID Pemesanan
-            String namaPelanggan = txtNamaPelanggan.getText();     // Nama Pelanggan
-            String nik = txtNik.getText();                // NIK
-            String noTelpPelanggan = txtNoTlpnPelanggan.getText();          // No. Telepon
+            String idPemesanan = txtIDPesanan.getText();  // ID Pemesanan            
+            String nik = txtNik.getText();                // NIK            
             String idKaryawan = txtIDKaryawan.getText();  // ID Karyawan           
             String tglPemesanan = txtTanggalPemesanan.getText();
-            String idMobil = txtIDMobil.getText();
-            String hargaMobil = txtHargaMobil.getText();
+            String idMobil = txtIDMobil.getText();            
             String lamaSewa = txtLama.getText();
             String dp = txtDp.getText();
             String totalHarga = txtTotal.getText();
@@ -801,17 +794,14 @@ public class Pemesanan extends javax.swing.JPanel {
             PreparedStatement statement = koneksi.prepareStatement(query);
 
             // Set nilai parameter untuk query
-            statement.setInt(1, Integer.parseInt(idPemesanan));       // ID Pemesanan
-            statement.setString(2, namaPelanggan);     // Nama Pelanggan
-            statement.setString(3, nik);               // NIK
-            statement.setString(4, noTelpPelanggan);   // No. Telepon
-            statement.setInt(5, Integer.parseInt(idKaryawan));        // ID Karyawan
-            statement.setString(6, tglPemesanan);  // Tanggal Pemesanan
-            statement.setString(7, idMobil);
-            statement.setInt(8, Integer.parseInt(hargaMobil));
-            statement.setInt(9, Integer.parseInt(lamaSewa));
-            statement.setInt(10, Integer.parseInt(dp));
-            statement.setInt(11, Integer.parseInt(totalHarga));
+            statement.setInt(1, Integer.parseInt(idPemesanan));       // ID Pemesanan            
+            statement.setString(2, nik);               // NIK            
+            statement.setInt(3, Integer.parseInt(idKaryawan));        // ID Karyawan
+            statement.setString(4, tglPemesanan);  // Tanggal Pemesanan
+            statement.setString(5, idMobil);            
+            statement.setInt(6, Integer.parseInt(lamaSewa));
+            statement.setInt(7, Integer.parseInt(dp));
+            statement.setInt(8, Integer.parseInt(totalHarga));
 
             statement.executeUpdate();
             statement.close();
@@ -928,26 +918,21 @@ public class Pemesanan extends javax.swing.JPanel {
         }
 
         // Ambil data dari baris yang dipilih
-        String idPemesanan = tblPemesanan.getValueAt(selectedRow, 0).toString();
-        String namaPelanggan = tblPemesanan.getValueAt(selectedRow, 1).toString();
-        String nik = tblPemesanan.getValueAt(selectedRow, 2).toString();
-        String noTelpPelanggan = tblPemesanan.getValueAt(selectedRow, 3).toString();
-        String idKaryawan = tblPemesanan.getValueAt(selectedRow, 4).toString();
-        String tanggalPemesanan = tblPemesanan.getValueAt(selectedRow, 5).toString();
-        String idMobil = tblPemesanan.getValueAt(selectedRow, 6).toString();
-        String harga = tblPemesanan.getValueAt(selectedRow, 7).toString();
-        String lamaSewa = tblPemesanan.getValueAt(selectedRow, 8).toString();
-        String dp = tblPemesanan.getValueAt(selectedRow, 9).toString();
-        String total = tblPemesanan.getValueAt(selectedRow, 10).toString();
+        String idPemesanan = tblPemesanan.getValueAt(selectedRow, 0).toString();        
+        String nik = tblPemesanan.getValueAt(selectedRow, 1).toString();        
+        String idKaryawan = tblPemesanan.getValueAt(selectedRow, 2).toString();
+        String tanggalPemesanan = tblPemesanan.getValueAt(selectedRow, 3).toString();
+        String idMobil = tblPemesanan.getValueAt(selectedRow, 4).toString();
+        String lamaSewa = tblPemesanan.getValueAt(selectedRow, 5).toString();
+        String dp = tblPemesanan.getValueAt(selectedRow, 6).toString();
+        String total = tblPemesanan.getValueAt(selectedRow, 7).toString();
 
         // Tampilkan panel pesanan
         tabPane.setSelectedIndex(0); // Asumsi tab pesanan ada di index 1        
 
         // Perbarui komponen input di tampilan pesanan
-        txtIDPesanan.setText(idPemesanan);
-        txtNamaPelanggan.setText(namaPelanggan);
-        txtNik.setText(nik);
-        txtNoTlpnPelanggan.setText(noTelpPelanggan);
+        txtIDPesanan.setText(idPemesanan);        
+        txtNik.setText(nik);        
         txtIDKaryawan.setText(idKaryawan);
         // Konversi format tanggal dari yyyy-MM-dd menjadi dd/MM/yyyy
         try {
@@ -969,8 +954,7 @@ public class Pemesanan extends javax.swing.JPanel {
             // Tangani kesalahan jika format tanggal tidak valid
             e.printStackTrace();
         }
-        txtIDMobil.setText(idMobil);
-        txtHargaMobil.setText(harga);
+        txtIDMobil.setText(idMobil);        
         txtLama.setText(lamaSewa);
         txtDp.setText(dp);
         txtTotal.setText(total);
@@ -980,47 +964,38 @@ public class Pemesanan extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Ambil data yang telah diedit dari komponen input
-                String newID = txtIDPesanan.getText();
-                String newNamaPelanggan = txtNamaPelanggan.getText();
-                String newNik = txtNik.getText();
-                String newNoTelp = txtNoTlpnPelanggan.getText();
+                String newID = txtIDPesanan.getText();                
+                String newNik = txtNik.getText();                
                 String newIDKaryawan = txtIDKaryawan.getText();
                 String newTglPemesanan = txtTanggalPemesanan.getText();
-                String newIDMobil = txtIDMobil.getText();
-                String newHarga = txtHargaMobil.getText();
+                String newIDMobil = txtIDMobil.getText();                
                 String newLamaSewa = txtLama.getText();
                 String newDp = txtDp.getText();
                 String newTotal = txtTotal.getText();
 
                 try {
                     // Simpan data yang telah diedit ke database
-                    String query = "UPDATE pemesanan SET nama_pelanggan = ?, nik = ?, notlpn_pelanggan = ?, id_karyawan = ?, tanggal_pemesanan = STR_TO_DATE(?, '%d/%m/%Y'), id_mobil = ?, harga_mobil = ?, lama_sewa = ?, dp = ?, total = ? WHERE id_pemesanan = ?";
-                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);
-                    preparedStatement.setString(1, newNamaPelanggan);
-                    preparedStatement.setString(2, newNik);
-                    preparedStatement.setString(3, newNoTelp);
-                    preparedStatement.setString(4, newIDKaryawan);
-                    preparedStatement.setString(5, newTglPemesanan);
-                    preparedStatement.setString(6, newIDMobil);
-                    preparedStatement.setString(7, newHarga);
-                    preparedStatement.setString(8, newLamaSewa);
-                    preparedStatement.setString(9, newDp);
-                    preparedStatement.setString(10, newTotal);
-                    preparedStatement.setString(11, newID);
+                    String query = "UPDATE pemesanan SET nik = ?, id_karyawan = ?, tanggal_pemesanan = STR_TO_DATE(?, '%d/%m/%Y'), id_mobil = ?, lama_sewa = ?, dp = ?, total = ? WHERE id_pemesanan = ?";
+                    PreparedStatement preparedStatement = koneksi.prepareStatement(query);                    
+                    preparedStatement.setString(1, newNik);                    
+                    preparedStatement.setString(2, newIDKaryawan);
+                    preparedStatement.setString(3, newTglPemesanan);
+                    preparedStatement.setString(4, newIDMobil);                    
+                    preparedStatement.setString(5, newLamaSewa);
+                    preparedStatement.setString(6, newDp);
+                    preparedStatement.setString(7, newTotal);
+                    preparedStatement.setString(8, newID);
                     preparedStatement.executeUpdate();
 
                     // Perbarui data yang telah diedit di tabel
-                    DefaultTableModel model = (DefaultTableModel) tblPemesanan.getModel();
-                    model.setValueAt(newNamaPelanggan, selectedRow, 1);
-                    model.setValueAt(newNik, selectedRow, 2);
-                    model.setValueAt(newNoTelp, selectedRow, 3);
-                    model.setValueAt(newIDKaryawan, selectedRow, 4);
-                    model.setValueAt(newTglPemesanan, selectedRow, 5);
-                    model.setValueAt(newIDMobil, selectedRow, 6);
-                    model.setValueAt(newHarga, selectedRow, 7);
-                    model.setValueAt(newLamaSewa, selectedRow, 8);
-                    model.setValueAt(newDp, selectedRow, 9);
-                    model.setValueAt(newTotal, selectedRow, 10);
+                    DefaultTableModel model = (DefaultTableModel) tblPemesanan.getModel();                    
+                    model.setValueAt(newNik, selectedRow, 1);                    
+                    model.setValueAt(newIDKaryawan, selectedRow, 2);
+                    model.setValueAt(newTglPemesanan, selectedRow, 3);
+                    model.setValueAt(newIDMobil, selectedRow, 4);                    
+                    model.setValueAt(newLamaSewa, selectedRow, 5);
+                    model.setValueAt(newDp, selectedRow, 6);
+                    model.setValueAt(newTotal, selectedRow, 7);
 
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data pesanan berhasil diperbarui");
                 } catch (SQLException ex) {

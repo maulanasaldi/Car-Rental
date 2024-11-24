@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bfd7a9d8-a468-4fb3-a551-642e09c32058">
-	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.zoom" value="1.3310000000000028"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -28,7 +28,7 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="86" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="37" forecolor="#3333FF" uuid="e0d88f15-3298-4891-a1eb-9be2fafe07e6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -50,13 +50,16 @@ FROM
 				</textElement>
 				<text><![CDATA[Kota Depok, Jawa Barat, 12345]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="85" width="555" height="1" uuid="c7eb3393-7660-4394-8be5-cd3579a21cce"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="62" splitType="Stretch">
 			<staticText>
 				<reportElement x="30" y="3" width="483" height="59" uuid="206bd432-20fb-4ffe-b8eb-36cf9d1441c0"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Laporan Mobil]]></text>

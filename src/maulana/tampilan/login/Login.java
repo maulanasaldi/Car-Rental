@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import maulana.koneksi.KoneksiDB;
 import maulana.tampilan.data.Pemesanan;
@@ -56,15 +57,19 @@ public class Login extends javax.swing.JFrame {
         cmd = new maulana.swing.Button();
         txtPass = new javax.swing.JPasswordField();
         cbShowPass = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel1.setText("Selamat Datang");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("ID User");
+        jLabel2.setText("ID Pengguna");
 
         txtUserID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtUserID.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +84,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Password");
+        jLabel3.setText("Kata Sandi");
 
         cmd.setBackground(new java.awt.Color(0, 0, 204));
         cmd.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,7 +108,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         cbShowPass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbShowPass.setText("Lihat password");
+        cbShowPass.setText("Lihat kata sandi");
         cbShowPass.setContentAreaFilled(false);
         cbShowPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,20 +153,13 @@ public class Login extends javax.swing.JFrame {
                 .addGap(50, 50, 50))
         );
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Tentang Kami");
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(400, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton1)
-                    .addComponent(panelRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(400, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -169,9 +167,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(98, Short.MAX_VALUE)
                 .addComponent(panelRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,11 +216,11 @@ public class Login extends javax.swing.JFrame {
                 String idKaryawan = resultSet.getString("id_karyawan");
                 String namaKaryawan = resultSet.getString("nama_karyawan");
 
-                Notifications.getInstance().show(Notifications.Type.SUCCESS, "Selamat anda berhasil Login");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, "Proses masuk berhasil");
 
                 new Thread(() -> {
                     try {
-                        Thread.sleep(2000);  // Jeda 2 detik
+                        Thread.sleep(1500);  // Jeda
                         SwingUtilities.invokeLater(() -> {
                             this.setVisible(false);
                             Main main = new Main();
@@ -245,10 +241,23 @@ public class Login extends javax.swing.JFrame {
             } else {
                 Notifications.getInstance().show(Notifications.Type.ERROR, "Login gagal! Username atau Password salah");
             }
-        } catch (SQLException e) {
+        } catch (SQLException e) {            
             e.printStackTrace();
         }
     }//GEN-LAST:event_cmdActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int pilih = JOptionPane.showConfirmDialog(
+                this,
+                "Apakah anda yakin ingin keluar",
+                "Konfirmasi Dialog",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+        if (pilih == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
         FlatDarculaLaf.setup();
@@ -262,7 +271,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox cbShowPass;
     private maulana.swing.Button cmd;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

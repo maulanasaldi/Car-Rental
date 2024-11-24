@@ -12,12 +12,10 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import maulana.koneksi.KoneksiDB;
@@ -41,8 +39,8 @@ public class Pembayaran extends javax.swing.JPanel {
     }
 
     private Connection koneksi = new KoneksiDB().connect();
-    public String idPesanan, namaPelanggan, noTlpnPelanggan, idMobil, hargaMobil, lamaSewa, dp;
-    public int totalHarga;
+    public String idPesanan, nik, idKaryawan, tglPemesanan, idMobil, lamaSewa;
+    public int dp, total;
     public String merek, jenis, platNomor, kapasitas, tarif, status;
     public String idSupir, namaSupir, noTlpnSupir, alamatSupir;
     public int tarifSupir;
@@ -88,23 +86,14 @@ public class Pembayaran extends javax.swing.JPanel {
     private void dataTabelPembayaran() {
         Object[] baris = {
             "ID Pembayaran",
-            "ID Pemesanan",
-            "Nama Pelanggan",
-            "Telepon Pelanggan",
+            "ID Pemesanan",            
             "ID Karyawan",
             "Tgl Pembayaran",
-            "ID Mobil",
-            "Harga Mobil",
-            "Lama Sewa",
-            "DP",
-            "Total",
+            "ID Mobil",            
             "Supir",
-            "ID Supir",
-            "Nama Supir",
-            "Telepon Supir",
-            "Tarif Supir",
+            "ID Supir",            
             "Total Harga",
-            "Uang",
+            "Uang Tunai",
             "Kembali"
         };
 
@@ -113,7 +102,7 @@ public class Pembayaran extends javax.swing.JPanel {
         String cariItem = txtCari.getText();
 
         try {
-            String query = "SELECT * FROM pembayaran WHERE id_pembayaran LIKE '%" + cariItem + "%' OR nama_pelanggan LIKE'%" + cariItem + "%' ORDER BY id_pembayaran ASC";
+            String query = "SELECT * FROM pembayaran WHERE id_pembayaran LIKE '%" + cariItem + "%' OR id_pemesanan LIKE'%" + cariItem + "%' ORDER BY id_pembayaran ASC";
             Statement statment = koneksi.createStatement();
             ResultSet hasil = statment.executeQuery(query);
             while (hasil.next()) {
@@ -127,16 +116,7 @@ public class Pembayaran extends javax.swing.JPanel {
                     hasil.getString(7),
                     hasil.getString(8),
                     hasil.getString(9),
-                    hasil.getString(10),
-                    hasil.getString(11),
-                    hasil.getString(12),
-                    hasil.getString(13),
-                    hasil.getString(14),
-                    hasil.getString(15),
-                    hasil.getString(16),
-                    hasil.getString(17),
-                    hasil.getString(18),
-                    hasil.getString(19)
+                    hasil.getString(10)                    
                 });
             }
             tblPembayaran.revalidate();
@@ -182,26 +162,24 @@ public class Pembayaran extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         txtTanggalPembayaran = new javax.swing.JFormattedTextField();
         panelRounded6 = new maulana.swing.PanelRounded();
-        panelRounded2 = new maulana.swing.PanelRounded();
         txtIDPesanan = new maulana.swing.TextFieldFlatLaf();
         jLabel1 = new javax.swing.JLabel();
         btnCekDataPesanan = new maulana.swing.ButtonActionFlatLaf();
         jLabel2 = new javax.swing.JLabel();
-        txtNamaPelanggan = new maulana.swing.TextFieldFlatLaf();
-        txtNoTlpPelanggan = new maulana.swing.TextFieldFlatLaf();
+        txtNikPelanggan = new maulana.swing.TextFieldFlatLaf();
+        txtTglPemesanan = new maulana.swing.TextFieldFlatLaf();
         jLabel3 = new javax.swing.JLabel();
-        panelRounded3 = new maulana.swing.PanelRounded();
         txtIDMobil = new maulana.swing.TextFieldFlatLaf();
         jLabel5 = new javax.swing.JLabel();
         btnCekDataMobil = new maulana.swing.ButtonActionFlatLaf();
-        jLabel6 = new javax.swing.JLabel();
-        txtHargaMobil = new maulana.swing.TextFieldFlatLaf();
         txtLamaSewa = new maulana.swing.TextFieldFlatLaf();
         jLabel7 = new javax.swing.JLabel();
         txtDp = new maulana.swing.TextFieldFlatLaf();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtTotal = new maulana.swing.TextFieldFlatLaf();
+        txtIdKaryawanPesanan = new maulana.swing.TextFieldFlatLaf();
+        jLabel4 = new javax.swing.JLabel();
         panelRounded7 = new maulana.swing.PanelRounded();
         btnSimpan = new maulana.swing.ButtonActionFlatLaf();
         btnBatalPembayaran = new maulana.swing.ButtonActionFlatLaf();
@@ -226,7 +204,7 @@ public class Pembayaran extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         lblKapasitas = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        lblStatusMobil = new javax.swing.JLabel();
+        lblHargaPerHari = new javax.swing.JLabel();
         panelRounded9 = new maulana.swing.PanelRounded();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -316,8 +294,6 @@ public class Pembayaran extends javax.swing.JPanel {
 
         panelRounded6.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Pesanan"));
 
-        panelRounded2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Pelanggan"));
-
         txtIDPesanan.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -332,59 +308,14 @@ public class Pembayaran extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nama");
+        jLabel2.setText("NIK");
 
-        txtNamaPelanggan.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtNikPelanggan.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        txtNoTlpPelanggan.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtTglPemesanan.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("No. Telepon");
-
-        javax.swing.GroupLayout panelRounded2Layout = new javax.swing.GroupLayout(panelRounded2);
-        panelRounded2.setLayout(panelRounded2Layout);
-        panelRounded2Layout.setHorizontalGroup(
-            panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRounded2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRounded2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIDPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCekDataPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRounded2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNamaPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRounded2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtNoTlpPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
-        );
-        panelRounded2Layout.setVerticalGroup(
-            panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRounded2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIDPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCekDataPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
-                .addGroup(panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNamaPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNoTlpPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        panelRounded3.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Pesanan"));
+        jLabel3.setText("Tgl. Pemesanan");
 
         txtIDMobil.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
@@ -399,11 +330,6 @@ public class Pembayaran extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Harga /Hari");
-
-        txtHargaMobil.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
         txtLamaSewa.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -415,90 +341,92 @@ public class Pembayaran extends javax.swing.JPanel {
         jLabel8.setText("DP");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Total");
+        jLabel9.setText("Tunggakan");
 
         txtTotal.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        javax.swing.GroupLayout panelRounded3Layout = new javax.swing.GroupLayout(panelRounded3);
-        panelRounded3.setLayout(panelRounded3Layout);
-        panelRounded3Layout.setHorizontalGroup(
-            panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRounded3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRounded3Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIDMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCekDataMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRounded3Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtHargaMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRounded3Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLamaSewa, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRounded3Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDp, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRounded3Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
-        );
-        panelRounded3Layout.setVerticalGroup(
-            panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRounded3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIDMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCekDataMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
-                .addGroup(panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHargaMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLamaSewa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRounded3Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(txtDp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
-        );
+        txtIdKaryawanPesanan.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("ID Karyawan");
 
         javax.swing.GroupLayout panelRounded6Layout = new javax.swing.GroupLayout(panelRounded6);
         panelRounded6.setLayout(panelRounded6Layout);
         panelRounded6Layout.setHorizontalGroup(
             panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRounded6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelRounded3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelRounded6Layout.createSequentialGroup()
+                        .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLamaSewa, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDp, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelRounded6Layout.createSequentialGroup()
+                        .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRounded6Layout.createSequentialGroup()
+                                .addComponent(txtIDPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCekDataPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNikPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelRounded6Layout.createSequentialGroup()
+                                .addComponent(txtIDMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCekDataMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIdKaryawanPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRounded6Layout.setVerticalGroup(
             panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRounded6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelRounded3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIDPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCekDataPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNikPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIdKaryawanPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCekDataMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIDMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLamaSewa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRounded6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         btnSimpan.setText("SIMPAN PEMBAYARAN");
@@ -523,11 +451,6 @@ public class Pembayaran extends javax.swing.JPanel {
         });
 
         btnUbahPembayaran1.setText("UBAH PEMBAYARAN");
-        btnUbahPembayaran1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUbahPembayaran1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRounded7Layout = new javax.swing.GroupLayout(panelRounded7);
         panelRounded7.setLayout(panelRounded7Layout);
@@ -547,13 +470,13 @@ public class Pembayaran extends javax.swing.JPanel {
         panelRounded7Layout.setVerticalGroup(
             panelRounded7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(panelRounded7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBatalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPembayaranBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUbahPembayaran1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         panelRounded5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pembayaran"));
@@ -562,7 +485,7 @@ public class Pembayaran extends javax.swing.JPanel {
         jLabel31.setText("Total Harga");
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel32.setText("Uang");
+        jLabel32.setText("Uang Tunai");
 
         txtTotalHarga.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
@@ -573,7 +496,7 @@ public class Pembayaran extends javax.swing.JPanel {
         jLabel33.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel33.setText("Kembali");
 
-        buttonAction1.setText("HITUNG");
+        buttonAction1.setText("JUMLAHKAN");
         buttonAction1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAction1ActionPerformed(evt);
@@ -619,7 +542,7 @@ public class Pembayaran extends javax.swing.JPanel {
                         .addComponent(txtUang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonAction1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         lblGambarMobil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -650,10 +573,10 @@ public class Pembayaran extends javax.swing.JPanel {
         lblKapasitas.setText("----------------");
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel28.setText("Status");
+        jLabel28.setText("Harga /Hari");
 
-        lblStatusMobil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblStatusMobil.setText("----------------");
+        lblHargaPerHari.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblHargaPerHari.setText("----------------");
 
         panelRounded9.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Supir"));
 
@@ -792,7 +715,7 @@ public class Pembayaran extends javax.swing.JPanel {
                     .addComponent(lblJenisMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPlatNomor, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblKapasitas, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatusMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHargaPerHari, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -825,7 +748,7 @@ public class Pembayaran extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblStatusMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblHargaPerHari, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelRounded9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblGambarMobil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
@@ -840,9 +763,9 @@ public class Pembayaran extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRounded4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelRounded6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelRounded1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelRounded6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelRounded5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -872,7 +795,7 @@ public class Pembayaran extends javax.swing.JPanel {
 
         tabPanePembayaran.addTab("Pembayaran", jPanel1);
 
-        btnEditPembayaran.setText("EDIT");
+        btnEditPembayaran.setText("UBAH");
         btnEditPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditPembayaranActionPerformed(evt);
@@ -926,7 +849,7 @@ public class Pembayaran extends javax.swing.JPanel {
                     .addComponent(buttonHapusPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
         );
 
         tabPanePembayaran.addTab("Data Pembayaran", jPanel2);
@@ -961,14 +884,14 @@ public class Pembayaran extends javax.swing.JPanel {
 
     public void itemTerpilihPemesanan() {
         txtIDPesanan.setText(idPesanan);
-        txtNamaPelanggan.setText(namaPelanggan);
-        txtNoTlpPelanggan.setText(noTlpnPelanggan);
-        txtIDMobil.setText(idMobil);
-        txtHargaMobil.setText(hargaMobil);
+        txtNikPelanggan.setText(nik);
+        txtTglPemesanan.setText(tglPemesanan);
+        txtIdKaryawanPesanan.setText(idKaryawan);
+        txtIDMobil.setText(idMobil);        
         txtLamaSewa.setText(lamaSewa);
-        txtDp.setText(dp);
-        txtTotal.setText(String.valueOf(totalHarga));
-        txtTotalHarga.setText(String.valueOf(totalHarga));
+        txtDp.setText(String.valueOf(dp));
+        txtTotal.setText(String.valueOf(total));        
+        txtTotalHarga.setText(String.valueOf(total));
     }
 
     private void btnCekDataMobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekDataMobilActionPerformed
@@ -989,13 +912,12 @@ public class Pembayaran extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCekDataMobilActionPerformed
 
     public void itemTerpilihMobil() {
-        txtIDMobil.setText(idMobil);
-        txtHargaMobil.setText(tarif);
+        txtIDMobil.setText(idMobil);        
         lblMerekMobil.setText(merek);
         lblJenisMobil.setText(jenis);
         lblPlatNomor.setText(platNomor);
         lblKapasitas.setText(kapasitas + " Orang");
-        lblStatusMobil.setText(status);
+        lblHargaPerHari.setText(tarif);
     }
 
     private void rdBtnTidakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnTidakActionPerformed
@@ -1069,10 +991,9 @@ public class Pembayaran extends javax.swing.JPanel {
 
     private void btnBatalPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalPembayaranActionPerformed
         txtIDPesanan.setText("");
-        txtNamaPelanggan.setText("");
-        txtNoTlpPelanggan.setText("");
-        txtIDMobil.setText("");
-        txtHargaMobil.setText("");
+        txtNikPelanggan.setText("");
+        txtTglPemesanan.setText("");
+        txtIDMobil.setText("");        
         txtLamaSewa.setText("");
         txtDp.setText("");
         txtTotal.setText("");
@@ -1081,7 +1002,7 @@ public class Pembayaran extends javax.swing.JPanel {
         lblJenisMobil.setText("");
         lblPlatNomor.setText("");
         lblKapasitas.setText("");
-        lblStatusMobil.setText("");
+        lblHargaPerHari.setText("");
         buttonGroup1.clearSelection();
         txtIDSopir.setText("");
         txtNamaSupir.setText("");
@@ -1096,10 +1017,9 @@ public class Pembayaran extends javax.swing.JPanel {
     private void btnPembayaranBaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembayaranBaruActionPerformed
         autoNumber();
         txtIDPesanan.setText("");
-        txtNamaPelanggan.setText("");
-        txtNoTlpPelanggan.setText("");
-        txtIDMobil.setText("");
-        txtHargaMobil.setText("");
+        txtNikPelanggan.setText("");
+        txtTglPemesanan.setText("");
+        txtIDMobil.setText("");        
         txtLamaSewa.setText("");
         txtDp.setText("");
         txtTotal.setText("");
@@ -1108,7 +1028,7 @@ public class Pembayaran extends javax.swing.JPanel {
         lblJenisMobil.setText("----------------");
         lblPlatNomor.setText("----------------");
         lblKapasitas.setText("----------------");
-        lblStatusMobil.setText("----------------");
+        lblHargaPerHari.setText("----------------");
         buttonGroup1.clearSelection();
         txtIDSopir.setText("");
         txtNamaSupir.setText("");
@@ -1131,51 +1051,30 @@ public class Pembayaran extends javax.swing.JPanel {
         rdBtnTidak.setActionCommand("Tanpa supir");
         String query = "INSERT INTO pembayaran ("
                 + "id_pembayaran, "
-                + "id_pemesanan, "
-                + "nama_pelanggan, "
-                + "no_telepon_pelanggan, "
+                + "id_pemesanan, "                                
                 + "id_karyawan, "
                 + "tanggal_pembayaran, "
-                + "id_mobil, "
-                + "harga_mobil, "
-                + "lama_sewa, "
-                + "dp, "
-                + "total, "
+                + "id_mobil, "                                                                
                 + "supir, "
-                + "id_supir, "
-                + "nama_supir, "
-                + "no_telepon_supir, "
-                + "tarif_supir, "
+                + "id_supir, "                                                
                 + "total_harga, "
-                + "uang, "
+                + "uang_tunai, "
                 + "kembali"
                 + ") "
-                + "VALUES (?, ?, ?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?, ?, ?)";
 
         try {
             // Ambil data dari JTextField
             String idPembayaran = txtIDPembayaran.getText();
-            String idPemesanan = txtIDPesanan.getText();
-            String namaPelanggan = txtNamaPelanggan.getText();
-            String noTelpPelanggan = txtNoTlpPelanggan.getText();
+            String idPemesanan = txtIDPesanan.getText();                        
             String idKaryawan = txtIDKaryawan.getText();
             String tglPembayaran = txtTanggalPembayaran.getText();
-            String idMobil = txtIDMobil.getText();
-            String hargaMobil = txtHargaMobil.getText();
-            String lamaSewa = txtLamaSewa.getText();
-            String dp = txtDp.getText();
-            String total = txtTotal.getText();
+            String idMobil = txtIDMobil.getText();            
             String supir = buttonGroup1.getSelection().getActionCommand();
             String idSupir = txtIDSopir.getText();
             if (idSupir.isEmpty()) {
                 idSupir = null;  // Kirimkan null jika tidak ada supir yang dipilih
-            }
-            String namaSupir = txtNamaSupir.getText();
-            String noTeleponSupir = txtNoTlpSupir.getText();
-            int tarifSupir = 0;
-            if (!txtTarifSupir.getText().isEmpty()) {
-                tarifSupir = Integer.parseInt(txtTarifSupir.getText());
-            }
+            }            
             String totalHarga = txtTotalHarga.getText();
             String uang = txtUang.getText();
             String kembali = txtKembali.getText();
@@ -1185,24 +1084,15 @@ public class Pembayaran extends javax.swing.JPanel {
 
             // Set nilai parameter untuk query
             statement.setInt(1, Integer.parseInt(idPembayaran));
-            statement.setInt(2, Integer.parseInt(idPemesanan));
-            statement.setString(3, namaPelanggan);
-            statement.setString(4, noTelpPelanggan);
-            statement.setInt(5, Integer.parseInt(idKaryawan));
-            statement.setString(6, tglPembayaran);
-            statement.setString(7, idMobil);
-            statement.setInt(8, Integer.parseInt(hargaMobil));
-            statement.setInt(9, Integer.parseInt(lamaSewa));
-            statement.setInt(10, Integer.parseInt(dp));
-            statement.setInt(11, Integer.parseInt(total));
-            statement.setString(12, supir);
-            statement.setString(13, (idSupir == null || idSupir.isEmpty()) ? null : idSupir);
-            statement.setString(14, namaSupir);
-            statement.setString(15, noTeleponSupir);
-            statement.setInt(16, tarifSupir);
-            statement.setInt(17, Integer.parseInt(totalHarga));
-            statement.setInt(18, Integer.parseInt(uang));
-            statement.setInt(19, Integer.parseInt(kembali));
+            statement.setInt(2, Integer.parseInt(idPemesanan));                        
+            statement.setInt(3, Integer.parseInt(idKaryawan));
+            statement.setString(4, tglPembayaran);
+            statement.setString(5, idMobil);                                                
+            statement.setString(6, supir);
+            statement.setString(7, (idSupir == null || idSupir.isEmpty()) ? null : idSupir);                                    
+            statement.setInt(8, Integer.parseInt(totalHarga));
+            statement.setInt(9, Integer.parseInt(uang));
+            statement.setInt(10, Integer.parseInt(kembali));
 
             statement.executeUpdate();
             statement.close();
@@ -1260,25 +1150,16 @@ public class Pembayaran extends javax.swing.JPanel {
 
         // Ambil data dari baris yang dipilih
         String idPembayaran = tblPembayaran.getValueAt(selectedRow, 0).toString();
-        String idPemesanan = tblPembayaran.getValueAt(selectedRow, 1).toString();
-        String namaPelanggan = tblPembayaran.getValueAt(selectedRow, 2).toString();
-        String noTelpPelanggan = tblPembayaran.getValueAt(selectedRow, 3).toString();
-        String idKaryawan = tblPembayaran.getValueAt(selectedRow, 4).toString();
-        String tanggalPembayaran = tblPembayaran.getValueAt(selectedRow, 5).toString();
-        String idMobil = tblPembayaran.getValueAt(selectedRow, 6).toString();
-        String hargaMobil = tblPembayaran.getValueAt(selectedRow, 7).toString();
-        String lamaSewa = tblPembayaran.getValueAt(selectedRow, 8).toString();
-        String dp = tblPembayaran.getValueAt(selectedRow, 9).toString();
-        String total = tblPembayaran.getValueAt(selectedRow, 10).toString();
-        String supir = tblPembayaran.getValueAt(selectedRow, 11).toString();
-        Object value = tblPembayaran.getValueAt(selectedRow, 12);
-        String idSupir = (value != null) ? value.toString() : "";
-        String namaSupir = tblPembayaran.getValueAt(selectedRow, 13).toString();
-        String noTlpSupir = tblPembayaran.getValueAt(selectedRow, 14).toString();
-        String tarifSupi = tblPembayaran.getValueAt(selectedRow, 15).toString();
-        String totalHarga = tblPembayaran.getValueAt(selectedRow, 16).toString();
-        String uang = tblPembayaran.getValueAt(selectedRow, 17).toString();
-        String kembali = tblPembayaran.getValueAt(selectedRow, 18).toString();
+        String idPemesanan = tblPembayaran.getValueAt(selectedRow, 1).toString();               
+        String idKaryawan = tblPembayaran.getValueAt(selectedRow, 2).toString();
+        String tanggalPembayaran = tblPembayaran.getValueAt(selectedRow, 3).toString();
+        String idMobil = tblPembayaran.getValueAt(selectedRow, 4).toString();                                
+        String supir = tblPembayaran.getValueAt(selectedRow, 5).toString();
+        Object value = tblPembayaran.getValueAt(selectedRow, 6);
+        String idSupir = (value != null) ? value.toString() : "";                        
+        String totalHarga = tblPembayaran.getValueAt(selectedRow, 7).toString();
+        String uang = tblPembayaran.getValueAt(selectedRow, 8).toString();
+        String kembali = tblPembayaran.getValueAt(selectedRow, 9).toString();
 
         // Tampilkan panel pesanan
         tabPanePembayaran.setSelectedIndex(0); // Asumsi tab pesanan ada di index 1        
@@ -1286,9 +1167,7 @@ public class Pembayaran extends javax.swing.JPanel {
 
         // Perbarui komponen input di tampilan pembayaran
         txtIDPembayaran.setText(idPembayaran);
-        txtIDPesanan.setText(idPemesanan);
-        txtNamaPelanggan.setText(namaPelanggan);
-        txtNoTlpPelanggan.setText(noTelpPelanggan);
+        txtIDPesanan.setText(idPemesanan);                
         txtIDKaryawan.setText(idKaryawan);
         // Konversi format tanggal dari yyyy-MM-dd menjadi dd/MM/yyyy
         try {
@@ -1310,20 +1189,13 @@ public class Pembayaran extends javax.swing.JPanel {
             // Tangani kesalahan jika format tanggal tidak valid
             e.printStackTrace();
         }
-        txtIDMobil.setText(idMobil);
-        txtHargaMobil.setText(hargaMobil);
-        txtLamaSewa.setText(lamaSewa);
-        txtDp.setText(dp);
-        txtTotal.setText(String.valueOf(total));
+        txtIDMobil.setText(idMobil);                        
         if (supir.equals("Dengan supir")) {
             rdBtnYa.setSelected(true);
         } else if (supir.equals("Tanpa supir")) {
             rdBtnTidak.setSelected(true);
         }
-        txtIDSopir.setText(idSupir);
-        txtNamaSupir.setText(namaSupir);
-        txtNoTlpSupir.setText(noTlpSupir);
-        txtTarifSupir.setText(String.valueOf(tarifSupi));
+        txtIDSopir.setText(idSupir);                        
         txtTotalHarga.setText(String.valueOf(totalHarga));
         txtUang.setText(String.valueOf(uang));
         txtKembali.setText(String.valueOf(kembali));
@@ -1335,27 +1207,15 @@ public class Pembayaran extends javax.swing.JPanel {
                 // Ambil data yang telah diedit dari komponen input
                 // Ambil data dari JTextField
                 String newIdPembayaran = txtIDPembayaran.getText();
-                String newIdPemesanan = txtIDPesanan.getText();
-                String newNamaPelanggan = txtNamaPelanggan.getText();
-                String newNoTelpPelanggan = txtNoTlpPelanggan.getText();
+                String newIdPemesanan = txtIDPesanan.getText();                
                 String newIdKaryawan = txtIDKaryawan.getText();
                 String newTglPembayaran = txtTanggalPembayaran.getText();
-                String newIdMobil = txtIDMobil.getText();
-                String newHargaMobil = txtHargaMobil.getText();
-                String newLamaSewa = txtLamaSewa.getText();
-                String newDp = txtDp.getText();
-                String newTotal = txtTotal.getText();
+                String newIdMobil = txtIDMobil.getText();                
                 String newSupir = buttonGroup1.getSelection().getActionCommand();
                 String newIdSupir = txtIDSopir.getText();
                 if (newIdSupir.isEmpty()) {
                     newIdSupir = null;  // Kirimkan null jika tidak ada supir yang dipilih
-                }
-                String newNamaSupir = txtNamaSupir.getText();
-                String newNoTeleponSupir = txtNoTlpSupir.getText();
-                int newTarifSupir = 0;
-                if (!txtTarifSupir.getText().isEmpty()) {
-                    newTarifSupir = Integer.parseInt(txtTarifSupir.getText());
-                }
+                }                
                 String newTotalHarga = txtTotalHarga.getText();
                 String newUang = txtUang.getText();
                 String newKembali = txtKembali.getText();
@@ -1363,67 +1223,40 @@ public class Pembayaran extends javax.swing.JPanel {
                 try {
                     // Simpan data yang telah diedit ke database
                     String query = "UPDATE pembayaran SET "
-                            + "id_pemesanan = ?, "
-                            + "nama_pelanggan = ?, "
-                            + "no_telepon_pelanggan = ?, "
+                            + "id_pemesanan = ?, "                 
                             + "id_karyawan = ?, "
                             + "tanggal_pembayaran = STR_TO_DATE(?, '%d/%m/%Y'), "
-                            + "id_mobil = ?, "
-                            + "harga_mobil = ?, "
-                            + "lama_sewa = ?, "
-                            + "dp = ?, "
-                            + "total = ?, "
+                            + "id_mobil = ?, "                            
                             + "supir = ?, "
-                            + "id_supir = ?, "
-                            + "nama_supir = ?, "
-                            + "no_telepon_supir = ?, "
-                            + "tarif_supir = ?, "
+                            + "id_supir = ?, "                            
                             + "total_harga = ?, "
-                            + "uang = ?, "
+                            + "uang_tunai = ?, "
                             + "kembali = ? "
                             + "WHERE id_pembayaran = ?";
                     PreparedStatement preparedStatement = koneksi.prepareStatement(query);
-                    preparedStatement.setInt(1, Integer.parseInt(newIdPemesanan));
-                    preparedStatement.setString(2, newNamaPelanggan);
-                    preparedStatement.setString(3, newNoTelpPelanggan);
-                    preparedStatement.setInt(4, Integer.parseInt(newIdKaryawan));
-                    preparedStatement.setString(5, newTglPembayaran);
-                    preparedStatement.setString(6, newIdMobil);
-                    preparedStatement.setInt(7, Integer.parseInt(newHargaMobil));
-                    preparedStatement.setInt(8, Integer.parseInt(newLamaSewa));
-                    preparedStatement.setInt(9, Integer.parseInt(newDp));
-                    preparedStatement.setInt(10, Integer.parseInt(newTotal));
-                    preparedStatement.setString(11, newSupir);
-                    preparedStatement.setString(12, (newIdSupir == null || newIdSupir.isEmpty()) ? null : newIdSupir);
-                    preparedStatement.setString(13, newNamaSupir);
-                    preparedStatement.setString(14, newNoTeleponSupir);
-                    preparedStatement.setInt(15, newTarifSupir);
-                    preparedStatement.setInt(16, Integer.parseInt(newTotalHarga));
-                    preparedStatement.setInt(17, Integer.parseInt(newUang));
-                    preparedStatement.setInt(18, Integer.parseInt(newKembali));
-                    preparedStatement.setInt(19, Integer.parseInt(newIdPembayaran));
+                    preparedStatement.setInt(1, Integer.parseInt(newIdPemesanan));                    
+                    preparedStatement.setInt(2, Integer.parseInt(newIdKaryawan));
+                    preparedStatement.setString(3, newTglPembayaran);
+                    preparedStatement.setString(4, newIdMobil);                    
+                    preparedStatement.setString(5, newSupir);
+                    preparedStatement.setString(6, (newIdSupir == null || newIdSupir.isEmpty()) ? null : newIdSupir);                   
+                    preparedStatement.setInt(7, Integer.parseInt(newTotalHarga));
+                    preparedStatement.setInt(8, Integer.parseInt(newUang));
+                    preparedStatement.setInt(9, Integer.parseInt(newKembali));
+                    preparedStatement.setInt(10, Integer.parseInt(newIdPembayaran));
                     preparedStatement.executeUpdate();
 
                     // Perbarui data yang telah diedit di tabel
                     DefaultTableModel model = (DefaultTableModel) tblPembayaran.getModel();
-                    model.setValueAt(newIdPemesanan, selectedRow, 1);
-                    model.setValueAt(newNamaPelanggan, selectedRow, 2);
-                    model.setValueAt(newNoTelpPelanggan, selectedRow, 3);
-                    model.setValueAt(newIdKaryawan, selectedRow, 4);
-                    model.setValueAt(newTglPembayaran, selectedRow, 5);
-                    model.setValueAt(newIdMobil, selectedRow, 6);
-                    model.setValueAt(newHargaMobil, selectedRow, 7);
-                    model.setValueAt(newLamaSewa, selectedRow, 8);
-                    model.setValueAt(newDp, selectedRow, 9);
-                    model.setValueAt(newTotal, selectedRow, 10);
-                    model.setValueAt(newSupir, selectedRow, 11);
-                    model.setValueAt(newIdSupir, selectedRow, 12);
-                    model.setValueAt(newNamaSupir, selectedRow, 13);
-                    model.setValueAt(newNoTeleponSupir, selectedRow, 14);
-                    model.setValueAt(newTarifSupir, selectedRow, 15);
-                    model.setValueAt(newTotalHarga, selectedRow, 16);
-                    model.setValueAt(newUang, selectedRow, 17);
-                    model.setValueAt(newKembali, selectedRow, 18);
+                    model.setValueAt(newIdPemesanan, selectedRow, 1);                    
+                    model.setValueAt(newIdKaryawan, selectedRow, 2);
+                    model.setValueAt(newTglPembayaran, selectedRow, 3);
+                    model.setValueAt(newIdMobil, selectedRow, 4);                    
+                    model.setValueAt(newSupir, selectedRow, 5);
+                    model.setValueAt(newIdSupir, selectedRow, 6);                    
+                    model.setValueAt(newTotalHarga, selectedRow, 7);
+                    model.setValueAt(newUang, selectedRow, 8);
+                    model.setValueAt(newKembali, selectedRow, 9);
 
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, "Data pembayaran berhasil diperbarui");
                 } catch (SQLException ex) {
@@ -1433,10 +1266,6 @@ public class Pembayaran extends javax.swing.JPanel {
             }
         });
     }//GEN-LAST:event_btnEditPembayaranActionPerformed
-
-    private void btnUbahPembayaran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahPembayaran1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUbahPembayaran1ActionPerformed
 
     private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
         dataTabelPembayaran();
@@ -1476,8 +1305,8 @@ public class Pembayaran extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1485,14 +1314,12 @@ public class Pembayaran extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblGambarMobil;
+    private javax.swing.JLabel lblHargaPerHari;
     private javax.swing.JLabel lblJenisMobil;
     private javax.swing.JLabel lblKapasitas;
     private javax.swing.JLabel lblMerekMobil;
     private javax.swing.JLabel lblPlatNomor;
-    private javax.swing.JLabel lblStatusMobil;
     private maulana.swing.PanelRounded panelRounded1;
-    private maulana.swing.PanelRounded panelRounded2;
-    private maulana.swing.PanelRounded panelRounded3;
     private maulana.swing.PanelRounded panelRounded4;
     private maulana.swing.PanelRounded panelRounded5;
     private maulana.swing.PanelRounded panelRounded6;
@@ -1505,20 +1332,20 @@ public class Pembayaran extends javax.swing.JPanel {
     private maulana.swing.TabelFlatLaf tblPembayaran;
     private javax.swing.JTextField txtCari;
     private maulana.swing.TextFieldFlatLaf txtDp;
-    private maulana.swing.TextFieldFlatLaf txtHargaMobil;
     private maulana.swing.TextFieldFlatLaf txtIDKaryawan;
     private maulana.swing.TextFieldFlatLaf txtIDMobil;
     private maulana.swing.TextFieldFlatLaf txtIDPembayaran;
     private maulana.swing.TextFieldFlatLaf txtIDPesanan;
     private maulana.swing.TextFieldFlatLaf txtIDSopir;
+    private maulana.swing.TextFieldFlatLaf txtIdKaryawanPesanan;
     private maulana.swing.TextFieldFlatLaf txtKembali;
     private maulana.swing.TextFieldFlatLaf txtLamaSewa;
-    private maulana.swing.TextFieldFlatLaf txtNamaPelanggan;
     private maulana.swing.TextFieldFlatLaf txtNamaSupir;
-    private maulana.swing.TextFieldFlatLaf txtNoTlpPelanggan;
+    private maulana.swing.TextFieldFlatLaf txtNikPelanggan;
     private maulana.swing.TextFieldFlatLaf txtNoTlpSupir;
     private javax.swing.JFormattedTextField txtTanggalPembayaran;
     private maulana.swing.TextFieldFlatLaf txtTarifSupir;
+    private maulana.swing.TextFieldFlatLaf txtTglPemesanan;
     private maulana.swing.TextFieldFlatLaf txtTotal;
     private maulana.swing.TextFieldFlatLaf txtTotalHarga;
     private maulana.swing.TextFieldFlatLaf txtUang;

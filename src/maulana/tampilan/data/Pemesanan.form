@@ -176,7 +176,7 @@
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Form Pelanggan">
+                    <TitledBorder title="Data Pelanggan">
                       <Font PropertyName="font" name="Segoe UI" size="14" style="0"/>
                     </TitledBorder>
                   </Border>
@@ -450,7 +450,7 @@
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Form Pesanan">
+                    <TitledBorder title="Data Pesanan">
                       <Font PropertyName="font" name="Segoe UI" size="14" style="0"/>
                     </TitledBorder>
                   </Border>
@@ -802,7 +802,7 @@
             </Component>
             <Component class="maulana.swing.ButtonActionFlatLaf" name="btnUbah">
               <Properties>
-                <Property name="text" type="java.lang.String" value="EDIT"/>
+                <Property name="text" type="java.lang.String" value="UBAH"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUbahActionPerformed"/>

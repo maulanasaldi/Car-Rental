@@ -206,7 +206,7 @@ public class DataMobil extends javax.swing.JPanel {
             }
         });
 
-        buttonAction2.setText("EDIT");
+        buttonAction2.setText("UBAH");
         buttonAction2.setMargin(new java.awt.Insets(2, 10, 2, 10));
         buttonAction2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,7 +367,7 @@ public class DataMobil extends javax.swing.JPanel {
         // Pastikan pengguna memilih baris yang akan di-edit
         int selectedRow = tabelMobil.getSelectedRow();
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin diubah terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -403,7 +403,7 @@ public class DataMobil extends javax.swing.JPanel {
         };
         String actions[] = new String[]{"Batal", "Simpan"};
 
-        GlassPanePopup.showPopup(new SimplePopupBorder(edit, "Edit Mobil", actions, (pc, i) -> {
+        GlassPanePopup.showPopup(new SimplePopupBorder(edit, "Ubah Data Mobil", actions, (pc, i) -> {
             if (i == 1) {
                 // Ambil data yang telah diedit dari form
                 String newID = edit.getTxtID();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package maulana.tampilan.popup;
 
 import com.formdev.flatlaf.FlatClientProperties;
@@ -18,13 +13,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import maulana.koneksi.KoneksiDB;
-import maulana.tampilan.data.Pembayaran;
 import maulana.tampilan.data.Pemesanan;
 
-/**
- *
- * @author mmaul
- */
 public class PopUpDataMobilPemesanan extends javax.swing.JPanel {
 
     private Connection koneksi = new KoneksiDB().connect();

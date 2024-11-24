@@ -114,14 +114,14 @@ public class ReportPelanggan extends javax.swing.JPanel {
             }
         });
 
-        buttonAction3.setText("CETAK KE WORD");
+        buttonAction3.setText("CETAK KE DOCX");
         buttonAction3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAction3ActionPerformed(evt);
             }
         });
 
-        buttonAction4.setText("CETAK KE EXCEL");
+        buttonAction4.setText("CETAK KE XLSX");
         buttonAction4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAction4ActionPerformed(evt);

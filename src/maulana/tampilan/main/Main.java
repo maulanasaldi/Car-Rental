@@ -3,7 +3,6 @@ package maulana.tampilan.main;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import maulana.tampilan.data.Dashboard;
@@ -16,6 +15,7 @@ import maulana.panel.report.ReportMobil;
 import maulana.panel.report.ReportPelanggan;
 import maulana.panel.report.ReportPembayaran;
 import maulana.panel.report.ReportPemesanan;
+import maulana.panel.report.ReportSupir;
 import maulana.tampilan.data.Pembayaran;
 import maulana.tampilan.data.Pemesanan;
 import maulana.tampilan.login.Login;
@@ -101,12 +101,18 @@ public class Main extends javax.swing.JFrame {
         cmdRepotMobil = new javax.swing.JButton();
         cmdRepotPelanggan = new javax.swing.JButton();
         cmdLogOut = new javax.swing.JButton();
+        cmdRepotPelanggan1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         scrollPenampil = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         penampil = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -144,7 +150,7 @@ public class Main extends javax.swing.JFrame {
 
         cmdDashboard.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmdDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Dashboard.png"))); // NOI18N
-        cmdDashboard.setText("Dashboard");
+        cmdDashboard.setText("Beranda");
         cmdDashboard.setAlignmentY(0.0F);
         cmdDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmdDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -156,7 +162,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Dashboard");
+        jLabel2.setText("Beranda");
 
         cmdPenyewaan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmdPenyewaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Car Rental.png"))); // NOI18N
@@ -210,7 +216,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Form");
+        jLabel4.setText("Data");
 
         cmdModil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmdModil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Car.png"))); // NOI18N
@@ -290,7 +296,7 @@ public class Main extends javax.swing.JFrame {
         cmdLogOut.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmdLogOut.setForeground(new java.awt.Color(255, 255, 255));
         cmdLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Logout.png"))); // NOI18N
-        cmdLogOut.setText("Log Out");
+        cmdLogOut.setText("Log Keluar");
         cmdLogOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmdLogOut.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cmdLogOut.setIconTextGap(10);
@@ -298,6 +304,18 @@ public class Main extends javax.swing.JFrame {
         cmdLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLogOutActionPerformed(evt);
+            }
+        });
+
+        cmdRepotPelanggan1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmdRepotPelanggan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maulana/icon/Statistics Report.png"))); // NOI18N
+        cmdRepotPelanggan1.setText("Laporan Supir");
+        cmdRepotPelanggan1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cmdRepotPelanggan1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cmdRepotPelanggan1.setMargin(new java.awt.Insets(10, 5, 10, 14));
+        cmdRepotPelanggan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdRepotPelanggan1ActionPerformed(evt);
             }
         });
 
@@ -323,7 +341,8 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(cmdRepotPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(cmdDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdRepotPelanggan1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -359,6 +378,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(cmdRepotMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmdRepotPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdRepotPelanggan1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmdLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -504,6 +525,27 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmdLogOutActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int pilih = JOptionPane.showConfirmDialog(
+                this, 
+                "Apakah anda yakin ingin keluar?",
+                "Konfirmasi Keluar",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+        
+        if (pilih == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void cmdRepotPelanggan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRepotPelanggan1ActionPerformed
+        penampil.removeAll();
+        penampil.add(new ReportSupir());
+        penampil.repaint();
+        penampil.revalidate();
+    }//GEN-LAST:event_cmdRepotPelanggan1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -528,6 +570,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton cmdReportPemesanan;
     private javax.swing.JButton cmdRepotMobil;
     private javax.swing.JButton cmdRepotPelanggan;
+    private javax.swing.JButton cmdRepotPelanggan1;
     private javax.swing.JButton cmdRepotPembayaran;
     private javax.swing.JButton cmdSopir;
     private javax.swing.JLabel jLabel2;

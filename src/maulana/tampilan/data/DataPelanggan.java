@@ -31,10 +31,7 @@ public class DataPelanggan extends javax.swing.JPanel {
         dataTabel();        
     }
 
-    private void init() {
-        panel.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arc:25;"
-                + "background:$Table.background");
+    private void init() {        
         scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
@@ -136,7 +133,7 @@ public class DataPelanggan extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setText("EDIT");
+        btnEdit.setText("UBAH");
         btnEdit.setMargin(new java.awt.Insets(2, 10, 2, 10));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +244,7 @@ public class DataPelanggan extends javax.swing.JPanel {
         // Pastikan pengguna memilih baris yang akan di-edit
         int selectedRow = tabelPelanggan.getSelectedRow();
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih data yang ingin di-edit terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin diubah terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -275,7 +272,7 @@ public class DataPelanggan extends javax.swing.JPanel {
         };
         String actions[] = new String[]{"Batal", "Simpan"};
 
-        GlassPanePopup.showPopup(new SimplePopupBorder(editDataPelanggan, "Edit Data Pelanggan", actions, (pc, i) -> {
+        GlassPanePopup.showPopup(new SimplePopupBorder(editDataPelanggan, "Ubah Data Pelanggan", actions, (pc, i) -> {
             if (i == 1) {
                 // Ambil data yang telah diedit dari form pelanggan
                 String newNIK = editDataPelanggan.getTxtNIK();

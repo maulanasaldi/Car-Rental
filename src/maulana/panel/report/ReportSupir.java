@@ -24,23 +24,21 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
-public class ReportMobil extends javax.swing.JPanel {
+public class ReportSupir extends javax.swing.JPanel {
 
     private Connection koneksi = new KoneksiDB().connect();
     private DefaultTableModel model;
 
-    public ReportMobil() {
+    public ReportSupir() {
         initComponents();
         model = new DefaultTableModel();
         tabel.setModel(model);
 
-        model.addColumn("ID Mobil");
-        model.addColumn("Merek");
-        model.addColumn("Jenis");
-        model.addColumn("No Polisi");
-        model.addColumn("Kapasitas");
-        model.addColumn("Harga Perhari");        
-        model.addColumn("Status");
+        model.addColumn("ID Supir");
+        model.addColumn("Nama");
+        model.addColumn("No. Telepon");
+        model.addColumn("Alamat");
+        model.addColumn("Tarif");        
         loadDataPelanggan();
     }
 
@@ -49,19 +47,17 @@ public class ReportMobil extends javax.swing.JPanel {
 
         try {
             Connection conn = new KoneksiDB().connect();
-            String sql = "SELECT id_mobil, merek, jenis, plat_nomor, kapasitas, harga_mobil, status FROM mobil";
+            String sql = "SELECT id_supir, nama_supir, no_telepon_supir, alamat_supir, tarif_supir FROM supir";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 Object[] rowData = {
-                    rs.getString("id_mobil"),
-                    rs.getString("merek"),
-                    rs.getString("jenis"),
-                    rs.getString("plat_nomor"),
-                    rs.getString("kapasitas"),
-                    rs.getString("harga_mobil"),       
-                    rs.getString("status")
+                    rs.getString("id_supir"),
+                    rs.getString("nama_supir"),
+                    rs.getString("no_telepon_supir"),
+                    rs.getString("alamat_supir"),
+                    rs.getString("tarif_supir")
                 };
                 model.addRow(rowData);
             }
@@ -70,7 +66,7 @@ public class ReportMobil extends javax.swing.JPanel {
             stmt.close();
             conn.close();
         } catch (Exception e) {
-            System.out.println("Error saat mengambil data pelanggan: " + e.getMessage());
+            System.out.println("Error saat mengambil data supir: " + e.getMessage());
         }
     }
 
@@ -100,7 +96,7 @@ public class ReportMobil extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tabel);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Report Mobil");
+        jLabel1.setText("Report Supir");
 
         buttonAction1.setText("LIHAT");
         buttonAction1.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +168,7 @@ public class ReportMobil extends javax.swing.JPanel {
     private void buttonAction1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction1ActionPerformed
         try {
             // Path dari file .jasper hasil kompilasi file .jrxml
-            String reportPath = "src/maulana/report/ReportMobil.jasper";
+            String reportPath = "src/maulana/report/ReportSupir.jasper";
 
             // Membuat koneksi database
             Connection conn = new KoneksiDB().connect();
@@ -193,7 +189,7 @@ public class ReportMobil extends javax.swing.JPanel {
 
     private void buttonAction2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction2ActionPerformed
         // Path ke file .jasper (file laporan yang telah dikompilasi)
-        String reportPath = "src/maulana/report/ReportMobil.jasper"; // Ganti dengan path file .jasper Anda
+        String reportPath = "src/maulana/report/RepotSupir.jasper"; // Ganti dengan path file .jasper Anda
 
         try {
             // Load file laporan yang telah dikompilasi
@@ -208,7 +204,7 @@ public class ReportMobil extends javax.swing.JPanel {
 
             // Mengatur tipe file filter agar hanya menyimpan file Excel
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setSelectedFile(new File("ReportMobil.pdf")); // Nama default untuk PDF
+            fileChooser.setSelectedFile(new File("ReportSupir.pdf")); // Nama default untuk PDF
 
             // Menampilkan dialog simpan
             int userSelection = fileChooser.showSaveDialog(this);
@@ -235,7 +231,7 @@ public class ReportMobil extends javax.swing.JPanel {
 
     private void buttonAction3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction3ActionPerformed
         // Path ke file .jasper (file laporan yang telah dikompilasi)
-        String reportPath = "src/maulana/report/ReportMobil.jasper"; // Ganti dengan path file .jasper Anda
+        String reportPath = "src/maulana/report/ReportSupir.jasper"; // Ganti dengan path file .jasper Anda
 
         try {
             // Load file laporan yang telah dikompilasi
@@ -250,7 +246,7 @@ public class ReportMobil extends javax.swing.JPanel {
 
             // Mengatur tipe file filter agar hanya menyimpan file Word
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setSelectedFile(new File("ReportMobil.docx")); // Nama default untuk Word
+            fileChooser.setSelectedFile(new File("ReportSupir.docx")); // Nama default untuk Word
 
             // Menampilkan dialog simpan
             int userSelection = fileChooser.showSaveDialog(this);
@@ -286,7 +282,7 @@ public class ReportMobil extends javax.swing.JPanel {
 
     private void buttonAction4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAction4ActionPerformed
         // Path ke file .jasper (file laporan yang telah dikompilasi)
-        String reportPath = "src/maulana/report/ReportMobil.jasper"; // Ganti dengan path file .jasper Anda
+        String reportPath = "src/maulana/report/ReportSupir.jasper"; // Ganti dengan path file .jasper Anda
 
         try {
             // Load file laporan yang telah dikompilasi
@@ -301,7 +297,7 @@ public class ReportMobil extends javax.swing.JPanel {
 
             // Mengatur tipe file filter agar hanya menyimpan file Excel
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setSelectedFile(new File("ReportMobil.xlsx")); // Nama default untuk Excel
+            fileChooser.setSelectedFile(new File("ReportSupir.xlsx")); // Nama default untuk Excel
 
             // Menampilkan dialog simpan
             int userSelection = fileChooser.showSaveDialog(this);
