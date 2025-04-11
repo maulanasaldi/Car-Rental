@@ -1,32 +1,32 @@
-# Sistem Informasi Pemesanan Sewa Mobil
+# Car Rental Booking Information System
 
-Ini adalah Sistem Pemesanan Penyewaan Mobil yang dibangun menggunakan Java, MySQL, dan phpMyAdmin. Aplikasi membantu mengelola persewaan mobil, termasuk informasi pelanggan dan karyawan, data mobil, pengemudi, transaksi, dan laporan.
+This is a Car Rental Booking System built using Java, MySQL, and phpMyAdmin. The application helps to manage car rentals, including customer and employee information, car data, drivers, transactions, and reports.
 
-## Fitur
+## Features
 
-### Transaksi
-1. **Peminjaman**: Fitur ini memungkinkan penyewaan mobil oleh karyawan.
-2. **Pembayaran**: Menangani proses pembayaran sewa mobil.
+## Transactions
+1. **Borrowing**: This feature allows employees to rent cars.
+2. **Payment**: Handles the car rental payment process.
 
-### Formulir
-1. **Form Pelanggan**: Kelola detail pelanggan, termasuk pendaftaran dan pembaruan.
-2. **Form Karyawan**: Kelola detail karyawan.
-3. **Form Mobil**: Kelola inventaris dan detail mobil.
-4. **Form Supir**: Kelola detail dan tugas pengemudi.
+### Forms
+1. **Customer Form**: Manage customer details, including registration and renewal.
+2. **Employee Form**: Manage employee details.
+3. **Car Form**: Manage car inventory and details.
+4. **Driver Form**: Manage driver details and assignments.
 
-### Laporan
-1. **Laporan Pemesanan**: Melihat dan menghasilkan laporan pemesanan sewa mobil.
-2. **Laporan Pembayaran**: Menghasilkan laporan transaksi pembayaran.
-3. **Laporan Mobil**: View laporan terkait inventaris dan ketersediaan mobil.
-4. **Laporan Pelanggan**: Menghasilkan laporan tentang data pelanggan.
+### Reports
+1. **Booking Report**: View and generate car rental booking reports.
+2. **Payment Report**: Generate payment transaction reports.
+3. **Car Report**: View reports related to car inventory and availability.
+4. **Customer Report**: Generate reports on customer data.
 
-## Teknologi yang Digunakan
-- **Java**: Digunakan untuk mengembangkan aplikasi utama.
-- **MySQL**: Digunakan sebagai database untuk menyimpan data aplikasi.
-- **phpMyAdmin**: Untuk mengelola database MySQL melalui antarmuka web.
+## Technologies Used
+- **Java**: Used to develop the main application.
+- **MySQL**: Used as a database to store application data.
+- **phpMyAdmin**: To manage MySQL database through a web interface.
 
-## Cara Menjalankan Program
+## How to Run the Program
 
-1. Kloning repositori
-   ```bash
-   git clone https://github.com/maulana/car-rental.git
+1. Clone the repository
+```bash
+git clone https://github.com/maulana/car-rental.git
